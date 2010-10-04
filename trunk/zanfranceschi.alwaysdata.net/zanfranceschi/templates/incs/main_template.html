@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" /> 
 	<title>zanfranceschi</title> 
 	<link rel="stylesheet" href="/static/css/style.css" />
+	{% block extra_header %}{% endblock %}
 </head>
 <body>
 
@@ -13,12 +14,13 @@
 </div>
 
 <div id="menu" class="area">
-	<h4>menu</h4>
-	<a href="/cwi/app01">início</a>
-	<a href="/cwi/app01/item/search">busca de itens</a>
-	<a href="/cwi/app01/category/search">busca de categorias</a>
-	<a href="/cwi/app01/department/search">busca de departamentos</a>
-	<a href="/cwi/app01/store/search">busca de lojas</a>
+	<a href="/">início</a>
+	<a href="/about">sobre</a>
 </div>
 
 <div id="content">
+	{% block content %}<i>content block</i>{% endblock %}
+</div>
+
+<body>
+</html>

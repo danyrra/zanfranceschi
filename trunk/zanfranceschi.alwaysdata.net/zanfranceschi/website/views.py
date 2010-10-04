@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
+import zanfranceschi
 
 def index(request):
 	return render_to_response('index.html', {'text' : 'Test'})
