@@ -1,0 +1,57 @@
+body
+{
+	font-size: 90%;
+	font-family: Georgia, Arial, sans-serif;
+	margin: 10px;
+}
+
+.area
+{
+	background: #eee;
+	border: 1px solid #ddd;
+	padding: 5px;
+}
+
+#header
+{
+	margin-bottom: 10px;
+	font-size: 120%;
+}
+
+#content, #menu
+{
+	float: left;
+	
+}
+
+#menu
+{
+	width: auto;
+	margin-right: 10px;
+}
+#menu h4
+{
+	margin: 3px;
+}
+
+#menu a
+{
+	display: block;
+	padding: 2px;
+	padding-left: 10px;
+}
+
+#menu a:hover
+{
+	background: #fff;
+}
+
+#content
+{
+	
+}
+
+.grid-result
+{
+	
+}
