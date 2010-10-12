@@ -7,17 +7,22 @@ using AMO.Core.Domain;
 using IdSharp.Tagging.ID3v2;
 using AMO.Core.Utils;
 using IdSharp.Tagging.ID3v1;
+using System.ComponentModel;
 
 namespace AMO.Core
 {
+	[DataObject]
 	public class AMOModel
 	{
 		private string[] fileExtensions;
 		
-		public AMOModel(params string[] searchPatterns)
+		public AMOModel(string workDirectory, params string[] searchPatterns)
 		{
+			DirectoryPath = workDirectory;
 			fileExtensions = searchPatterns;
 		}
+
+		public string DirectoryPath { get; set; }
 		
 		public void SaveSongID3(Song song)
 		{
@@ -36,7 +41,9 @@ namespace AMO.Core
 			id3.Year = song.Year;
 			id3.Save(file);
 		}
-		public IList<Song> GetMediaFiles(string directory)
+
+		[DataObjectMethod(DataObjectMethodType.Select)]
+		public IList<Song> GetMediaFiles()
 		{
 			IList<Song> songs = new List<Song>();
 
@@ -46,7 +53,7 @@ namespace AMO.Core
 
 				foreach (string extension in fileExtensions)
 				{
-					string[] list = Directory.GetFiles(directory, extension, SearchOption.AllDirectories);
+					string[] list = Directory.GetFiles(DirectoryPath, extension, SearchOption.AllDirectories);
 					foreach (string file in list)
 						files.Add(file);
 				}
