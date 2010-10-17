@@ -4,3 +4,6 @@ import zanfranceschi
 
 def index(request):
 	return render_to_response('index.html', {'text' : 'Test'})
+	
+def curriculo(request):
+	return render_to_response('curriculo.html')
