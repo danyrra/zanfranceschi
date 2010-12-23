@@ -5,7 +5,7 @@ from socket import gethostname
 HOST = gethostname()
 
 # HOST dependant settings
-if HOST == 'http4' or True:
+if HOST == 'http4' or 1 == 1:
 	#alwaysdata
 	DATABASES = {
 		'default': {
@@ -20,7 +20,7 @@ if HOST == 'http4' or True:
 	MEDIA_ROOT = '/home/zanfranceschi/zanfranceschi/public/'
 	MEDIA_URL = 'static'
 	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', )
-
+'''
 elif HOST == 'zanfranceschi':
 	#localhost
 	DATABASES = {
@@ -36,7 +36,7 @@ elif HOST == 'zanfranceschi':
 	MEDIA_ROOT = 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/public/'
 	MEDIA_URL = 'static'
 	TEMPLATE_DIRS = ( 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/templates', )
-	
+'''	
 
 
 
