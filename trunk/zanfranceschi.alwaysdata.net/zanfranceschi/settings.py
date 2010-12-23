@@ -5,7 +5,23 @@ from socket import gethostname
 HOST = gethostname()
 
 # HOST dependant settings
-if HOST == 'http4':
+if HOST == 'zanfranceschi':
+	#localhost
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3', 
+			'NAME': 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/database.db3',
+			'USER': '',                      
+			'PASSWORD': '',                  
+			'HOST': '',                      
+			'PORT': '',                      
+		}
+	}
+	MEDIA_ROOT = 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/public/'
+	MEDIA_URL = 'static'
+	TEMPLATE_DIRS = ( 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/templates', )
+
+else:
 	#alwaysdata
 	DATABASES = {
 		'default': {
@@ -21,21 +37,7 @@ if HOST == 'http4':
 	MEDIA_URL = 'static'
 	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', )
 
-elif HOST == 'zanfranceschi':
-	#localhost
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.sqlite3', 
-			'NAME': 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/database.db3',
-			'USER': '',                      
-			'PASSWORD': '',                  
-			'HOST': '',                      
-			'PORT': '',                      
-		}
-	}
-	MEDIA_ROOT = 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/public/'
-	MEDIA_URL = 'static'
-	TEMPLATE_DIRS = ( 'D:/Projects/Google SVN/trunk/zanfranceschi.alwaysdata.net/zanfranceschi/templates', )
+
 	
 
 
