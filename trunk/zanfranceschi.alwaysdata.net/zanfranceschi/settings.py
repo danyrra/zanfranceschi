@@ -5,7 +5,7 @@ from socket import gethostname
 HOST = gethostname()
 
 # HOST dependant settings
-if HOST == 'http4':
+if HOST == 'http4' or True:
 	#alwaysdata
 	DATABASES = {
 		'default': {
