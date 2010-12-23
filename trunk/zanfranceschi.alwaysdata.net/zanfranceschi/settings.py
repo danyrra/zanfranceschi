@@ -5,24 +5,23 @@ from socket import gethostname
 HOST = gethostname()
 
 # HOST dependant settings
-
-#alwaysdata
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3', 
-		'NAME': '/home/zanfranceschi/zanfranceschi/database.db3',
-		'USER': '',                      
-		'PASSWORD': '',                  
-		'HOST': '',                      
-		'PORT': '',                      
+if HOST == 'http4':
+	#alwaysdata
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3', 
+			'NAME': '/home/zanfranceschi/zanfranceschi/database.db3',
+			'USER': '',                      
+			'PASSWORD': '',                  
+			'HOST': '',                      
+			'PORT': '',                      
+		}
 	}
-}
-MEDIA_ROOT = '/home/zanfranceschi/zanfranceschi/public/'
-MEDIA_URL = 'static'
-TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', )
+	MEDIA_ROOT = '/home/zanfranceschi/zanfranceschi/public/'
+	MEDIA_URL = 'static'
+	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', )
 
-# development
-if HOST == 'zanfranceschi':
+elif HOST == 'zanfranceschi':
 	#localhost
 	DATABASES = {
 		'default': {
@@ -41,7 +40,7 @@ if HOST == 'zanfranceschi':
 
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
