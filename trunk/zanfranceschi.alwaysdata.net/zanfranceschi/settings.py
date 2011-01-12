@@ -9,11 +9,11 @@ if HOST == 'http7':
 	#alwaysdata
 	DATABASES = {
 		'default': {
-			'ENGINE': 'django.db.backends.mysql', 
-			'NAME': 'zanfranceschi_website',
-			'USER': 'zanfranceschi',
-			'PASSWORD': 'frazan*963',                  
-			'HOST': 'mysql.alwaysdata.com',                      
+			'ENGINE': 'sqlite3', 
+			'NAME': '/home/zanfranceschi/zanfranceschi/database.db3',
+			'USER': '',
+			'PASSWORD': '',
+			'HOST': '',
 			'PORT': '',
 		}
 	}
