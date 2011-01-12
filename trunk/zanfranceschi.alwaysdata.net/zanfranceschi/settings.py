@@ -9,12 +9,12 @@ if HOST == 'http7':
 	#alwaysdata
 	DATABASES = {
 		'default': {
-			'ENGINE': 'django.db.backends.sqlite3', 
-			'NAME': '/home/zanfranceschi/zanfranceschi/database.db3',
-			'USER': '',                      
-			'PASSWORD': '',                  
-			'HOST': '',                      
-			'PORT': '',                      
+			'ENGINE': 'django.db.backends.mysql', 
+			'NAME': 'zanfranceschi_website',
+			'USER': 'zanfranceschi',
+			'PASSWORD': 'frazan*963',                  
+			'HOST': 'mysql.alwaysdata.com',                      
+			'PORT': '',
 		}
 	}
 	MEDIA_ROOT = '/home/zanfranceschi/zanfranceschi/public/'
