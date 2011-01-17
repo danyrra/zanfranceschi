@@ -13,7 +13,7 @@ if HOST == 'http7' or HOST == 'ssh':
 			'NAME': 'zanfranceschi_website',
 			'USER': 'zanfranceschi',
 			'PASSWORD': 'frazan*963',
-			'HOST': '',
+			'HOST': 'mysql.alwaysdata.com',
 			'PORT': '',
 		}
 	}
