@@ -5,7 +5,7 @@ from socket import gethostname
 HOST = gethostname()
 
 # HOST dependant settings
-if HOST == 'http7':
+if HOST == 'http7' or HOST == 'ssh':
 	#alwaysdata
 	DATABASES = {
 		'default': {
