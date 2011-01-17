@@ -9,10 +9,10 @@ if HOST == 'http7' or HOST == 'ssh':
 	#alwaysdata
 	DATABASES = {
 		'default': {
-			'ENGINE': 'sqlite3', 
-			'NAME': '/home/zanfranceschi/zanfranceschi/database.db3',
-			'USER': '',
-			'PASSWORD': '',
+			'ENGINE': 'mysql', 
+			'NAME': 'zanfranceschi_website',
+			'USER': 'zanfranceschi',
+			'PASSWORD': 'frazan*963',
 			'HOST': '',
 			'PORT': '',
 		}
