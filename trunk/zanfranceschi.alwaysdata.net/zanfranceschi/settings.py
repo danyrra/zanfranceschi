@@ -12,14 +12,14 @@ if HOST == 'http7' or HOST == 'ssh':
 			'ENGINE': 'mysql', 
 			'NAME': 'zanfranceschi_website',
 			'USER': 'zanfranceschi',
-			'PASSWORD': 'frazan*963',
+			'PASSWORD': 'xxx',
 			'HOST': 'mysql.alwaysdata.com',
 			'PORT': '',
 		}
 	}
 	MEDIA_ROOT = '/home/zanfranceschi/zanfranceschi/public/'
 	MEDIA_URL = 'static'
-	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', )
+	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', '/home/zanfranceschi/zanfranceschi/templates/admin', )
 
 elif HOST == 'zanfranceschi':
 	#localhost
