@@ -12,14 +12,14 @@ if HOST == 'http7' or HOST == 'ssh':
 			'ENGINE': 'mysql', 
 			'NAME': 'zanfranceschi_website',
 			'USER': 'zanfranceschi',
-			'PASSWORD': 'xxx',
+			'PASSWORD': 'frazan*963',
 			'HOST': 'mysql.alwaysdata.com',
 			'PORT': '',
 		}
 	}
 	MEDIA_ROOT = '/home/zanfranceschi/zanfranceschi/public/'
 	MEDIA_URL = 'static'
-	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', '/home/zanfranceschi/zanfranceschi/templates/admin', )
+	TEMPLATE_DIRS = ( '/home/zanfranceschi/zanfranceschi/templates', )
 
 elif HOST == 'zanfranceschi':
 	#localhost
@@ -61,7 +61,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/media/'
 
 SECRET_KEY = 'knx(+uubb!b$wwwi*_-wg&x(%41x2=bg8qd+s@r5=*pn(n5oii'
 
