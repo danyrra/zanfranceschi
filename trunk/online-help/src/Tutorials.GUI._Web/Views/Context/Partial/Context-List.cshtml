@@ -6,6 +6,6 @@
 {
 	foreach (var item in Model)
 	{
-		<a class="context" href="@Url.Content("~/Context/Details/" + @item.Key)" style="background: #eee; margin: 5px; border: 1px solid #ddd; padding: 5px; display: block;" order="@item.Order" id="@item.Key">@item.Title</a>
+		<a class="context" href="@Url.Content("~/Context/Details/" + @item.Key)" id="@item.Key">@item.Title</a>
 	}
 }

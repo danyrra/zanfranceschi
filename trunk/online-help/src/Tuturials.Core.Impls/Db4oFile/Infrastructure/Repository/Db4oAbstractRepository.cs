@@ -41,6 +41,13 @@ namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
 				return db.Query<T>().AsQueryable().Where(expression).ToArray();
 			}
 		}
+		public T FindOneByKey(string key)
+		{
+			using (var db = ObjectContainerFactory.ObjectContainer)
+			{
+				return db.Query<T>().AsQueryable().Where(obj => obj.Key.Equals(key)).First();
+			}
+		}
 		#endregion
 
 		#region IUnitOfWorkRepository

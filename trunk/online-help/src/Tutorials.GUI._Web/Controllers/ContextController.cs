@@ -35,6 +35,13 @@ namespace Tutorials.GUI._Web.Controllers
 			return "ok";
 		}
 
+		public string UpdateTopicsOrder(string contextKey, string idsraw)
+		{
+			string[] ids = idsraw.Split(',');
+			Domain.ContextController.OrderTopics(contextKey, ids);
+			return "ok";
+		}
+
 		[ValidateInput(false)]
 		public string CreateContext(string title, string description, int order)
 		{

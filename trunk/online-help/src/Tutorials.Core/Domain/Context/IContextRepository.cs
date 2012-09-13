@@ -11,6 +11,6 @@ namespace Tutorials.Core.Domain.Context
 	public interface IContextRepository
         : IRepository<Context> 
     {
-		void DeleteContextByKey(string key);
+		
     }
 }

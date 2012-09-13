@@ -13,15 +13,19 @@
 	<div style="padding: 10px;">
 		<h1 id="context-title">@Model.Title</h1>
 		<div id="context-description">@Html.Raw(@Model.Description)</div>
-
+	
+		<div id="topics" style="border: 0;">
 		@if (Model.Topics != null)
-  {
-	  foreach (var item in Model.Topics)
-	  {
-			<h2>@item.Title</h2>
-			<p>@Server.HtmlDecode(@item.Description)</p>
-	  }
-  }
+		{
+			foreach (var item in Model.Topics)
+			{
+				<div id="@item.Key">
+					<h2 style="background: #eee; padding-left: 30px;">@item.Title</h2>
+					<p>@Server.HtmlDecode(@item.Description)</p>
+				</div>
+			}
+		}
+		</div>
 	</div>
 </div>
 
@@ -41,6 +45,8 @@
 <script type="text/javascript">
 	$(function () {
 
+		
+		
 		var reloadContextsMenu = function()
 		{
 			$("#menu").load("@Url.Content("~/Context/GetAllContexts")");
@@ -48,7 +54,7 @@
 
 		var deleting = false;
 
-		var reorderTopics = function()
+		var reorderContexts = function()
 		{
 			if (deleting)
 				return;
@@ -67,6 +73,34 @@
 				type: 'post'
 			});
 		};
+
+		var reorderTopics = function()
+		{
+			var dict = new Array();
+			i = 0;
+			$("#topics div").each(function(){
+				id = $(this).attr("id");
+				dict[i] = id;
+				i++;
+			});
+
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateTopicsOrder")",
+				data: 'contextKey=@Model.Key&idsraw=' + dict,
+				type: 'post'
+			});
+		};
+
+		$("#topics").accordion({
+			header: '> div > h2'
+		}).sortable({
+			axis: 'y',
+			containment: 'parent',
+			stop: function(event, ui)
+			{
+				reorderTopics();
+			}
+		});
 
 		$("#trash-bin").droppable({
 			tolerance: 'touch',
@@ -122,7 +156,7 @@
 			axis: 'y',
 			stop: function(event, ui)
 			{
-				reorderTopics();
+				reorderContexts();
 			}
 		});
 
