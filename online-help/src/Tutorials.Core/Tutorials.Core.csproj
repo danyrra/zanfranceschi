@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Context\ContextService.cs" />
+    <Compile Include="Domain\ISearchable.cs" />
     <Compile Include="UI.Boundary\Controllers\ContextController.cs" />
     <Compile Include="Infrastructure\Factories\ServicesFactory.cs" />
     <Compile Include="Infrastructure\DomainBase\EntityBase.cs" />

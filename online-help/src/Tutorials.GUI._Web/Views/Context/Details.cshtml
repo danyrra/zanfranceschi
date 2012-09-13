@@ -6,10 +6,10 @@
 	<button id="btn-new-context">
 		novo contexto</button>
 </div>
-<div id="menu" style="width: 30%; background: #ccc; padding: 0; float: left;">
+<div id="menu" style="width: 28%; background: #fff; padding: 0; float: left;">
 	@{ Html.RenderAction("GetAllContexts", "Context"); }
 </div>
-<div id="content" style="width: 70%; background: #eee; padding: 0; float: left;">
+<div id="content" style="width: 70%; background: #fff; padding: 0; float: left; border-left: 1px solid #ccc;">
 	<div style="padding: 10px;">
 		<h1 id="context-title">@Model.Title</h1>
 		<div id="context-description">@Html.Raw(@Model.Description)</div>
@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<img src="@Url.Content("~/_static/img/trash-bin.png")" alt="lixeira" id="trash-bin" style="display: block; clear: both; margin-left: 100px;" />
+<img src="@Url.Content("~/_static/img/trash-bin.png")" alt="lixeira" id="trash-bin" style="position: absolute; bottom: 5px; left: 5px;" />
 
 <div id="new-context">
 	<form id="new-context-form">
@@ -34,8 +34,8 @@
 	<input type="text" name="title" id="title" value="" />
 	<label>
 		Descrição</label>
-	<textarea name="description" id="description"></textarea>
-	<input type="hidden" name="order" id="order" value="999999999" />
+	<textarea name="description" id="description" rows="20" cols="65"></textarea>
+	<input type="hidden" name="order" id="order" value="99999" />
 	</form>
 </div>
 <script type="text/javascript">
@@ -69,6 +69,7 @@
 		};
 
 		$("#trash-bin").droppable({
+			tolerance: 'touch',
 			drop: function(event, ui)
 			{
 				if (confirm("Confirma a exclusão desse contexto?"))
@@ -92,16 +93,16 @@
 					});
 				}
 				
-				$(this).css({'border' : '0'});
+				$(this).css({'background-color' : '#fff'});
 
 			},
 			over: function(event, ui)
 			{
-				$(this).css({'border' : '2px solid red'});
+				$(this).css({'background-color' : '#ddd'});
 			},
 			out: function(event, ui)
 			{
-				$(this).css({'border' : '0'});
+				$(this).css({'background-color' : '#fff'});
 			}
 		});
 
@@ -117,6 +118,8 @@
 
 		$("#menu").sortable({
 			placeholder: "placeholder",
+			containment: 'document',
+			axis: 'y',
 			stop: function(event, ui)
 			{
 				reorderTopics();
@@ -126,6 +129,7 @@
 		$("#new-context").dialog({
 			modal: true,
 			autoOpen: false,
+			width: 600,
 			buttons: {
 				"Criar": function () {
 					
@@ -186,6 +190,14 @@
 					insertImage: { visible: false }
 				}
 			}
+		});
+
+		$("#description").wysiwyg({
+			separator04: { visible: true },
+			insertOrderedList: { visible: true },
+			insertUnorderedList: { visible: true },
+			createLink: { visible: false },
+			insertImage: { visible: false }
 		});
 
 	});
