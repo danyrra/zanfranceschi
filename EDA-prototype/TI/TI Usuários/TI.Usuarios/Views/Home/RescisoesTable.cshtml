@@ -1,0 +1,42 @@
+﻿@model List<TI.Usuarios.Modelos.Rescisao>
+@if (Model != null)
+{ 
+	<table border="0" cellpadding="0" cellspacing="0" id="rescisoesTable" style="background: #fff;">
+		<tr>
+			<th>Id</th>
+			<th>Nome</th>
+			<th>Empresa</th>
+			<th>Depto</th>
+			<th>Centro de Custo</th>
+			<th>Data</th>
+		</tr>
+		@foreach (var rescisao in Model)
+		{
+			<tr>
+				<td style="padding-right: 10px;">
+					@rescisao.Id
+				</td>
+				<td>
+					@rescisao.ColaboradorNome
+				</td>
+				<td>
+					@rescisao.ColaboradorEmpresa
+				</td>
+				<td>
+					@rescisao.ColaboradorDpto
+				</td>
+				<td>
+					@rescisao.ColaboradorCentroCusto
+				</td>
+				<td>
+					@rescisao.DataRescisao.ToString("yyyy-MM-dd")
+				</td>
+			</tr>
+		}
+	</table>
+}
+else
+{ 
+	<text> Não há rescisões...
+	</text>
+}

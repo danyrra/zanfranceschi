@@ -1,0 +1,137 @@
+﻿@model List<TI.Usuarios.Modelos.Rescisao>
+@{
+	ViewBag.Title = "Index";
+}
+<h2>Lista de Rescisões</h2>
+
+<div id="rescisoes">
+	<img src="@Url.Content("~/Content/ajax-loader.gif")" /> Carregando rescisões...
+</div>
+
+<div class="modal" id="modal-wrapper" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: #333; opacity: 0.8; z-index: 10; display: none;">
+</div>
+<div class="modal" id="modal" style="text-align: center; border: 3px solid #fff; display: none; color: #fff; font-weight: bold; position: fixed; width: 50%; height: auto; z-index: 11; background: #000; padding: 20px; left: 25%; top: 40%;"></div>
+
+
+
+<div id="pop-up" style="border: 1px solid #ccc; background: #ddd; padding: 10px;
+	position: fixed; right: 10px; bottom: 0; width: auto; height: auto; display: none;">
+	<h4>
+		Notificação de Rescisão</h4>
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="label">
+				Colaborador(a):
+			</td>
+			<td>
+				%colaborador%
+			</td>
+		</tr>
+		<tr>
+			<td class="label">
+				Empresa:
+			</td>
+			<td>
+				%empresa%
+			</td>
+		</tr>
+		<tr>
+			<td class="label">
+				Departamento:
+			</td>
+			<td>
+				%dpto%
+			</td>
+		</tr>
+		<tr>
+			<td class="label">
+				Centro de Custo
+			</td>
+			<td>
+				%custo%
+			</td>
+		</tr>
+		<tr>
+			<td class="label">
+				Data:
+			</td>
+			<td>
+				%data%
+			</td>
+		</tr>
+	</table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#pop-up, .modal").click(function(){
+            $(this).fadeOut();
+			$(".modal").fadeOut();
+        });
+
+        var template = $("#pop-up").html();
+
+        var currentId = 0;
+
+        verificarNovaRescisao = function () {
+            $.ajax({
+                url : "@Url.Content("~/Home/VerificarNovaRescisao")",
+                success : function(obj)
+                {
+                    if (obj.Id != currentId)
+                    {
+                        $("#pop-up").fadeIn();
+
+                        text = template;
+
+                        text = text.replace("%colaborador%", obj.Id + " - " + obj.ColaboradorNome).replace("%empresa%", obj.ColaboradorEmpresa);
+                        text = text.replace("%dpto%", obj.ColaboradorDpto).replace("%custo%", obj.ColaboradorCentroCusto).replace("%data%", obj.DataRescisao);
+
+                        $("#pop-up").html(text);
+
+                        currentId = obj.Id;
+
+						$("#pop-up").animate({ "background-color" : "red" }, 250, function(){
+							$(this).animate({"background-color" : "#eee" }, 250);
+						});
+
+						if (obj.ColaboradorDpto.toLowerCase() == "opec")
+						{
+							$(".modal").show();
+							$("#modal").text("Colaborador " + obj.ColaboradorNome + " foi desativado do sistema OPEC.");
+							//$("#modal-wrapper").fadeOut(3000);
+						}
+
+						carregarRescisoes();
+                    }
+                },
+                error: function(a, b, c)
+                {
+                    $("#pop-up").fadeIn();
+                    $("#pop-up").text("erro: " + c);
+                }
+            });
+        };
+
+		carregarRescisoes = function () {
+            $.ajax({
+                url : "@Url.Content("~/Home/RescisoesTable")",
+                success : function(rescisoesTable)
+                {
+					$("#rescisoes").html(rescisoesTable);
+					
+                },
+                error: function(a, b, c)
+                {
+                    $("#rescisoes").html("");
+                    $("#rescisoes").text("erro: " + c);
+                }
+            });
+        };
+
+		carregarRescisoes();
+
+        setInterval("verificarNovaRescisao()", 1000);
+    });
+</script>

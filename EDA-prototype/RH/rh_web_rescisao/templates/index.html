@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="utf-8" />
+	<title>RH - Módulo de Rescisão</title>
+	<style type="text/css">
+		body 
+		{
+			font-family: Arial, sans-serif;
+			font-size: 100%;
+		}
+		label
+		{
+			display: block;
+			font-weight: bold;
+		}
+		li
+		{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<h1><a href="/">RH - Módulo de Rescisão</a></h1>
+	
+{% if msg %}
+	<p style="padding: 10px; background-color: green; color: white; font-weight: bold;">{{ msg }}</p>
+{% endif %}
+	
+{% if form %}
+	<form action="/notificar-rescisao/" method="post">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Notificar Rescisão</legend>
+			{{ form.as_p }}
+			<input type="submit" value="notificar" /> 
+		</fieldset>
+	</form>
+{% endif %}
+</body>
+</html>

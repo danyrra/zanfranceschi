@@ -1,0 +1,193 @@
+﻿@model Tutorials.Core.Domain.Context.Context
+@{
+	ViewBag.Title = "Índice";
+}
+<div id="header" style="background: #666;">
+	<button id="btn-new-context">
+		novo contexto</button>
+</div>
+<div id="menu" style="width: 30%; background: #ccc; padding: 0; float: left;">
+	@{ Html.RenderAction("GetAllContexts", "Context"); }
+</div>
+<div id="content" style="width: 70%; background: #eee; padding: 0; float: left;">
+	<div style="padding: 10px;">
+		<h1 id="context-title">@Model.Title</h1>
+		<div id="context-description">@Html.Raw(@Model.Description)</div>
+
+		@if (Model.Topics != null)
+  {
+	  foreach (var item in Model.Topics)
+	  {
+			<h2>@item.Title</h2>
+			<p>@Server.HtmlDecode(@item.Description)</p>
+	  }
+  }
+	</div>
+</div>
+
+<img src="@Url.Content("~/_static/img/trash-bin.png")" alt="lixeira" id="trash-bin" style="display: block; clear: both; margin-left: 100px;" />
+
+<div id="new-context">
+	<form id="new-context-form">
+	<label>
+		Título</label>
+	<input type="text" name="title" id="title" value="" />
+	<label>
+		Descrição</label>
+	<textarea name="description" id="description"></textarea>
+	<input type="hidden" name="order" id="order" value="999999999" />
+	</form>
+</div>
+<script type="text/javascript">
+	$(function () {
+
+		var reloadContextsMenu = function()
+		{
+			$("#menu").load("@Url.Content("~/Context/GetAllContexts")");
+		};
+
+		var deleting = false;
+
+		var reorderTopics = function()
+		{
+			if (deleting)
+				return;
+			
+			var dict = new Array();
+			i = 0;
+			$("#menu a").each(function(){
+				id = $(this).attr("id");
+				dict[i] = id;
+				i++;
+			});
+
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateContextsOrder")",
+				data: 'idsraw=' + dict,
+				type: 'post'
+			});
+		};
+
+		$("#trash-bin").droppable({
+			drop: function(event, ui)
+			{
+				if (confirm("Confirma a exclusão desse contexto?"))
+				{
+					id = ui.draggable.attr("id");
+					
+					deleting = true;
+					$.ajax({
+						url: "@Url.Content("~/Context/DeleteContext/")" + id,
+						type: 'post',
+						success: function()
+						{
+							if ("@Model.Key" == id)
+							{
+								document.location = "@Url.Content("~/")";
+							}
+
+							reloadContextsMenu();
+							deleting = false;
+						}
+					});
+				}
+				
+				$(this).css({'border' : '0'});
+
+			},
+			over: function(event, ui)
+			{
+				$(this).css({'border' : '2px solid red'});
+			},
+			out: function(event, ui)
+			{
+				$(this).css({'border' : '0'});
+			}
+		});
+
+		$("#btn-new-context").click(function () {
+			$("#new-context").dialog("open");
+		});
+
+		$("#new-context-form").submit(function () {
+			return false;
+		});
+
+		
+
+		$("#menu").sortable({
+			placeholder: "placeholder",
+			stop: function(event, ui)
+			{
+				reorderTopics();
+			}
+		});
+
+		$("#new-context").dialog({
+			modal: true,
+			autoOpen: false,
+			buttons: {
+				"Criar": function () {
+					
+					_this = $(this);
+					
+					$.ajax({
+						url: "@Url.Content("~/Context/CreateContext")",
+						type: 'post',
+						data: $("#new-context-form").serialize(),
+						success: function(data)
+						{
+							$("#title, #description").val('');
+							reloadContextsMenu();
+							_this.dialog("close");
+						}
+					});
+				}
+			}
+		});
+
+
+		$("#context-title").editable(function(value, settings){
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateContextTitle")",
+				data: 'contextKey=@Model.Key&title=' + value,
+				type: 'post',
+				success: function()
+				{
+					reloadContextsMenu();
+				}
+			});
+			return value;
+		}, 
+		{ 
+			cssclass: 'editable' 
+		});
+		
+		$("#context-description").editable(function (value, settings) {
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateContextDescription")",
+				data: 'contextKey=@Model.Key&description=' + value,
+				type: 'post'
+			});
+			return value;
+		}, {
+			type: 'wysiwyg',
+			width: 640,
+			height: 'auto',
+			onblur: 'ignore',
+			submit: 'OK',
+			cancel: 'Cancelar',
+			wysiwyg: {
+				controls: {
+					separator04: { visible: true },
+					insertOrderedList: { visible: true },
+					insertUnorderedList: { visible: true },
+					createLink: { visible: false },
+					insertImage: { visible: false }
+				}
+			}
+		});
+
+	});
+</script>
+

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Índice";
+}
+
+
+<div id="header" style="background: #666;">
+	teste...
+</div>
+<div id="menu" style="width: 30%; background: #ccc; padding: 0; float: left;">
+@{ Html.RenderAction("GetAllContexts", "Context"); }
+</div>
+<div id="content" style="width: 70%; background: #eee; padding: 0; float: left;">
+@{ Html.RenderAction("GetFirstContext", "Context"); }
+</div>
+<script type="text/javascript">
+	$(function () {
+		$("#menu a").click(function (event) {
+			event.preventDefault();
+			href = $(this).attr("href");
+			$("#content").load(href);
+		});
+
+	});
+</script>
+
+
