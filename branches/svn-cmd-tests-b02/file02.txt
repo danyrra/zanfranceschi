@@ -1,8 +1,0 @@
-arquivo 02
-
-sss
-
-
-linha 3: apenas desse branch...
-
-branch 02
