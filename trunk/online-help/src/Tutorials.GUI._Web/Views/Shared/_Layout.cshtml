@@ -13,6 +13,13 @@
 	<script type="text/javascript" src="@Url.Content("~/Content/jwysiwyg/jquery.jeditable.js")"></script>
 	<script type="text/javascript" src="@Url.Content("~/Content/jwysiwyg/jquery.jeditable.wysiwyg.js")"></script>
 
+	<style type="text/css" media="print">
+		#menu, #header, #trash-bin
+		{
+			display: none;
+		}
+	</style>
+
 	<style type="text/css">
 		body
 		{
@@ -20,13 +27,21 @@
 		}
 		.placeholder
 		{
-			background: yellow;
+			background: #ddd;
 			margin: 5px;
-			border: 1px solid #000;
+			border: 1px solid #ccc;
 			height: 30px;
 			display: block;
 		}
 		.editable
+		{
+			width: 500px;
+			}
+		label
+		{
+			display: block;		
+		}
+		input[type=text]
 		{
 			width: 500px;
 			}

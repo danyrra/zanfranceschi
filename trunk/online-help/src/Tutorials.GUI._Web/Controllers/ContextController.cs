@@ -35,6 +35,7 @@ namespace Tutorials.GUI._Web.Controllers
 			return "ok";
 		}
 
+		[ValidateInput(false)]
 		public string CreateContext(string title, string description, int order)
 		{
 			Context c = Domain.ContextController.CreateNewContext("x", title, description, order);
