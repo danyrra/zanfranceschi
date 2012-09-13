@@ -1,0 +1,11 @@
+RabbitMQ Server
+
+.NET
+- MVC 3 - http://www.microsoft.com/en-us/download/details.aspx?id=1491
+- RabbitMQ client - http://www.rabbitmq.com/dotnet.html
+- Newtonsoft.JSON - http://json.codeplex.com/releases/view/92198 ou "Install-Package Newtonsoft.Json"
+- db4o 8 (.NET 4.0) - http://www.db4o.com/DownloadNow.aspx
+
+Python
+- django
+- pika
