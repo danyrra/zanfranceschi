@@ -21,6 +21,22 @@ namespace Tutorials.Core.Domain.Context
 		public IList<Topic> Topics { get; set; }
 		public IList<Comment> Comments { get; set; }
 
+		public Topic FindTopicByKey(string key)
+		{
+			return (from t in Topics
+					where t.Key.Equals(key)
+					select t).First();
+		}
+		public void UpdateTopicTitle(string topicKey, string title)
+		{
+			Topic topic = FindTopicByKey(topicKey);
+			topic.Title = title;
+		}
+		public void UpdateTopicDescription(string topicKey, string description)
+		{
+			Topic topic = FindTopicByKey(topicKey);
+			topic.Description = description;
+		}
 		public void AddTopic(Topic topic)
 		{
 			if (topics == null)

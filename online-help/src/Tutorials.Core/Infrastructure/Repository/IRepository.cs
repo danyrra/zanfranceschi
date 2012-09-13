@@ -17,5 +17,6 @@ namespace Tutorials.Core.Infrastructure.Repository
 		void Remove(T entity);
 		void Update(T entity);
 		T[] Find(Expression<Func<T, bool>> expression);
+		T FindOneByKey(string key);
 	}
 }

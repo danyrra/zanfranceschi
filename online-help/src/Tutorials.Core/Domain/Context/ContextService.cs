@@ -25,9 +25,9 @@ namespace Tutorials.Core.Domain.Context
 			repository.UnitOfWork.Commit();
 			return context;
 		}
-		internal Context GetContext(string key)
+		internal Context GetContextByKey(string key)
 		{
-			return repository.Find(c => c.EqualsByKey(key)).First();
+			return repository.FindOneByKey(key);
 		}
 		internal Context[] GetAllContexts()
 		{
@@ -41,39 +41,35 @@ namespace Tutorials.Core.Domain.Context
 		{
 			for (int i = 0; i < ids.Length; i++)
 			{
-				var context = repository.Find(c => c.Key.Equals(ids[i])).First();
+				var context = repository.FindOneByKey(ids[i]);
 				context.Order = i;
 				repository.Update(context);
 			}
-
 			repository.UnitOfWork.Commit();
 		}
 		internal void DeleteContext(string id)
 		{
-			repository.DeleteContextByKey(id);
+			var context = repository.FindOneByKey(id);
+			repository.Remove(context);
+			repository.UnitOfWork.Commit();
 		}
-		internal void UpdateContextTitle(string contextKey, string title)
+		internal void UpdateContextTitle(Context context, string title)
 		{
-			var context = repository.Find(c => c.Key.Equals(contextKey)).First();
 			context.Title = title;
 			repository.Update(context);
 			repository.UnitOfWork.Commit();
 		}
-		internal void UpdateContextDescription(string contextKey, string description)
+		internal void UpdateContextDescription(Context context, string description)
 		{
-			var context = repository.Find(c => c.Key.Equals(contextKey)).First();
 			context.Description = description;
 			repository.Update(context);
 			repository.UnitOfWork.Commit();
 		}
 		#endregion
 
-
 		#region Topic
-		internal Topic CreateNewTopic(string contextKey, Topic topic)
+		internal Topic CreateNewTopic(Context context, Topic topic)
 		{
-			Context context = repository.Find(c => c.EqualsByKey(contextKey)).First();
-
 			if (context.Topics == null)
 				context.Topics = new List<Topic>();
 
@@ -82,6 +78,32 @@ namespace Tutorials.Core.Domain.Context
 			repository.UnitOfWork.Commit();
 			return topic;
 		} 
+		internal void OrderTopics(Context context, string[] ids)
+		{
+			for (int i = 0; i < ids.Length; i++)
+			{
+				var topic = context.FindTopicByKey(ids[i]);
+				topic.Order = i;
+			}
+			var topics = context.Topics.OrderBy(t => t.Order).ToList();
+			context.Topics = topics;
+			repository.Update(context);
+			repository.UnitOfWork.Commit();
+		}
+		internal void UpdateTopicTitle(Context context, string topicKey, string title)
+		{
+			var topic = context.FindTopicByKey(topicKey);
+			topic.Title = title;
+			repository.Update(context);
+			repository.UnitOfWork.Commit();	
+		}
+		internal void UpdateTopicDescription(Context context, string topicKey, string description)
+		{
+			var topic = context.FindTopicByKey(topicKey);
+			topic.Description = description;
+			repository.Update(context);
+			repository.UnitOfWork.Commit();
+		}
 		#endregion
 	}
 }
