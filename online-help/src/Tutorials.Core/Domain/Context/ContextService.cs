@@ -19,6 +19,19 @@ namespace Tutorials.Core.Domain.Context
 		}
 
 		#region Context
+		/// <summary>
+		/// TODO: Has to go away...
+		/// </summary>
+		/// <returns></returns>
+		internal Context[] GetAllContexts()
+		{
+			return repository.Find(obj => true).OrderBy(c => c.Order).ToArray();
+		}
+		
+		internal Context[] GetContextsBySystemKey(string systemKey)
+		{
+			return repository.Find(c => c.SystemKey.Equals(systemKey)).OrderBy(c => c.Order).ToArray();
+		}
 		internal Context CreateNewContext(Context context)
 		{
 			repository.Add(context);
@@ -28,10 +41,6 @@ namespace Tutorials.Core.Domain.Context
 		internal Context GetContextByKey(string key)
 		{
 			return repository.FindOneByKey(key);
-		}
-		internal Context[] GetAllContexts()
-		{
-			return repository.Find(obj => true).OrderBy(c => c.Order).ToArray();
 		}
 		internal Context GetFirstContext()
 		{
