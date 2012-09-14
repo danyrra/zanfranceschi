@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Tutorials.Core.Domain.Context.Context>
+
+<h2 style="margin: 10px;">Índice</h2>
+
+@if (Model != null)
+{
+	foreach (var item in Model)
+	{
+		<a class="context" href="@Url.Content("~/Context/Details/" + @item.Key)" id="@item.Key">@item.Title</a>
+	}
+}

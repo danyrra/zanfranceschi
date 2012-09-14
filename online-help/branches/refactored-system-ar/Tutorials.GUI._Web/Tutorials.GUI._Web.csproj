@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B86689A3-6891-494F-AA8D-A12CB4CF5D4A}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tutorials.GUI._Web</RootNamespace>
+    <AssemblyName>Tutorials.GUI._Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Db4objects.Db4o, Version=8.0.249.16098, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\db4o\db4o-8.0\bin\net-4.0\Db4objects.Db4o.dll</HintPath>
+    </Reference>
+    <Reference Include="Db4objects.Db4o.CS">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\db4o\db4o-8.0\bin\net-4.0\Db4objects.Db4o.CS.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ContextController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\ajax-loader.gif" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\controls\wysiwyg.colorpicker.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\controls\wysiwyg.cssWrap.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\controls\wysiwyg.image.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\controls\wysiwyg.link.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\controls\wysiwyg.table.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\GPL-LICENSE.txt" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\scheme-refactoring.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\scheme.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\01-basic.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\02-full.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\03-ajax.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\04-resizable.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\05-ui-dialogs.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\06-hide-heading-buttons.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\07-enable-rtl.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\08-auto-grow.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\09-css-autoloading.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\10-custom-controls.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\11-plugins.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\12-writing-plugins.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\13-fileManager.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\14-PHP-fileManager.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\index.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\examples\jw_ajax.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\blueprint\ie.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\blueprint\print.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\blueprint\screen.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jasmine\jasmine-html.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jasmine\jasmine.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jasmine\jasmine.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jquery.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jquery.simplemodal.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jquery.simplemodal.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\autoload\jquery.autoload.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\CHANGELOG.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\css\farbtastic.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\demo\demo1.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\demo\demo2.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\farbtastic.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\images\marker.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\images\mask.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\images\wheel.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\LICENSE.txt" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\plugins\farbtastic\README.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.blind.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.bounce.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.clip.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.core.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.drop.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.explode.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.fold.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.highlight.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.pulsate.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.scale.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.shake.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.slide.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.effects.transfer.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.accordion.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.accordion.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.all.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.autocomplete.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.autocomplete.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.base.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.button.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.button.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.core.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.core.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.datepicker.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.datepicker.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.dialog.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.dialog.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.draggable.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.droppable.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.mouse.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.position.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.progressbar.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.progressbar.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.resizable.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.resizable.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.selectable.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.slider.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.slider.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.sortable.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.tabs.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.tabs.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.theme.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\ui\jquery.ui.widget.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\x.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\css\issue014-cg.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\css\issue145.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\images\quote02.gif" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue005.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue014-cg.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue016.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue026.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue029.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue130.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue145.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue152_iframe.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue154.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue214-cg.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\154.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\159.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\controls\html.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\functions\insertHtml.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\helper.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\jwysiwyg.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\plugins.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\plugins\i18n.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\jasmine\plugins\rmFormat.spec.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\run-jasmine-tests.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.cs.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.de.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.en.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.es.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.fr.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.he.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.hr.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.it.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.ja.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.nb.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.nl.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.pl.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.pt_br.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.ru.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.se.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.sl.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\i18n\lang.zh-cn.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\index.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.bg.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.gif" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.jpg" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.modal.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.no-alpha.gif" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\jquery.wysiwyg.old-school.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\lib\jquery1.5.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\MIT-LICENSE.txt" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\icon.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\application.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\code.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\css.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\db.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\directory.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\doc.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\file.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\film.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\flash.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\folder_open.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\html.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\java.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\linux.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\mkdir.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\music.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\pdf.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\php.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\picture.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\ppt.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\prev-directory.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\psd.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\remove.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\rename.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\ruby.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\script.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\txt.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\upload.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\xls.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\images\zip.png" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\wysiwyg.fileManager.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\wysiwyg.autoload.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\wysiwyg.fileManager.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\wysiwyg.fullscreen.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\wysiwyg.i18n.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\wysiwyg.rmFormat.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\src\controls\default.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\src\dialogs\default.css" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\src\dialogs\default.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\src\jquery.wysiwyg-names-only.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\src\jquery.wysiwyg-names-only.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\src\jquery.wysiwyg.js" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\test\basic.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\test\events.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\test\external_toolbar.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\test\jwysiwyg.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\test\multiple_instances.html" />
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\test\unified_dialog_ui.html" />
+    <Content Include="Content\jwysiwyg\jquery.jeditable.js" />
+    <Content Include="Content\jwysiwyg\jquery.jeditable.wysiwyg.js" />
+    <Content Include="Content\jwysiwyg\jquery.wysiwyg.css" />
+    <Content Include="Content\jwysiwyg\jquery.wysiwyg.gif" />
+    <Content Include="Content\jwysiwyg\jquery.wysiwyg.jpg" />
+    <Content Include="Content\jwysiwyg\jquery.wysiwyg.js" />
+    <Content Include="Content\sceditor\jquery.sceditor.default.min.css" />
+    <Content Include="Content\sceditor\jquery.sceditor.min.js" />
+    <Content Include="Content\sceditor\languages\de.js" />
+    <Content Include="Content\sceditor\languages\en-US.js" />
+    <Content Include="Content\sceditor\languages\en.js" />
+    <Content Include="Content\sceditor\languages\es.js" />
+    <Content Include="Content\sceditor\languages\et.js" />
+    <Content Include="Content\sceditor\languages\fr.js" />
+    <Content Include="Content\sceditor\languages\nl.js" />
+    <Content Include="Content\sceditor\languages\no.js" />
+    <Content Include="Content\sceditor\languages\pt-BR.js" />
+    <Content Include="Content\sceditor\languages\ru.js" />
+    <Content Include="Content\sceditor\languages\sv.js" />
+    <Content Include="Content\sceditor\themes\default.min.css" />
+    <Content Include="Content\sceditor\themes\famfamfam.png" />
+    <Content Include="Content\sceditor\themes\modern.min.css" />
+    <Content Include="Content\sceditor\themes\office-toolbar.min.css" />
+    <Content Include="Content\sceditor\themes\office.min.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.5.1.js" />
+    <Content Include="Scripts\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.jeditable.mini.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="_static\img\trash-bin.png" />
+    <Content Include="_static\js\jquery-1.8.0.min.js" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="_static\libs\jquery-ui\css\ui-lightness\jquery-ui-1.8.23.custom.css" />
+    <Content Include="_static\libs\jquery-ui\js\jquery-ui-1.8.23.custom.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tutorials.Core\Tutorials.Core.csproj">
+      <Project>{920B5D72-148A-4D67-9279-6B9955D9586F}</Project>
+      <Name>Tutorials.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tuturials.Core.Impls\Tuturials.Core.Impls.csproj">
+      <Project>{860C594C-2B9F-4EF7-A55F-36DF1E6DF48D}</Project>
+      <Name>Tuturials.Core.Impls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Context\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Context\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Context\Partial\Context-List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\jwysiwyg\akzhan-jwysiwyg-0.98-alpha1-83-gb44a793.zip" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\.gitignore" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\CHANGES.markdown" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\bin\compile.bash" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\bin\compile.conf" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\code_style.rst" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\contributing.rst" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\get_dia.rst" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\internals.rst" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\plugins.rst" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\scheme-refactoring.dia" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\docs\scheme.dia" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\htmlentity\.gitignore" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\htmlentity\db.csv" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\htmlentity\Gemfile" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\htmlentity\unicode4jwysiwyg.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\htmlentity\unicode4jwysiwyg.rb" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\lib\jasmine\MIT.LICENSE" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\help\tests\issue152.xhtml" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\Perl\file_manager.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\Perl\mkdir_handler.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\Perl\move_handler.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\Perl\remove_handler.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\Perl\rename_handler.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\Perl\upload_handler.pl" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\PHP\common.php" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\PHP\config.php" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\PHP\file-manager.php" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\plugins\fileManager\handlers\PHP\handlers.php" />
+    <None Include="Content\jwysiwyg\akzhan-jwysiwyg-b44a793\README.rst" />
+    <Content Include="Content\jwysiwyg\jwysiwyg-0.3-0.zip" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>16892</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
