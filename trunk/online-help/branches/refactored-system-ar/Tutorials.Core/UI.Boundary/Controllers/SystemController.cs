@@ -16,6 +16,11 @@ namespace Tutorials.Core.UI.Boundary.Controllers
 			service = ServicesFactory.ContextService;
 		}
 
+		public static Context GetContext(string key)
+		{
+			return service.GetContextByKey(key);
+		}
+
 		#region Context
 		public static Context CreateNewContext(string systemKey, string contextId, string title, string description, int order)
 		{
