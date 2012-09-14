@@ -6,13 +6,13 @@ using Tutorials.Core.Infrastructure.UnitOfWork;
 using Ninject.Modules;
 using Ninject;
 
-namespace Tutorials.Core.Domain.Context
+namespace Tutorials.Core.Domain.System
 {
-	internal class ContextService
+	internal class SystemService
 	{
-		private IContextRepository repository;
+		private ISystemRepository repository;
 
-		internal ContextService(IContextRepository repository)
+		internal SystemService(ISystemRepository repository)
 		{
 			this.repository = repository;
 			this.repository.SetUnitOfWork(new UnitOfWork());

@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tutorials.Core.Domain.Context;
+using Tutorials.Core.Domain.System;
 using Tutorials.Core.Infrastructure.Factories;
 
 namespace Tutorials.Core.UI.Boundary.Controllers
 {
-	public static class ContextController
+	public static class SystemController
 	{
-		static ContextService service;
+		static SystemService service;
 
-		static ContextController()
+		static SystemController()
 		{
 			service = ServicesFactory.ContextService;
 		}
 
 		#region Context
-		public static Context CreateNewContext(string contextId, string title, string description, int order)
+		public static Context CreateNewContext(string systemKey, string contextId, string title, string description, int order)
 		{
 			Context context = new Context
 			{

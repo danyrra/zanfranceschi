@@ -6,10 +6,10 @@ using Tutorials.Core.Domain;
 using Tutorials.Core.Infrastructure.Repository;
 
 
-namespace Tutorials.Core.Domain.Context
+namespace Tutorials.Core.Domain.System
 {
-	public interface IContextRepository
-        : IRepository<Context> 
+	public interface ISystemRepository
+        : IRepository<System> 
     {
 		
     }

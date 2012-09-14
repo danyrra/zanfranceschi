@@ -6,13 +6,12 @@ using Tutorials.Core.Infrastructure.DomainBase;
 
 namespace Tutorials.Core.Domain.System
 {
-    public class User
+	public class Topic
 		: EntityBase
     {
-		internal User() { }
-		public string Login { get; set; }
-		public string Name { get; set; }
-		public string Email { get; set; }
-		public Employer Employer { get; set; }
+		internal Topic() { }
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public int Order { get; set; }
     }
 }

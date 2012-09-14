@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tutorials.Core.Domain.Context;
+using Tutorials.Core.Domain.System;
 using Tutorials.Core.UI.Boundary.Controllers;
 using Db4objects.Db4o;
 using System.Linq.Expressions;
@@ -69,23 +69,23 @@ namespace Tutorials.GUI._Console
 		static void Main(string[] args)
 		{
 
-			Context[] ctxs = ContextController.GetAllContexts();
+			Context[] ctxs = SystemController.GetAllContexts();
 
 			if (ctxs.Count() < 1)
 			{
-				ContextController.CreateNewContext("", "Título", "Descrição", 0);
-				ctxs = ContextController.GetAllContexts();
+				SystemController.CreateNewContext("", "Título", "Descrição", 0);
+				ctxs = SystemController.GetAllContexts();
 			}
 
 			foreach (var ctx in ctxs)
 			{
 				for (int i = 0; i < 10; i++)
 				{
-					ContextController.CreateNewTopic(ctx.Key.ToString(), "Título " + i.ToString(), "Descrição " + i.ToString(), i);
+					SystemController.CreateNewTopic(ctx.Key.ToString(), "Título " + i.ToString(), "Descrição " + i.ToString(), i);
 				}
 				Console.WriteLine("{0} - {1}", ctx.Key, ctx.Title);
 			}
-			ctxs = ContextController.GetAllContexts();
+			ctxs = SystemController.GetAllContexts();
 
 			Console.Read();
 		}

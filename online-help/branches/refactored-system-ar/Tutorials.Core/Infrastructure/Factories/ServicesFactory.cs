@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tutorials.Core.Domain.Context;
+using Tutorials.Core.Domain.System;
 using Ninject;
 using Ninject.Extensions.Conventions;
 using System.Configuration;
@@ -30,9 +30,9 @@ namespace Tutorials.Core.Infrastructure.Factories
 					.Configure(b => b.InSingletonScope())
 				);
 		}
-		public static ContextService ContextService
+		public static SystemService ContextService
 		{
-			get { return kernel.Get<ContextService>(); }
+			get { return kernel.Get<SystemService>(); }
 		}
 	}
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Tutorials.Core.Infrastructure.DomainBase;
 
-namespace Tutorials.Core.Domain.Context
+namespace Tutorials.Core.Domain.System
 {
     public class Context
-		: EntityBase, IAggregateRoot
+		: EntityBase
     {
 		internal Context() : base() { }
 
