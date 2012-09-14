@@ -1,0 +1,239 @@
+﻿@model Tutorials.Core.Domain.Context.Context
+@{
+	ViewBag.Title = "Índice";
+}
+<div id="header" style="background: #666;">
+	<button id="btn-new-context">
+		novo contexto</button>
+</div>
+<div id="menu" style="width: 28%; background: #fff; padding: 0; float: left;">
+	@{ Html.RenderAction("GetAllContexts", "Context"); }
+</div>
+<div id="content" style="width: 70%; background: #fff; padding: 0; float: left; border-left: 1px solid #ccc;">
+	<div style="padding: 10px;">
+		<h1 id="context-title">@Model.Title</h1>
+		<div id="context-description">@Html.Raw(@Model.Description)</div>
+	
+		<div id="topics" style="border: 0;">
+		@if (Model.Topics != null)
+		{
+			foreach (var item in Model.Topics)
+			{
+				<div id="@item.Key">
+					<h2 style="background: #eee; padding-left: 30px;">@item.Title</h2>
+					<p>@Server.HtmlDecode(@item.Description)</p>
+				</div>
+			}
+		}
+		</div>
+	</div>
+</div>
+
+<img src="@Url.Content("~/_static/img/trash-bin.png")" alt="lixeira" id="trash-bin" style="position: absolute; bottom: 5px; left: 5px;" />
+
+<div id="new-context">
+	<form id="new-context-form">
+	<label>
+		Título</label>
+	<input type="text" name="title" id="title" value="" />
+	<label>
+		Descrição</label>
+	<textarea name="description" id="description" rows="20" cols="65"></textarea>
+	<input type="hidden" name="order" id="order" value="99999" />
+	</form>
+</div>
+<script type="text/javascript">
+	$(function () {
+
+		
+		
+		var reloadContextsMenu = function()
+		{
+			$("#menu").load("@Url.Content("~/Context/GetAllContexts")");
+		};
+
+		var deleting = false;
+
+		var reorderContexts = function()
+		{
+			if (deleting)
+				return;
+			
+			var dict = new Array();
+			i = 0;
+			$("#menu a").each(function(){
+				id = $(this).attr("id");
+				dict[i] = id;
+				i++;
+			});
+
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateContextsOrder")",
+				data: 'idsraw=' + dict,
+				type: 'post'
+			});
+		};
+
+		var reorderTopics = function()
+		{
+			var dict = new Array();
+			i = 0;
+			$("#topics div").each(function(){
+				id = $(this).attr("id");
+				dict[i] = id;
+				i++;
+			});
+
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateTopicsOrder")",
+				data: 'contextKey=@Model.Key&idsraw=' + dict,
+				type: 'post'
+			});
+		};
+
+		$("#topics").accordion({
+			header: '> div > h2'
+		}).sortable({
+			axis: 'y',
+			containment: 'parent',
+			stop: function(event, ui)
+			{
+				reorderTopics();
+			}
+		});
+
+		$("#trash-bin").droppable({
+			tolerance: 'touch',
+			drop: function(event, ui)
+			{
+				if (confirm("Confirma a exclusão desse contexto?"))
+				{
+					id = ui.draggable.attr("id");
+					
+					deleting = true;
+					$.ajax({
+						url: "@Url.Content("~/Context/DeleteContext/")" + id,
+						type: 'post',
+						success: function()
+						{
+							if ("@Model.Key" == id)
+							{
+								document.location = "@Url.Content("~/")";
+							}
+
+							reloadContextsMenu();
+							deleting = false;
+						}
+					});
+				}
+				
+				$(this).css({'background-color' : '#fff'});
+
+			},
+			over: function(event, ui)
+			{
+				$(this).css({'background-color' : '#ddd'});
+			},
+			out: function(event, ui)
+			{
+				$(this).css({'background-color' : '#fff'});
+			}
+		});
+
+		$("#btn-new-context").click(function () {
+			$("#new-context").dialog("open");
+		});
+
+		$("#new-context-form").submit(function () {
+			return false;
+		});
+
+		
+
+		$("#menu").sortable({
+			placeholder: "placeholder",
+			containment: 'document',
+			axis: 'y',
+			stop: function(event, ui)
+			{
+				reorderContexts();
+			}
+		});
+
+		$("#new-context").dialog({
+			modal: true,
+			autoOpen: false,
+			width: 600,
+			buttons: {
+				"Criar": function () {
+					
+					_this = $(this);
+					
+					$.ajax({
+						url: "@Url.Content("~/Context/CreateContext")",
+						type: 'post',
+						data: $("#new-context-form").serialize(),
+						success: function(data)
+						{
+							$("#title, #description").val('');
+							reloadContextsMenu();
+							_this.dialog("close");
+						}
+					});
+				}
+			}
+		});
+
+
+		$("#context-title").editable(function(value, settings){
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateContextTitle")",
+				data: 'contextKey=@Model.Key&title=' + value,
+				type: 'post',
+				success: function()
+				{
+					reloadContextsMenu();
+				}
+			});
+			return value;
+		}, 
+		{ 
+			cssclass: 'editable' 
+		});
+		
+		$("#context-description").editable(function (value, settings) {
+			$.ajax({
+				url: "@Url.Content("~/Context/UpdateContextDescription")",
+				data: 'contextKey=@Model.Key&description=' + value,
+				type: 'post'
+			});
+			return value;
+		}, {
+			type: 'wysiwyg',
+			width: 640,
+			height: 'auto',
+			onblur: 'ignore',
+			submit: 'OK',
+			cancel: 'Cancelar',
+			wysiwyg: {
+				controls: {
+					separator04: { visible: true },
+					insertOrderedList: { visible: true },
+					insertUnorderedList: { visible: true },
+					createLink: { visible: false },
+					insertImage: { visible: false }
+				}
+			}
+		});
+
+		$("#description").wysiwyg({
+			separator04: { visible: true },
+			insertOrderedList: { visible: true },
+			insertUnorderedList: { visible: true },
+			createLink: { visible: false },
+			insertImage: { visible: false }
+		});
+
+	});
+</script>
+
