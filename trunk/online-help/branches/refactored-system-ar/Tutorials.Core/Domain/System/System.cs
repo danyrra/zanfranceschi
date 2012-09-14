@@ -13,5 +13,6 @@ namespace Tutorials.Core.Domain.System
 		internal System() { }
 		public string Name { get; set; }
 		public string Description { get; set; }
+		public IList<Context> Contexts { get; set; }
     }
 }

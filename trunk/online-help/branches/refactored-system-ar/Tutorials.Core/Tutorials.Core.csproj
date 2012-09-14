@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject">
-      <HintPath>..\..\Libs\Ninject.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Installers\VS2010\Ninject-3.0.0.15-release-net-4.0\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Extensions.Conventions">
-      <HintPath>..\..\Libs\Ninject.Extensions.Conventions.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Installers\VS2010\Ninject-3.0.0.15-release-net-4.0\Ninject.Extensions.Conventions-3.0.0.11-release-net-4.0\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -48,9 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Context\ContextService.cs" />
-    <Compile Include="Domain\ISearchable.cs" />
-    <Compile Include="UI.Boundary\Controllers\ContextController.cs" />
+    <Compile Include="Domain\System\SystemService.cs" />
+    <Compile Include="UI.Boundary\Controllers\SystemController.cs" />
     <Compile Include="Infrastructure\Factories\ServicesFactory.cs" />
     <Compile Include="Infrastructure\DomainBase\EntityBase.cs" />
     <Compile Include="Infrastructure\DomainBase\IAggregateRoot.cs" />
@@ -59,12 +58,10 @@
     <Compile Include="Infrastructure\Repository\IUnitOfWorkRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork\UnitOfWork.cs" />
-    <Compile Include="Domain\Context\IContextRepository.cs" />
-    <Compile Include="Domain\Context\Comment.cs" />
-    <Compile Include="Domain\Context\Context.cs" />
-    <Compile Include="Domain\System\Employer.cs" />
-    <Compile Include="Domain\Context\Topic.cs" />
-    <Compile Include="Domain\System\User.cs" />
+    <Compile Include="Domain\System\ISystemRepository.cs" />
+    <Compile Include="Domain\System\Comment.cs" />
+    <Compile Include="Domain\System\Context.cs" />
+    <Compile Include="Domain\System\Topic.cs" />
     <Compile Include="Domain\System\System.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
