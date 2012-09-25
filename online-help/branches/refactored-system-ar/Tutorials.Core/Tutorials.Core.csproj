@@ -55,14 +55,11 @@
     <Compile Include="Infrastructure\DomainBase\IAggregateRoot.cs" />
     <Compile Include="Infrastructure\DomainBase\IEntity.cs" />
     <Compile Include="Infrastructure\Repository\IRepository.cs" />
-    <Compile Include="Infrastructure\Repository\IUnitOfWorkRepository.cs" />
-    <Compile Include="Infrastructure\UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="Infrastructure\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Domain\System\ISystemRepository.cs" />
     <Compile Include="Domain\System\Comment.cs" />
     <Compile Include="Domain\System\Context.cs" />
     <Compile Include="Domain\System\Topic.cs" />
-    <Compile Include="Domain\System\System.cs" />
+    <Compile Include="Domain\System\_System.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

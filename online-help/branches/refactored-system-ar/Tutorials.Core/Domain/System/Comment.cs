@@ -10,6 +10,7 @@ namespace Tutorials.Core.Domain.System
 		: EntityBase
     {
 		internal Comment() { }
+		public Context Context { get; set; }
 		public string Post { get; set; }
 		public string User { get; set; }
     }

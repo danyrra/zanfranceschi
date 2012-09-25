@@ -10,6 +10,7 @@ namespace Tutorials.Core.Domain.System
 		: EntityBase
     {
 		internal Topic() { }
+		public Context Context { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public int Order { get; set; }

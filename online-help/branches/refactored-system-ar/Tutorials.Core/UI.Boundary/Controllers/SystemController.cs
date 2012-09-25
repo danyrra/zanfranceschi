@@ -16,9 +16,9 @@ namespace Tutorials.Core.UI.Boundary.Controllers
 			service = ServicesFactory.ContextService;
 		}
 
-		public static Context GetContext(string key)
+		public static _System[] GetAllSystems()
 		{
-			return service.GetContextByKey(key);
+			return service.GetAllSystems();
 		}
 
 		#region Context
