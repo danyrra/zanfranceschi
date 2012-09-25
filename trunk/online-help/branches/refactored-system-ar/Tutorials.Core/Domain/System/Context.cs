@@ -15,6 +15,7 @@ namespace Tutorials.Core.Domain.System
 		private IList<Comment> comments;
 
 		public string SystemKey { get; set; }
+		public _System system { get; set; }
 
 		public string ContextId { get; set; }
 		public string Title { get; set; }

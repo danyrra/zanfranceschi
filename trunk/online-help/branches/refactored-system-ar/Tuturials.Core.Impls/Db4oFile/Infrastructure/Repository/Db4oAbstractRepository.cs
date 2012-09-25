@@ -9,31 +9,8 @@ using System.Threading;
 namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
 {
 	public abstract class Db4oAbstractRepository<T>
-		: IRepository<T>, IUnitOfWorkRepository where T : IAggregateRoot
+		: IRepository<T> where T : IAggregateRoot
 	{
-		private IUnitOfWork unitOfWork;
-
-		#region IUnitOfWork
-		public void SetUnitOfWork(IUnitOfWork unitOfWork)
-		{
-			this.unitOfWork = unitOfWork;
-		}
-		public IUnitOfWork UnitOfWork
-		{
-			get { return this.unitOfWork; }
-		}
-		public void Add(T entity)
-		{
-			this.unitOfWork.MarkAdded(entity, this);
-		}
-		public void Remove(T entity)
-		{
-			this.unitOfWork.MarkRemoved(entity, this);
-		}
-		public void Update(T entity)
-		{
-			this.unitOfWork.MarkChanged(entity, this);
-		}
 		public T[] Find(Expression<Func<T, bool>> expression)
 		{
 			using (var db = ObjectContainerFactory.ObjectContainer)
@@ -48,18 +25,23 @@ namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
 				return db.Query<T>().AsQueryable().Where(obj => obj.Key.Equals(key)).First();
 			}
 		}
-		#endregion
-
-		#region IUnitOfWorkRepository
-		public void PersistNewEntity(IEntity entity)
+		public void Add(IEntity entity)
 		{
-			PersistGambiEntity(entity);
+			GambiSave(entity);
 		}
-		public void PersistUpdatedEntity(IEntity entity)
+		public void Update(IEntity entity)
 		{
-			PersistGambiEntity(entity);
+			GambiSave(entity);
 		}
-		private void PersistGambiEntity(IEntity entity)
+		public void Remove(IEntity entity)
+		{
+			using (var db = ObjectContainerFactory.ObjectContainer)
+			{
+				db.Delete(entity);
+			}
+		}
+		
+		private void GambiSave(IEntity entity)
 		{
 			using (var db = ObjectContainerFactory.ObjectContainer)
 			{
@@ -71,13 +53,5 @@ namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
 				db.Store(entity);
 			}
 		}
-		public void PersistDeletedEntity(IEntity entity)
-		{
-			using (var db = ObjectContainerFactory.ObjectContainer)
-			{
-				db.Delete(entity);
-			}
-		}
-		#endregion
 	}
 }
