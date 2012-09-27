@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Tutorials.Core.Domain.System._System>
+
+@{
+    ViewBag.Title = "Sistemas";
+}
+
+<div id="header" style="background: #666;">
+	<button id="btn-new-system">Criar Novo Sistema</button>
+</div>
+
+<div id="content" style="background: #fff; padding: 0; float: left; border-left: 1px solid #ccc;">
+	<div style="padding: 10px;">
+		@if (Model != null)
+		{
+			foreach (var item in Model)
+			{
+				<div id="@item.Key">
+					<h2 style="background: #eee; padding-left: 30px; white-space: pre;">@item.Name</h2>
+					<p>@Server.HtmlDecode(@item.Description)</p>
+				</div>
+			}
+		}
+	</div>
+</div>
+
+<div id="new-system">
+	<form id="new-system-form" action="/">
+	<label>Nome</label>
+	<input type="text" name="name" id="name" value="" />
+	
+	<label>Descrição</label>
+	<textarea name="description" id="description" rows="20" cols="65"></textarea>
+	</form>
+</div>
+<script type="text/javascript">
+	$(function () {
+
+		$("#btn-new-system").click(function () {
+			$("#new-system").dialog("open");
+		});
+
+		$("#new-system-form").submit(function () {
+			return false;
+		});
+
+		$("#new-system").dialog({
+			modal: true,
+			autoOpen: false,
+			width: 600,
+			buttons: {
+				"Criar": function () {
+					_this = $(this);
+					$.ajax({
+						url: "@Url.Content("~/System/Create")",
+						type: 'post',
+						data: $("#new-system-form").serialize(),
+						success: function(data)
+						{
+							$("#name, #description").val('');
+							reloadContextsMenu();
+							_this.dialog("close");
+						}
+					});
+				}
+			}
+		});
+	});
+</script>
+

@@ -14,7 +14,7 @@ namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
         {
             get 
 			{
-				return Db4oFactory.OpenClient("localhost", 8080, "db4o", "123");
+				return Db4oFactory.OpenClient("localhost", 7878, "db4o", "123");
 			}
         }
     }

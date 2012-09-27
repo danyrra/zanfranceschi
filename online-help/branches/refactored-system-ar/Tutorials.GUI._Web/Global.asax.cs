@@ -32,7 +32,7 @@ namespace Tutorials.GUI._Web
 
         protected void Application_Start()
         {
-			var server = Db4oClientServer.OpenServer(@"C:\tmp\base.yap", 8080);
+			var server = Db4oClientServer.OpenServer(@"C:\tmp\base.yap", 7878);
 			server.GrantAccess("db4o", "123");
 			
 			AreaRegistration.RegisterAllAreas();

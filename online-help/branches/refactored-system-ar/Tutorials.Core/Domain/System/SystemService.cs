@@ -21,13 +21,7 @@ namespace Tutorials.Core.Domain.System
 			return repository.Find(s => true);
 		}
 
-		internal Topic CreateNewTopic(string contextKey, Topic topic)
-		{
-			repository.Add(obj);
-			return obj;
-		}
-
-		internal _System CreateNewSystem(_System obj)
+		internal _System CreateSystem(_System obj)
 		{
 			repository.Add(obj);
 			return obj;
