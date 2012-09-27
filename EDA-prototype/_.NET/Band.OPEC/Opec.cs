@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using EasyNetQ;
 
 namespace Band.OPEC
 {
@@ -12,25 +13,15 @@ namespace Band.OPEC
 		{
 			Console.Title = "OPEC";
 
-			Bus bus = new Bus();
-			bus.OnMessageReceived += new MessageReceivedHandler(bus_OnMessageReceived);
-			bus.OnBusNotificationOccured += new BusNotificationHandler(bus_OnBusNotificationOccured);
+			var bus = RabbitHutch.CreateBus("host=localhost");
+			var publishChannel = bus.OpenPublishChannel();
 
-			while (true)
+			while (bus.IsConnected)
 			{
-				bus.Publish("localhost", "opec", string.Format("Novo contrato nº {0}", new Random().Next()));
+				publishChannel.Publish("opec", string.Format("Novo contrato nº {0}", new Random().Next()));
 				Thread.Sleep(1000);
 			}
-		}
-
-		static void bus_OnBusNotificationOccured(string message)
-		{
-			Console.WriteLine(message);
-		}
-
-		static void bus_OnMessageReceived(string message)
-		{
-			Console.WriteLine(message);
+			bus.Dispose();
 		}
 	}
 }
