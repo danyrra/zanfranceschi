@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BUS;
+using EasyNetQ;
 
 namespace Band.ProjetosTI
 {
 	class ProjetosTI
 	{
-		static Bus bus = new Bus();
+		static IBus bus = RabbitHutch.CreateBus("host=localhost");
 		
 		static void Main(string[] args)
 		{
 			Console.Title = "Projetos TI";
 
-			bus.OnMessageReceived += new MessageReceivedHandler(bus_OnMessageReceived);
-			bus.StartConsuming("localhost", "rh");
+			bus.Subscribe<string>("projetosTI-id", "rh", bus_OnMessageReceived);
 		}
 
 		static void bus_OnMessageReceived(string message)
 		{
 			Console.WriteLine("Notificação de novo colaborador recebida.");
 			Console.WriteLine("Criado login para área de projetos de TI para {0}", message);
-			bus.Publish("localhost", "projetosTI", message.Replace(" ", ".").ToLower());
+
+			var publishChannel = bus.OpenPublishChannel();
+			publishChannel.Publish("projetosTI", message.Replace(" ", ".").ToLower());
 		}
 	}
 }

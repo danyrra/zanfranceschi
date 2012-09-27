@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BUS;
+using EasyNetQ;
 
 namespace Band.MonitoramentoInfra
 {
@@ -11,12 +11,11 @@ namespace Band.MonitoramentoInfra
 		static void Main(string[] args)
 		{
 			Console.Title = "Monitoramento Infra";
-			
-			Bus bus = new Bus();
-			bus.OnMessageReceived += new MessageReceivedHandler(bus_OnMessageReceived);
-			bus.StartConsuming("localhost", "opec");
-			bus.StartConsuming("localhost", "projetosTI");
-			bus.StartConsuming("localhost", "rh");
+
+			var bus = RabbitHutch.CreateBus("host=localhost");
+			bus.Subscribe<string>("monitor-id", "rh", bus_OnMessageReceived);
+			bus.Subscribe<string>("monitor-id", "projetosTI", bus_OnMessageReceived);
+			bus.Subscribe<string>("monitor-id", "opec", bus_OnMessageReceived);
 		}
 
 		static void bus_OnMessageReceived(string message)

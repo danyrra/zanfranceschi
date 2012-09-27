@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BUS;
 using System.Threading;
+using EasyNetQ;
 
 namespace Band.RH
 {
@@ -12,8 +12,6 @@ namespace Band.RH
 		static void Main(string[] args)
 		{
 			Console.Title = "RH";
-			
-			Bus bus = new Bus();
 
 			string[] nomes = 
 			{
@@ -34,15 +32,23 @@ namespace Band.RH
 				"Maluf",
 				"Swcherts"
 			};
+
+			var bus = RabbitHutch.CreateBus("host=localhost");
+			var publishChannel = bus.OpenPublishChannel();
 			
-			while (true)
+			int i = 0;
+
+			while (bus.IsConnected)
 			{
+				i++;
 				Random random = new Random();
 				string nome = string.Format("{0} {1}", nomes[random.Next(0, 5)], sobrenomes[random.Next(0, 5)]);
-				bus.Publish("localhost", "rh", nome);
+				publishChannel.Publish("rh", string.Format("{0} - {1}", nome, i));
 				Console.WriteLine("Novo colaborador Band: {0}", nome);
 				Thread.Sleep(1500);
 			}
+
+			bus.Dispose();
 		}
 	}
 }
