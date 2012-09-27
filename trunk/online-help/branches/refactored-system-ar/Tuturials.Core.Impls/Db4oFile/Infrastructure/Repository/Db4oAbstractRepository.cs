@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Tutorials.Core.Infrastructure.DomainBase;
 using Tutorials.Core.Infrastructure.Repository;
-using Tutorials.Core.Infrastructure.UnitOfWork;
 using System.Threading;
 
 namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
@@ -25,23 +24,22 @@ namespace Tuturials.Core.Impls.Db4oFile.Infrastructure.Repository
 				return db.Query<T>().AsQueryable().Where(obj => obj.Key.Equals(key)).First();
 			}
 		}
-		public void Add(IEntity entity)
+		public void Add(T entity)
 		{
 			GambiSave(entity);
 		}
-		public void Update(IEntity entity)
+		public void Update(T entity)
 		{
 			GambiSave(entity);
 		}
-		public void Remove(IEntity entity)
+		public void Remove(T entity)
 		{
 			using (var db = ObjectContainerFactory.ObjectContainer)
 			{
 				db.Delete(entity);
 			}
 		}
-		
-		private void GambiSave(IEntity entity)
+		private void GambiSave(T entity)
 		{
 			using (var db = ObjectContainerFactory.ObjectContainer)
 			{

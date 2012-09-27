@@ -14,7 +14,7 @@ namespace Tutorials.GUI._Web.Controllers
 
         public ActionResult Index()
         {
-			return Redirect("~/Context/");
+			return Redirect("~/System/");
         }
 
         //

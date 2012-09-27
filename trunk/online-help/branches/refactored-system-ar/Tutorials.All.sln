@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuturials.Core.Impls", "Tuturials.Core.Impls\Tuturials.Core.Impls.csproj", "{860C594C-2B9F-4EF7-A55F-36DF1E6DF48D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorials.GUI._Console", "Tutorials.GUI._Console\Tutorials.GUI._Console.csproj", "{06F2BAEB-81DC-4620-B8F7-58609B7338E2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,23 +53,12 @@ Global
 		{860C594C-2B9F-4EF7-A55F-36DF1E6DF48D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{860C594C-2B9F-4EF7-A55F-36DF1E6DF48D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{860C594C-2B9F-4EF7-A55F-36DF1E6DF48D}.Release|x86.ActiveCfg = Release|Any CPU
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Debug|x86.ActiveCfg = Debug|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Debug|x86.Build.0 = Debug|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Release|Any CPU.ActiveCfg = Release|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Release|Mixed Platforms.Build.0 = Release|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Release|x86.ActiveCfg = Release|x86
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B86689A3-6891-494F-AA8D-A12CB4CF5D4A} = {ACCFB6DD-A1E5-4881-94A9-B4ABE9F10E8C}
-		{06F2BAEB-81DC-4620-B8F7-58609B7338E2} = {ACCFB6DD-A1E5-4881-94A9-B4ABE9F10E8C}
 		{920B5D72-148A-4D67-9279-6B9955D9586F} = {A22341F5-BA2B-4D7B-983D-89A0900A3BEF}
 		{F422F467-71FE-4169-B0E7-D50C358DAA0D} = {A22341F5-BA2B-4D7B-983D-89A0900A3BEF}
 		{860C594C-2B9F-4EF7-A55F-36DF1E6DF48D} = {F422F467-71FE-4169-B0E7-D50C358DAA0D}
