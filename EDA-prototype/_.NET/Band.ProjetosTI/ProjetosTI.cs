@@ -14,7 +14,7 @@ namespace Band.ProjetosTI
 		{
 			Console.Title = "Projetos TI";
 
-			bus.Subscribe<string>("projetosTI-id", "rh", bus_OnMessageReceived);
+			bus.Subscribe<string>("projetosTI-id", "rh", bus_OnMessageReceived); 
 		}
 
 		static void bus_OnMessageReceived(string message)

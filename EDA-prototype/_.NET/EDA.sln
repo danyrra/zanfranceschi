@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Band.MonitoramentoInfra", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Band.OPEC", "Band.OPEC\Band.OPEC.csproj", "{551C9697-3232-414D-8850-DEF2C88C35E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Band.EventsMonitor", "Band.EventsMonitor\Band.EventsMonitor.csproj", "{49D09C9C-4549-4F81-8769-D3F39E476592}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{551C9697-3232-414D-8850-DEF2C88C35E3}.Release|Mixed Platforms.Build.0 = Release|x86
 		{551C9697-3232-414D-8850-DEF2C88C35E3}.Release|x86.ActiveCfg = Release|x86
 		{551C9697-3232-414D-8850-DEF2C88C35E3}.Release|x86.Build.0 = Release|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Debug|x86.ActiveCfg = Debug|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Debug|x86.Build.0 = Debug|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Release|Any CPU.ActiveCfg = Release|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Release|Mixed Platforms.Build.0 = Release|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Release|x86.ActiveCfg = Release|x86
+		{49D09C9C-4549-4F81-8769-D3F39E476592}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
