@@ -31,8 +31,8 @@ class Rescisao(models.Model):
 		#sends the message
 		connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 		channel = connection.channel()
-		channel.exchange_declare(exchange='rh_rescisao', type='fanout')
-		channel.basic_publish(exchange='rh_rescisao', routing_key='', body=message)
+		channel.exchange_declare(exchange='rh', type='fanout')
+		channel.basic_publish(exchange='rh', routing_key='', body=message)
 		connection.close()
 		
 		print >> sys.stderr, message
