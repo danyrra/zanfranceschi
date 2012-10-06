@@ -15,7 +15,7 @@ namespace Band.Processor
 
 			IBus bus = RabbitHutch.CreateBus("host=localhost");
 
-			bus.Respond<RequestMessage, ResponseMessage>(r => new ResponseMessage { Text = string.Format("ooopa recebi sua mensagem {0}", r.Text) });
+			bus.Respond<RequestMessage, ResponseMessage>(r => new ResponseMessage { Text = string.Format("ooopa recebi sua mensagem '{0}'", r.Text) });
 		}
 	}
 }
