@@ -11,7 +11,7 @@ namespace Band.ProcessorCoordinator
 	{
 		static void Main(string[] args)
 		{
-			var request = new RequestMessage { Text = "mensagem de teste" };
+			var request = new RequestMessage { Text = "XXXXXXXXXXXXXXXXXXX" };
 			
 			IBus bus = RabbitHutch.CreateBus("host=localhost");
 
