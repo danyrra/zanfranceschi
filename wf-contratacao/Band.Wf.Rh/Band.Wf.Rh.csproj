@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Band.Bus.Componentes\Band.Bus.Componentes.csproj">
+      <Project>{4B76D9F7-84D5-47D8-8725-9ADB7E4E5258}</Project>
+      <Name>Band.Bus.Componentes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Band.Mensagens.Wf\Band.Mensagens.Wf.csproj">
       <Project>{E322B41A-40C8-4124-92A8-3178AB8ECCEF}</Project>
       <Name>Band.Mensagens.Wf</Name>

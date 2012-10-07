@@ -34,15 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\RH\Band.Wf.Rh\packages\EasyNetQ.0.8.0.36\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ, Version=0.8.0.36, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyNetQ.0.8.0.36\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\RH\Band.Wf.Rh\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=2.8.6.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\RH\Band.Wf.Rh\packages\RabbitMQ.Client.2.8.6\lib\net30\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\packages\RabbitMQ.Client.2.8.6\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,8 +51,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\..\RH\Band.Wf.Rh\packages\Topshelf.3.0.2\lib\net40-full\Topshelf.dll</HintPath>
+    <Reference Include="Topshelf, Version=3.0.105.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Topshelf.3.0.2\lib\net40-full\Topshelf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +60,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Band.Bus.Componentes\Band.Bus.Componentes.csproj">
+      <Project>{4B76D9F7-84D5-47D8-8725-9ADB7E4E5258}</Project>
+      <Name>Band.Bus.Componentes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Band.Mensagens.Wf\Band.Mensagens.Wf.csproj">
       <Project>{E322B41A-40C8-4124-92A8-3178AB8ECCEF}</Project>
       <Name>Band.Mensagens.Wf</Name>
