@@ -6,6 +6,7 @@ using EasyNetQ;
 using Band.Mensagens.Wf;
 using System.Threading;
 using Topshelf;
+using Band.Bus.Componentes;
 
 namespace Band.Wf.Rh
 {
@@ -13,6 +14,8 @@ namespace Band.Wf.Rh
 	{
 		public static void Main(string[] args)
 		{
+			Console.Title = "RH";
+			
 			HostFactory.Run(x =>
 			{
 				x.Service<Bus_WfRh>(s =>
@@ -37,23 +40,29 @@ namespace Band.Wf.Rh
 
 		public Bus_WfRh()
 		{
-			bus = RabbitHutch.CreateBus("host=localhost");
+			bus = RabbitHutch.CreateBus("host=localhost", r => r.Register<IEasyNetQLogger>(sp => new BandLogger()));
 		}
 
 		public void Start()
 		{
+			Console.WriteLine("Sistema de RH - 2012");
 			channel = bus.OpenPublishChannel();
 			while (bus.IsConnected)
 			{
-				Thread.Sleep(2000);
-				var c = new ColaboradorContratado { Departamento = "Projetos TI", InicioColaboracao = DateTime.Now.AddDays(10), Nome = "Francisco", Sobrenome = "Zanfranceschi" };
+				Console.WriteLine("Entre com o nome do novo colaborador ou 0 para sair:");
+				var input = Console.ReadLine();
+				if (input.Equals("0"))
+				{
+					Stop();
+					break;
+				}
+				var c = new ColaboradorContratado { Nome = input };
 				channel.Publish<ColaboradorContratado>(c);
 			}
 		}
 
 		public void Stop()
 		{
-			Console.WriteLine("Stopping...");
 			channel.Dispose();
 			bus.Dispose();
 		}

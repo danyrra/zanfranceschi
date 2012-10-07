@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E322B41A-40C8-4124-92A8-3178AB8ECCEF}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{918A749A-F397-4919-B60F-25409CE65263}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Band.Mensagens.Wf</RootNamespace>
-    <AssemblyName>Band.Mensagens.Wf</AssemblyName>
+    <RootNamespace>Band.Wf.Infra</RootNamespace>
+    <AssemblyName>Band.Wf.Infra</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -33,10 +33,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\EasyNetQ.0.8.0.36\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=2.8.6.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RabbitMQ.Client.2.8.6\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,11 +53,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColaboradorContratado.cs" />
-    <Compile Include="LoginColaboradorCriado.cs" />
+    <Compile Include="Bus_WfInfra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Band.Bus.Componentes\Band.Bus.Componentes.csproj">
+      <Project>{4B76D9F7-84D5-47D8-8725-9ADB7E4E5258}</Project>
+      <Name>Band.Bus.Componentes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Band.Mensagens.Wf\Band.Mensagens.Wf.csproj">
+      <Project>{E322B41A-40C8-4124-92A8-3178AB8ECCEF}</Project>
+      <Name>Band.Mensagens.Wf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Band.Mensagens\Band.Mensagens.csproj">
       <Project>{89E00923-22D7-42B2-AB82-E14B74BFF560}</Project>
       <Name>Band.Mensagens</Name>

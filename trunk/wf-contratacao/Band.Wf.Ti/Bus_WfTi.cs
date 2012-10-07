@@ -7,6 +7,7 @@ using Band.Mensagens.Wf;
 using System.IO;
 using Topshelf;
 using System.Timers;
+using Band.Bus.Componentes;
 
 
 namespace Band.Wf.Ti
@@ -15,6 +16,8 @@ namespace Band.Wf.Ti
 	{
 		public static void Main(string[] args)
 		{
+			Console.Title = "Projetos de TI";
+			
 			HostFactory.Run(x =>                                
 			{
 				x.Service<Bus_WfTi>(s =>                        
@@ -36,26 +39,18 @@ namespace Band.Wf.Ti
 
 		public Bus_WfTi()
 		{
-			bus = RabbitHutch.CreateBus("host=localhost");
+			bus = RabbitHutch.CreateBus("host=localhost", r => r.Register<IEasyNetQLogger>(sp => new BandLogger()));
 			
 		}
 
 		public void Subscribe()
 		{
-			bus.Subscribe<ColaboradorContratado>("workflow.ti.colaborador-criado", HandleMessage);
+			bus.Subscribe<LoginColaboradorCriado>("workflow.ti.login-colaborador-criado", HandleMessage);
 		}
 
-		public void HandleMessage(ColaboradorContratado obj)
+		public void HandleMessage(LoginColaboradorCriado obj)
 		{
-			using (StreamWriter writer = new StreamWriter(@"C:\temp\message.txt", true))
-			{
-				string[] lines = { obj.Nome, obj.Sobrenome, obj.Departamento, obj.InicioColaboracao.ToShortTimeString() };
-				foreach (var line in lines)
-				{
-					writer.WriteLine(line);
-				}
-				writer.WriteLine("###############################");
-			}
+			Console.WriteLine("Acesso aos sistemas liberado para o usuário {0} <{1}>", obj.Colaborador.Nome, obj.Login);
 		}
 	}
 }
