@@ -45,6 +45,7 @@ namespace Band.EventsMonitor
 
 		private void HandleMessage(string message)
 		{
+			throw new Exception("teste...");
 			if (txtMessages.InvokeRequired)
 			{
 				txtMessages.Invoke(new MethodInvoker(delegate
