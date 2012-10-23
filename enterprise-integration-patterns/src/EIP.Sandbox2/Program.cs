@@ -8,13 +8,16 @@ namespace EIP.Sandbox
 {
 	class Program
 	{
-		
+		const string Queue = @"INFO1301040072\TestQueue";
+
 		static void Main(string[] args)
 		{
-			Console.Title = "Sender";
+			Console.Title = "Receiver";
 
-			var sender = new Sender();
-			sender.Start();
+			Console.WriteLine("Ouvindo mensagens...");
+
+			var receiver = new Receiver();
+			receiver.Start();
 		}
 	}
 }
