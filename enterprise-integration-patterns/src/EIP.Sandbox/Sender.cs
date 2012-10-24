@@ -70,7 +70,7 @@ namespace EIP.Sandbox
 			//m.UseDeadLetterQueue = true;
 			m.UseJournalQueue = true;
 			m.AdministrationQueue = new MessageQueue(@".\private$\Ack");
-			m.
+			
 			return m;
 		}
 	}
