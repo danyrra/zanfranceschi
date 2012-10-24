@@ -5,6 +5,7 @@ using System.Text;
 
 namespace EIP.CanonicalDomain.Events
 {
+	[Serializable]
 	public abstract class BaseEvent
 	{
 		protected BaseEvent()

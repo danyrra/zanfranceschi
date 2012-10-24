@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Messaging;
-using System.Net.NetworkInformation;
-using System.Threading;
 using System.Configuration;
-using EIP.CanonicalDomain.Events;
+using System.Threading;
+using System.Messaging;
 
-namespace EIP.Sandbox
+namespace EIP.PubSub
 {
-	internal class Receiver
+	public class Splitter
 	{
-		private string Queue = @"INFO1301040072\TestQueue";
+		private string Queue = null;
 
 		TimeSpan timeout = TimeSpan.FromSeconds(2);
 
-		internal Receiver()
+		internal Splitter()
 		{
 			Queue = ConfigurationManager.AppSettings["queue"];
-			
 			Thread thread = new Thread(new ThreadStart(Start));
 			thread.Start();
-			Console.Read();
 		}
 
 		internal void Start()
@@ -41,10 +37,7 @@ namespace EIP.Sandbox
 			try
 			{
 				Message msg = mq.EndReceive(e.AsyncResult);
-				var formatter = new BinaryMessageFormatter();
-				TestOccurred obj = (TestOccurred)formatter.Read(msg);
-
-				Console.WriteLine("mensagem recebida: {0}", obj.Text);
+				// send to all subscribers...
 				mq.BeginReceive(timeout);
 			}
 			catch (MessageQueueException)

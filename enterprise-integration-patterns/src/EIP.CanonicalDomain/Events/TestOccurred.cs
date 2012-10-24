@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EIP.CanonicalModels;
 
 namespace EIP.CanonicalDomain.Events
 {
 	[Serializable]
-	public class EmployeeHired
+	public class TestOccurred
 		: BaseEvent
 	{
-		public EmployeeHired() : base() { }
+		public string Text { get; set; }
 		
-		public Employee Employee { get; set; }
-
 		public override float Event_Version
 		{
-			get { return 0.1f; }
+			get { return 1f; }
 		}
 	}
 }
