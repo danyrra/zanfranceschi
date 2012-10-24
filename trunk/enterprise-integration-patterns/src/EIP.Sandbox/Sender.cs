@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Messaging;
+using System.Configuration;
+using EIP.CanonicalDomain.Events;
 
 namespace EIP.Sandbox
 {
 	internal class Sender
 	{
-		const string Queue = @"INFO1301040072\TestQueue";
+		private string Queue = @"INFO1301040072\TestQueue";
+
+		internal Sender()
+		{
+			Queue = ConfigurationManager.AppSettings["queue"];
+		}
 
 		internal void Start()
 		{
@@ -20,7 +27,7 @@ namespace EIP.Sandbox
 			}
 			else
 			{
-				mq = MessageQueue.Create(Queue);
+				mq = MessageQueue.Create(Queue, true);
 			}
 
 			while (true)
@@ -39,18 +46,32 @@ namespace EIP.Sandbox
 				{
 					for (int i = 0; i < 10000; i++)
 					{
-						Message m = new Message(i.ToString(), new BinaryMessageFormatter());
-						mq.Send(m);
+						mq.Send(FormMessage(i.ToString()), MessageQueueTransactionType.Single);
 					}
 				}
 				// just sends the message
 				else
 				{
-					Message m = new Message(body, new BinaryMessageFormatter());
-					mq.Send(m);
+					mq.Send(FormMessage(body), MessageQueueTransactionType.Single);
 				}
 			}
 			mq.Close();
+		}
+
+		private Message FormMessage(string text)
+		{
+			TestOccurred obj = new TestOccurred();
+			obj.Text = text;
+
+			Message m = new Message(obj, new BinaryMessageFormatter());
+			m.Recoverable = true; // write message to disk - safer
+			//m.Label = "EIP.Sandbox";
+			m.AcknowledgeType = AcknowledgeTypes.NegativeReceive | AcknowledgeTypes.NotAcknowledgeReceive;
+			//m.UseDeadLetterQueue = true;
+			m.UseJournalQueue = true;
+			m.AdministrationQueue = new MessageQueue(@".\private$\Ack");
+			m.
+			return m;
 		}
 	}
 }

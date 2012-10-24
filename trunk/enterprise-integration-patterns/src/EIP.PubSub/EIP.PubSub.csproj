@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B20D675-5E58-4CED-910A-DDD752B6AF25}</ProjectGuid>
+    <ProjectGuid>{CAFC979F-8009-49E4-81BF-FDFD9EA9F201}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EIP.Sandbox</RootNamespace>
-    <AssemblyName>EIP.Sandbox</AssemblyName>
+    <RootNamespace>EIP.PubSub</RootNamespace>
+    <AssemblyName>EIP.PubSub</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -48,16 +47,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sender.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalDomain.csproj">
-      <Project>{5078C2E0-CD36-4175-B81C-3401011AE454}</Project>
-      <Name>EIP.CanonicalDomain</Name>
-    </ProjectReference>
+    <Compile Include="Splitter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
