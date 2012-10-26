@@ -56,11 +56,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\TestServiceRef\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -69,32 +64,19 @@
     <None Include="Service References\ServiceReference1\EIP.Sandbox.ServiceReference1.Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\ServiceRegistry.xsd">
+    <None Include="Service References\ServiceReference1\service-registry.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\ServiceRegistry1.xsd">
+    <None Include="Service References\ServiceReference1\service-registry1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\ServiceRegistry2.xsd">
+    <None Include="Service References\ServiceReference1\service-registry2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\ServiceRegistry3.xsd">
+    <None Include="Service References\ServiceReference1\service-registry3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\ServiceRegistryImpl.wsdl" />
-    <None Include="Service References\TestServiceRef\EIP.Sandbox.TestServiceRef.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TestServiceRef\TestService.wsdl" />
-    <None Include="Service References\TestServiceRef\TestService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TestServiceRef\TestService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TestServiceRef\TestService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Service References\ServiceReference1\ServiceRegistry.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalDomain.csproj">
@@ -107,25 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
-    <WCFMetadataStorage Include="Service References\TestServiceRef\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\TestServiceRef\TestService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TestServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TestServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TestServiceRef\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference1\ServiceRegistry.disco" />
+    <None Include="Service References\ServiceReference1\service-registry.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />

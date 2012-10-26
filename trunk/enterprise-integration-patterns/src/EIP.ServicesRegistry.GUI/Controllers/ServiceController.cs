@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EIP.ServicesRegistry.Core;
 
 namespace EIP.ServicesRegistry.GUI.Controllers
 {
@@ -15,8 +14,7 @@ namespace EIP.ServicesRegistry.GUI.Controllers
 
 		public ActionResult Index()
         {
-			var services = ServiceRegistrySrv.GetAll();
-			return Json(services, JsonRequestBehavior.AllowGet);
+			return View();
         }
 
         //
@@ -32,8 +30,7 @@ namespace EIP.ServicesRegistry.GUI.Controllers
 
 		public ActionResult Search(string q)
 		{
-			var services = ServiceRegistrySrv.Search(q);
-			return Json(services, JsonRequestBehavior.AllowGet);
+			return View();
 		}
 
         //
@@ -48,11 +45,10 @@ namespace EIP.ServicesRegistry.GUI.Controllers
         // POST: /Service/Create
 
         [HttpPost]
-        public ActionResult Create(Service service)
+        public ActionResult Create(string x)
         {
             try
             {
-				ServiceRegistrySrv.Insert(service);
                 return RedirectToAction("Index");
             }
             catch

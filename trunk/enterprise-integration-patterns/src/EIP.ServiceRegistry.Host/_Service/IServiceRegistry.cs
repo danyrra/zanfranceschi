@@ -5,7 +5,7 @@ using System.Text;
 using System.ServiceModel;
 using EIP.ServicesRegistry.Core;
 
-namespace EIP.ServiceRegistry.WinService
+namespace EIP.ServiceRegistry.Host._Service
 {
 	[ServiceContract]
 	public interface IServiceRegistry
@@ -16,12 +16,5 @@ namespace EIP.ServiceRegistry.WinService
 		Service[] Search(string term);
 		[OperationContract]
 		Service GetById(string id);
-		//[OperationContract]
-		//Service Insert(Service service);
-		//[OperationContract]
-		//void Update(Service service);
-		//[OperationContract]
-		//void Remove(string id);
 	}
-
 }

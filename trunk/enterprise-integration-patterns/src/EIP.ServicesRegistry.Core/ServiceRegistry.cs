@@ -25,7 +25,7 @@ namespace EIP.ServicesRegistry.Core
 			return dao.GetById(id);
 		}
 
-		internal static Service Insert(Service service)
+		internal static Service Save(Service service)
 		{
 			return dao.Insert(service);
 		}

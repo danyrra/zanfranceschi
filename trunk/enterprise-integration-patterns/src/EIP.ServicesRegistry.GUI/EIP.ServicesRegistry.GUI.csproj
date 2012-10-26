@@ -143,12 +143,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EIP.ServicesRegistry.Core\EIP.ServicesRegistry.Core.csproj">
-      <Project>{2DECC99C-88B4-46C6-97EF-21F54666FD73}</Project>
-      <Name>EIP.ServicesRegistry.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Service\Create.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
