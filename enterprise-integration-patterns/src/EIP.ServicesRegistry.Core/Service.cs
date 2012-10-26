@@ -11,7 +11,7 @@ namespace EIP.ServicesRegistry.Core
 	public class Service
 	{
 		[DataMember]
-		public ObjectId Id { get; set; }
+		public ObjectId Id { get; internal set; }
 		[DataMember]
 		public string Name { get; set; }
 		[DataMember]

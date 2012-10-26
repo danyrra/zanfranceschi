@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using EIP.ServicesRegistry.Core;
 
-namespace EIP.ServiceRegistry.WinService
+namespace EIP.ServiceRegistry.Host._Service
 {
-	public class ServiceRegistryImpl
+	public class ServiceRegistry
 		: IServiceRegistry
 	{
 		public Service[] GetAll()
@@ -26,7 +26,7 @@ namespace EIP.ServiceRegistry.WinService
 
 		public Service Insert(Service service)
 		{
-			return ServiceRegistrySrv.Insert(service);
+			return ServiceRegistrySrv.Save(service);
 		}
 
 		public void Update(Service service)
