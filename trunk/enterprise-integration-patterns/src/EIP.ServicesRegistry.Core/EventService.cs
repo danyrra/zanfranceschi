@@ -8,6 +8,8 @@ namespace EIP.ServicesRegistry.Core
 	public class EventService
 		: Service
 	{
+		public string DefinitionUrl { get; set; }
+		
 		public override string ServiceType
 		{
 			get { return "event"; }

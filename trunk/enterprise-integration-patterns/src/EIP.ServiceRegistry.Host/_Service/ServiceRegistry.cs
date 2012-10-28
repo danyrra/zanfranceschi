@@ -14,6 +14,16 @@ namespace EIP.ServiceRegistry.Host._Service
 			return ServiceRegistrySrv.GetAll();
 		}
 
+		public RequestService[] GetAllRequest()
+		{
+			return ServiceRegistrySrv.GetAllRequest();
+		}
+
+		public EventService[] GetAllEvent()
+		{
+			return ServiceRegistrySrv.GetAllEvent();
+		}
+
 		public Service[] Search(string term)
 		{
 			return ServiceRegistrySrv.Search(term);
@@ -24,7 +34,7 @@ namespace EIP.ServiceRegistry.Host._Service
 			return ServiceRegistrySrv.GetById(id);
 		}
 
-		public Service Insert(Service service)
+		public Service Create(Service service)
 		{
 			return ServiceRegistrySrv.Create(service);
 		}

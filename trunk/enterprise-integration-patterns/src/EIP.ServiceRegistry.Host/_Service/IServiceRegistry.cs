@@ -13,6 +13,10 @@ namespace EIP.ServiceRegistry.Host._Service
 		[OperationContract]
 		Service[] GetAll();
 		[OperationContract]
+		RequestService[] GetAllRequest();
+		[OperationContract]
+		EventService[] GetAllEvent();
+		[OperationContract]
 		Service[] Search(string term);
 		[OperationContract]
 		Service GetById(string id);
