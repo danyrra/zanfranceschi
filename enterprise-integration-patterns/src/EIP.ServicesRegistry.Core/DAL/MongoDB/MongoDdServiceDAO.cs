@@ -40,11 +40,14 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 
 		public RequestService[] GetAllRequest()
 		{
+			return collection.FindAs<RequestService>(Query.EQ("_t", "RequestService")).ToArray();
+			
 			return collection.FindAllAs<RequestService>().ToArray();
 		}
 
 		public EventService[] GetAllEvent()
 		{
+			return collection.FindAs<EventService>(Query.EQ("_t", "EventService")).ToArray();
 			return collection.FindAllAs<EventService>().ToArray();
 		}
 	}

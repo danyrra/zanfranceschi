@@ -18,19 +18,25 @@ namespace EIP.Sandbox
 	{
 		static void Main(string[] args)
 		{
+			Console.Title = "Sender";
 
-			MongoDbTests();
-			//Console.Title = "Sender";
+			IServiceRegistry service = new ServiceRegistryClient();
+			var events = service.GetAllEvent();
 
-			//IServiceRegistry service = new ServiceRegistryClient();
-			//var list = service.GetAll();
+			foreach (var item in events)
+			{
+				Console.WriteLine(item.Name);
+			}
 
-			//foreach (var item in list)
-			//{
-			//    Console.WriteLine(item.Name);
-			//}
 
-			//Console.Read();
+			var requests = service.GetAllRequest();
+
+			foreach (var item in requests)
+			{
+				Console.WriteLine(item.Name);
+			}
+
+			Console.Read();
 
 			//var sender = new Sender();
 			//sender.Start();
