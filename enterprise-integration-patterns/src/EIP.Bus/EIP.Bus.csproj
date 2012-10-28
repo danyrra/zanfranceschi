@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2DECC99C-88B4-46C6-97EF-21F54666FD73}</ProjectGuid>
+    <ProjectGuid>{D100D8B2-8599-44CA-8E1B-D17953F87BAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EIP.ServicesRegistry.Core</RootNamespace>
-    <AssemblyName>EIP.ServicesRegistry.Core</AssemblyName>
+    <RootNamespace>EIP.Bus</RootNamespace>
+    <AssemblyName>EIP.Bus</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,37 +31,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\packages\MongoDB\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\packages\MongoDB\MongoDB.Driver.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Topshelf">
+      <HintPath>..\packages\Topshelf.3.0.2\lib\net40-full\Topshelf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\DAOFactory.cs" />
-    <Compile Include="DAL\IEventSubscritpionDAO.cs" />
-    <Compile Include="DAL\IServiceDAO.cs" />
-    <Compile Include="DAL\MongoDB\MongoDbEventSubscritpionDAO.cs" />
-    <Compile Include="DAL\MongoDB\MongoDbBaseDAO.cs" />
-    <Compile Include="DAL\MongoDB\MongoDdServiceDAO.cs" />
-    <Compile Include="EventSubscription.cs" />
-    <Compile Include="EventService.cs" />
-    <Compile Include="EventSubscriptionService.cs" />
-    <Compile Include="IMongoDbEntity.cs" />
-    <Compile Include="RequestService.cs" />
-    <Compile Include="Service.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Dispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceRegistry.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,7 +26,7 @@ namespace EIP.ServiceRegistry.Host._Service
 
 		public Service Insert(Service service)
 		{
-			return ServiceRegistrySrv.Save(service);
+			return ServiceRegistrySrv.Create(service);
 		}
 
 		public void Update(Service service)

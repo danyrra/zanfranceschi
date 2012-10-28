@@ -11,6 +11,8 @@ namespace EIP.ServicesRegistry.Core.DAL
 		void Update(Service service);
 		void Remove(string id);
 		Service[] GetAll();
+		RequestService[] GetAllRequest();
+		EventService[] GetAllEvent();
 		Service[] Search(string term);
 		Service GetById(string id);
 	}

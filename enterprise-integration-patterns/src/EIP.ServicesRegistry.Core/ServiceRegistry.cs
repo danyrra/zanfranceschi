@@ -15,6 +15,16 @@ namespace EIP.ServicesRegistry.Core
 			return dao.GetAll();
 		}
 
+		internal static EventService[] GetAllEvent()
+		{
+			return dao.GetAllEvent();
+		}
+
+		internal static RequestService[] GetAllRequest()
+		{
+			return dao.GetAllRequest();
+		}
+
 		internal static Service[] Search(string term)
 		{
 			return dao.Search(term);
@@ -25,7 +35,7 @@ namespace EIP.ServicesRegistry.Core
 			return dao.GetById(id);
 		}
 
-		internal static Service Save(Service service)
+		internal static Service Create(Service service)
 		{
 			return dao.Insert(service);
 		}
