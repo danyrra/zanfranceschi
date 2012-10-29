@@ -9,6 +9,11 @@ using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver.Builders;
+using MassTransit;
+using MassTransit;
+using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModels;
+using System.Threading;
 
 
 
@@ -20,23 +25,54 @@ namespace EIP.Sandbox
 		{
 			Console.Title = "Sender";
 
-			IServiceRegistry service = new ServiceRegistryClient();
-			var events = service.GetAllEvent();
-
-			foreach (var item in events)
+			var bus = ServiceBusFactory.New(sbc =>
 			{
-				Console.WriteLine(item.Name);
-			}
+				sbc.UseMsmq();
+				//sbc.UseRabbitMq();
+				sbc.UseMulticastSubscriptionClient();
+				sbc.UseJsonSerializer();
+				sbc.VerifyMsmqConfiguration();
+				sbc.ReceiveFrom("msmq://localhost/PublisherEmployeeHired");
+			});
 
+			//Bus.Initialize(sbc =>
+			//{
+			//    sbc.UseMsmq();
+			//    sbc.VerifyMsmqConfiguration();
+			//    sbc.UseMulticastSubscriptionClient();
+			//    //sbc.UseRabbitMq();
+			//    sbc.ReceiveFrom("msmq://localhost/PublisherEmployeeHired");
+				
+			//});
 
-			var requests = service.GetAllRequest();
+			int i = 0;
 
-			foreach (var item in requests)
+			while (true)
 			{
-				Console.WriteLine(item.Name);
+				
+				bus.Publish(new EmployeeHired { Employee = new Employee { Name = "mensagem " + i.ToString() } });
+				Console.WriteLine("mensagem {0}", i++);
+				Thread.Sleep(500);
 			}
+			
 
-			Console.Read();
+			//IServiceRegistry service = new ServiceRegistryClient();
+			//var events = service.GetAllEvent();
+
+			//foreach (var item in events)
+			//{
+			//    Console.WriteLine(item.Name);
+			//}
+
+
+			//var requests = service.GetAllRequest();
+
+			//foreach (var item in requests)
+			//{
+			//    Console.WriteLine(item.Name);
+			//}
+
+			//Console.Read();
 
 			//var sender = new Sender();
 			//sender.Start();
