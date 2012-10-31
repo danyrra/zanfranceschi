@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Core.DAL
 {
@@ -15,5 +16,6 @@ namespace EIP.ServicesRegistry.Core.DAL
 		EventService[] GetAllEvent();
 		Service[] Search(string term);
 		Service GetById(string id);
+		EventService FindOneByProperty(string propertyName, object propertyValue);
 	}
 }

@@ -6,6 +6,8 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {
@@ -37,6 +39,10 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 				|| obj.Name.ToLower().Contains(term);
 		}
 
+		public EventService FindOneByProperty(string propertyName, object propertyValue)
+		{
+			return collection.FindAs<EventService>(Query.EQ(propertyName, BsonValue.Create(propertyValue))).FirstOrDefault();
+		}
 
 		public RequestService[] GetAllRequest()
 		{

@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Runtime.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace EIP.ServicesRegistry.Core
+namespace EIP.ServicesRegistry.Core.Entities
 {
 	[DataContract]
 	public class EventSubscription

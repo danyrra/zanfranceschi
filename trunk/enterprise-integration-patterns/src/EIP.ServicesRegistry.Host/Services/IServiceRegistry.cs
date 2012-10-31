@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using EIP.ServicesRegistry.Core;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Host.Services
 {
@@ -11,11 +12,11 @@ namespace EIP.ServicesRegistry.Host.Services
 	public interface IServiceRegistry
 	{
 		[OperationContract]
-		Service Create(Service service);
+		string Create(Service service);
 		[OperationContract]
-		Service CreateEventService(string name, string description, string address, string dataType);
+		string CreateEventService(string name, string description, string address, string dataType);
 		[OperationContract]
-		Service CreateRequestService(string name, string description, string address, string dataType, string definitionUrl);
+		string CreateRequestService(string name, string description, string address, string definitionUrl);
 		[OperationContract]
 		Service[] GetAll();
 		[OperationContract]
@@ -25,6 +26,8 @@ namespace EIP.ServicesRegistry.Host.Services
 		[OperationContract]
 		Service GetById(string id);
 		[OperationContract]
+		EventService FindOneByDataType(string dataTypeFullName);
+		[OperationContract]
 		void Remove(string id);
 		[OperationContract]
 		Service[] Search(string term);
@@ -33,6 +36,6 @@ namespace EIP.ServicesRegistry.Host.Services
 		[OperationContract]
 		void UpdateEventService(string id, string name, string description, string address, string dataType);
 		[OperationContract]
-		void UpdateRequestService(string id, string name, string description, string address, string dataType, string definitionUrl);
+		void UpdateRequestService(string id, string name, string description, string address, string definitionUrl);
 	}
 }

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceRegistry" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IServiceRegistry_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IServiceRegistry_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8088/service-registry?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8088/service-registry?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8088/service-registry?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EIP.ServicesRegistry.Core.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceRegistry_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_CreateEventService_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEventService" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_CreateEventService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateEventServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_CreateRequestService_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRequestService" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_CreateRequestService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRequestServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAll" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetAllEventServices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEventServices" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetAllEventServices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEventServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetAllRequestServices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRequestServices" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetAllRequestServices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRequestServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetById" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_GetById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_FindOneByDataType_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOneByDataType" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_FindOneByDataType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOneByDataTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Remove_InputMessage">
+    <wsdl:part name="parameters" element="tns:Remove" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Remove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Search_InputMessage">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Search_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Update_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_Update_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_UpdateEventService_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventService" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_UpdateEventService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_UpdateRequestService_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRequestService" />
+  </wsdl:message>
+  <wsdl:message name="IServiceRegistry_UpdateRequestService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRequestServiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceRegistry">
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/Create" message="tns:IServiceRegistry_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/CreateResponse" message="tns:IServiceRegistry_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEventService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/CreateEventService" message="tns:IServiceRegistry_CreateEventService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/CreateEventServiceResponse" message="tns:IServiceRegistry_CreateEventService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequestService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/CreateRequestService" message="tns:IServiceRegistry_CreateRequestService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/CreateRequestServiceResponse" message="tns:IServiceRegistry_CreateRequestService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/GetAll" message="tns:IServiceRegistry_GetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/GetAllResponse" message="tns:IServiceRegistry_GetAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEventServices">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/GetAllEventServices" message="tns:IServiceRegistry_GetAllEventServices_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/GetAllEventServicesResponse" message="tns:IServiceRegistry_GetAllEventServices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRequestServices">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/GetAllRequestServices" message="tns:IServiceRegistry_GetAllRequestServices_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/GetAllRequestServicesResponse" message="tns:IServiceRegistry_GetAllRequestServices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/GetById" message="tns:IServiceRegistry_GetById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/GetByIdResponse" message="tns:IServiceRegistry_GetById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOneByDataType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/FindOneByDataType" message="tns:IServiceRegistry_FindOneByDataType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/FindOneByDataTypeResponse" message="tns:IServiceRegistry_FindOneByDataType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/Remove" message="tns:IServiceRegistry_Remove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/RemoveResponse" message="tns:IServiceRegistry_Remove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/Search" message="tns:IServiceRegistry_Search_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/SearchResponse" message="tns:IServiceRegistry_Search_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/Update" message="tns:IServiceRegistry_Update_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/UpdateResponse" message="tns:IServiceRegistry_Update_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/UpdateEventService" message="tns:IServiceRegistry_UpdateEventService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/UpdateEventServiceResponse" message="tns:IServiceRegistry_UpdateEventService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRequestService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceRegistry/UpdateRequestService" message="tns:IServiceRegistry_UpdateRequestService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceRegistry/UpdateRequestServiceResponse" message="tns:IServiceRegistry_UpdateRequestService_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServiceRegistry" type="tns:IServiceRegistry">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEventService">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/CreateEventService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequestService">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/CreateRequestService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/GetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEventServices">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/GetAllEventServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRequestServices">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/GetAllRequestServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/GetById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOneByDataType">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/FindOneByDataType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/Remove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventService">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/UpdateEventService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRequestService">
+      <soap:operation soapAction="http://tempuri.org/IServiceRegistry/UpdateRequestService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IServiceRegistry" type="tns:IServiceRegistry">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServiceRegistry_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEventService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/CreateEventService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequestService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/CreateRequestService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEventServices">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetAllEventServices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRequestServices">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetAllRequestServices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOneByDataType">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/FindOneByDataType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Remove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/UpdateEventService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRequestService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/UpdateRequestService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSHttpBinding_IServiceRegistry" type="tns:IServiceRegistry">
+    <wsp:PolicyReference URI="#WSHttpBinding_IServiceRegistry_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEventService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/CreateEventService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequestService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/CreateRequestService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEventServices">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetAllEventServices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRequestServices">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetAllRequestServices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/GetById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOneByDataType">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/FindOneByDataType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Remove">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Remove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEventService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/UpdateEventService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRequestService">
+      <soap12:operation soapAction="http://tempuri.org/IServiceRegistry/UpdateRequestService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceRegistry">
+    <wsdl:port name="BasicHttpBinding_IServiceRegistry" binding="tns:BasicHttpBinding_IServiceRegistry">
+      <soap:address location="http://localhost:8088/service-registry/http" />
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IServiceRegistry" binding="tns:NetTcpBinding_IServiceRegistry">
+      <soap12:address location="net.tcp://localhost:8098/service-registry/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8098/service-registry/tcp</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="WSHttpBinding_IServiceRegistry" binding="tns:WSHttpBinding_IServiceRegistry">
+      <soap12:address location="http://localhost:8088/service-registry" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8088/service-registry</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EIP.ServicesRegistry.Core;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Host.Services
 {
@@ -41,27 +42,25 @@ namespace EIP.ServicesRegistry.Host.Services
 			return coreService.GetById(id);
 		}
 
-		public Service Create(Service service)
+		public string Create(Service service)
 		{
 			return coreService.Create(service);
 		}
 
-		public Service CreateRequestService(
+		public string CreateRequestService(
 			string name,
 			string description,
 			string address,
-			string dataType,
 			string definitionUrl)
 		{
 			return coreService.CreateRequest(
 				name,
 				description,
 				address,
-				dataType,
 				definitionUrl);
 		}
 
-		public Service CreateEventService(
+		public string CreateEventService(
 				string name,
 				string description,
 				string address,
@@ -99,7 +98,6 @@ namespace EIP.ServicesRegistry.Host.Services
 			string name, 
 			string description, 
 			string address, 
-			string dataType, 
 			string definitionUrl)
 		{
 			coreService.UpdateRequestService(
@@ -107,13 +105,18 @@ namespace EIP.ServicesRegistry.Host.Services
 				name, 
 				description, 
 				address, 
-				dataType, 
 				definitionUrl);
 		}
 
 		public void Remove(string id)
 		{
 			coreService.Remove(id);
+		}
+
+
+		public EventService FindOneByDataType(string dataTypeFullName)
+		{
+			return coreService.FindOneByDataType(dataTypeFullName);
 		}
 	}
 }
