@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+using MongoDBBuilders = MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
+using MongoDB.Bson;
+using MongoDB.Driver.Builders;
 
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {
-	internal abstract class MongoDbBaseDAO<TCollectionType> 
-		where TCollectionType : IMongoDbEntity
+	public abstract class MongoDbBaseDAO<TCollectionType> 
+		where TCollectionType : IEntity
 	{
 		protected MongoServer server;
 		protected MongoCollection<TCollectionType> collection;
@@ -24,14 +26,18 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 
 		public TCollectionType Insert(TCollectionType obj)
 		{
-			collection.Insert(obj);
+			SafeModeResult result = collection.Insert(obj);
 			return obj;
 		}
 
 		public void Update(TCollectionType obj)
 		{
-			Remove(obj.Id.ToString());
-			Insert(obj);
+			BsonDocumentWrapper document = BsonDocumentWrapper.Create<TCollectionType>(obj);
+
+			collection.Update(
+				Query.EQ("_id", obj.Id),
+				MongoDBBuilders.Update.Replace(document)
+			);
 		}
 
 		public void Remove(string id)
@@ -47,7 +53,7 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 
 		public TCollectionType GetById(string id)
 		{
-			return collection.Find(Query.EQ("_id", id)).FirstOrDefault();
+			return collection.Find(Query.EQ("_id", ObjectId.Parse(id))).FirstOrDefault();
 		}
 
 		public TCollectionType[] Search(string term)
