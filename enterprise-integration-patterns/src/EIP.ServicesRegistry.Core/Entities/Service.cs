@@ -7,14 +7,14 @@ using System.Runtime.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace EIP.ServicesRegistry.Core
+namespace EIP.ServicesRegistry.Core.Entities
 {
 	[DataContract]
 	public abstract class Service
 		: IEntity
 	{
-		[DataMember]
 		[BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
+		[DataMember]
 		public string Id { get; internal set; }
 		[DataMember]
 		public string Name { get; set; }
@@ -23,8 +23,6 @@ namespace EIP.ServicesRegistry.Core
 		[DataMember]
 		public string Address { get; set; }
 		[DataMember]
-		public string DataType { get; set; }
-		[DataMember]
-		public abstract string ServiceType { get; set;  }
+		public abstract string ServiceType { get; set; }
 	}
 }

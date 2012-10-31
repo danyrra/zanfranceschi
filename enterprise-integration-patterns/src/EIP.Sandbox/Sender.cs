@@ -60,7 +60,7 @@ namespace EIP.Sandbox
 
 		private Message FormMessage(string text)
 		{
-			TestOccurred obj = new TestOccurred();
+			TestEventOccurred obj = new TestEventOccurred();
 			obj.Text = text;
 
 			Message m = new Message(obj, new BinaryMessageFormatter());

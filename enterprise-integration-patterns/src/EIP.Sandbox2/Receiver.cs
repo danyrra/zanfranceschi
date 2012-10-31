@@ -42,7 +42,7 @@ namespace EIP.Sandbox
 			{
 				Message msg = mq.EndReceive(e.AsyncResult);
 				var formatter = new BinaryMessageFormatter();
-				TestOccurred obj = (TestOccurred)formatter.Read(msg);
+				TestEventOccurred obj = (TestEventOccurred)formatter.Read(msg);
 
 				Console.WriteLine("mensagem recebida: {0}", obj.Text);
 				mq.BeginReceive(timeout);

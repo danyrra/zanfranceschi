@@ -6,7 +6,7 @@ using System.Text;
 namespace EIP.CanonicalDomain.Events
 {
 	[Serializable]
-	public class TestOccurred
+	public class TestEventOccurred
 		: BaseEvent
 	{
 		public string Text { get; set; }

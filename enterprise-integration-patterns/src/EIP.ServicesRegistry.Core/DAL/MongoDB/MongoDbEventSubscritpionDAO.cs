@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using MongoDB.Bson.Serialization;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {

@@ -84,6 +84,8 @@ namespace EIP.ServicesRegistry.Host.Services
 				ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
 				smb.HttpGetEnabled = true;
 				_serviceHost.Description.Behaviors.Add(smb);
+				_serviceHost.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+				_serviceHost.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
 				_serviceHost.Open();
 				openSucceeded = true;

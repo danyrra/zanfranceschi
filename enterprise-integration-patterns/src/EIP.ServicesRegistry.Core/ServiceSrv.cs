@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EIP.ServicesRegistry.Core.DAL;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Core
 {
 	public class ServiceSrv
 	{
 		private IServiceDAO dao;
+
+		public EventService FindOneByDataType(string dataTypeFullName)
+		{
+			return dao.FindOneByProperty("DataType", dataTypeFullName);
+		}
 
 		public ServiceSrv(IServiceDAO dao)
 		{
@@ -40,9 +46,9 @@ namespace EIP.ServicesRegistry.Core
 			return dao.GetById(id);
 		}
 
-		public Service Create(Service service)
+		public string Create(Service service)
 		{
-			return dao.Insert(service);
+			return dao.Insert(service).Id;
 		}
 
 		public void Update(Service service)
@@ -55,27 +61,23 @@ namespace EIP.ServicesRegistry.Core
 			dao.Remove(id);
 		}
 
-		public Service CreateRequest(
+		public string CreateRequest(
 			string name,
 			string description,
 			string address, 
-			string dataType, 
 			string definitionUrl)
 		{
 			RequestService request = new RequestService 
 			{
 				Address = address,
-				DataType = dataType,
 				DefinitionUrl = definitionUrl,
 				Description = description,
 				Name = name
 			};
-
-
-			return dao.Insert(request);
+			return dao.Insert(request).Id;
 		}
 
-		public Service CreateEventService(
+		public string CreateEventService(
 			string name,
 			string description,
 			string address,
@@ -89,7 +91,7 @@ namespace EIP.ServicesRegistry.Core
 				Name = name,
 			};
 
-			return dao.Insert(@event);
+			return dao.Insert(@event).Id;
 		}
 
 		public void UpdateRequestService(
@@ -97,13 +99,11 @@ namespace EIP.ServicesRegistry.Core
 			string name,
 			string description,
 			string address,
-			string dataType,
 			string definitionUrl)
 		{
 			RequestService request = new RequestService
 			{
 				Address = address,
-				DataType = dataType,
 				DefinitionUrl = definitionUrl,
 				Description = description,
 				Name = name

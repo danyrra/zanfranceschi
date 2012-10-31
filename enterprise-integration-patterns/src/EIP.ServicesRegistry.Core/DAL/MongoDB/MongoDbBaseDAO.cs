@@ -8,6 +8,7 @@ using MongoDBBuilders = MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
+using EIP.ServicesRegistry.Core.Entities;
 
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {
@@ -53,7 +54,8 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 
 		public TCollectionType GetById(string id)
 		{
-			return collection.Find(Query.EQ("_id", ObjectId.Parse(id))).FirstOrDefault();
+			var result = collection.Find(Query.EQ("_id", BsonValue.Create(id)));
+			return result.FirstOrDefault();
 		}
 
 		public TCollectionType[] Search(string term)
