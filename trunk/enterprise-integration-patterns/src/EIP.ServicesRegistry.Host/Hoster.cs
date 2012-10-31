@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
-using EIP.ServiceRegistry.Host._Service;
+using EIP.ServicesRegistry.Host.Services;
 using Topshelf;
 using EIP.ServicesRegistry.Core;
 
-namespace EIP.ServiceRegistry.Host
+namespace EIP.ServicesRegistry.Host
 {
 	class Hoster
 	{
@@ -14,11 +14,11 @@ namespace EIP.ServiceRegistry.Host
 
 			HostFactory.Run(x =>
 			{
-				x.Service<WcfServiceWrapper<ServiceRegistry.Host._Service.ServiceRegistry, IServiceRegistry>>(s =>
+				x.Service<WcfServiceWrapper<ServiceRegistry, IServiceRegistry>>(s =>
 				{
 					s.ConstructUsing(name =>
 
-						new WcfServiceWrapper<ServiceRegistry.Host._Service.ServiceRegistry, IServiceRegistry>(
+						new WcfServiceWrapper<ServiceRegistry, IServiceRegistry>(
 							"ServiceRegistry",
 							baseWebAddress,
 							baseTcpAddress));

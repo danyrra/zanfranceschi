@@ -20,12 +20,12 @@ namespace EIP.ServicesRegistry.Core
 			return dao.GetAll();
 		}
 
-		public EventService[] GetAllEvent()
+		public EventService[] GetAllEventServices()
 		{
 			return dao.GetAllEvent();
 		}
 
-		public RequestService[] GetAllRequest()
+		public RequestService[] GetAllRequestServices()
 		{
 			return dao.GetAllRequest();
 		}
@@ -75,7 +75,7 @@ namespace EIP.ServicesRegistry.Core
 			return dao.Insert(request);
 		}
 
-		public Service CreateEvent(
+		public Service CreateEventService(
 			string name,
 			string description,
 			string address,
@@ -92,7 +92,7 @@ namespace EIP.ServicesRegistry.Core
 			return dao.Insert(@event);
 		}
 
-		public void UpdateRequest(
+		public void UpdateRequestService(
 			string id,
 			string name,
 			string description,
@@ -112,7 +112,7 @@ namespace EIP.ServicesRegistry.Core
 			dao.Update(request);
 		}
 
-		public void UpdateEvent(
+		public void UpdateEventService(
 			string id,
 			string name,
 			string description,

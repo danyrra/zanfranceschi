@@ -9,7 +9,7 @@ using System.ServiceModel.Configuration;
 using System.Configuration;
 using System.ServiceModel.Channels;
 
-namespace EIP.ServiceRegistry.Host._Service
+namespace EIP.ServicesRegistry.Host.Services
 {
 	public class WcfServiceWrapper<TServiceImplementation, TServiceContract>
 		: ServiceBase where TServiceImplementation : TServiceContract
