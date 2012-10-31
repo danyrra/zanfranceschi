@@ -92,19 +92,16 @@
     <None Include="Service References\ServiceReference1\EIP.Sandbox.ServiceReference1.Service.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\service-registry4.xsd">
+    <None Include="Service References\ServiceReference1\service-registry.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\service-registry41.xsd">
+    <None Include="Service References\ServiceReference1\service-registry1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\service-registry42.xsd">
+    <None Include="Service References\ServiceReference1\service-registry2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\service-registry43.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\ServiceRegistry1.wsdl" />
+    <None Include="Service References\ServiceReference1\ServiceRegistry.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalDomain.csproj">
@@ -119,6 +116,9 @@
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ServiceReference1\service-registry.disco" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +129,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference1\service-registry1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
