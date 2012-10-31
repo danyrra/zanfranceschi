@@ -83,7 +83,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="Service References\ServiceReference1\EIP.Sandbox.ServiceReference1.EventService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

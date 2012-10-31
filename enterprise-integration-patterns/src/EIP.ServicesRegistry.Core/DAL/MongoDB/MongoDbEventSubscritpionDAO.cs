@@ -9,20 +9,30 @@ using MongoDB.Bson.Serialization;
 
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {
-	internal class MongoDbEventSubscritpionDAO
+	public class MongoDbEventSubscritpionDAO
 		: MongoDbBaseDAO<EventSubscription>, IEventSubscriptionDAO
 	{
-		internal MongoDbEventSubscritpionDAO(MongoServer server, string database, string collection)
-			: base(server, database, collection) { }
+		public MongoDbEventSubscritpionDAO(MongoServer server, string database)
+			: base(server, database, "subscriptions") 
+		{
+			if (!BsonClassMap.IsClassMapRegistered(typeof(EventSubscription)))
+			{
+				BsonClassMap.RegisterClassMap<EventSubscription>(cm =>
+				{
+					cm.AutoMap();
+				});
+			}
+		}
 
 		protected override bool SearchCriteria(EventSubscription obj, string term)
 		{
 			term = term.ToLower();
 
 			return
-				obj.SubscriberQueuePath.ToLower().Contains(term)
+				obj.SubscriberAddress.ToLower().Contains(term)
 				|| obj.EventService.DataType.ToLower().Contains(term)
-				|| obj.EventService.Name.ToLower().Contains(term);
+				|| obj.EventService.Name.ToLower().Contains(term)
+				|| obj.Name.ToLower().Contains(term);
 		}
 	}
 }

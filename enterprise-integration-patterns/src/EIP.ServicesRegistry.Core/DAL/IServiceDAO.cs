@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EIP.ServicesRegistry.Core.DAL
 {
-	internal interface IServiceDAO
+	public interface IServiceDAO
 	{
 		Service Insert(Service service);
 		void Update(Service service);

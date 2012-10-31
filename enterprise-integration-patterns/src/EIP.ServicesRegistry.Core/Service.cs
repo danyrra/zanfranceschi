@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using System.Runtime.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace EIP.ServicesRegistry.Core
 {
 	[DataContract]
 	public abstract class Service
-		: IMongoDbEntity
+		: IEntity
 	{
 		[DataMember]
-		public ObjectId Id { get; internal set; }
+		[BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
+		public string Id { get; internal set; }
 		[DataMember]
 		public string Name { get; set; }
 		[DataMember]

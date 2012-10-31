@@ -9,44 +9,51 @@ namespace EIP.ServiceRegistry.Host._Service
 	public class ServiceRegistry
 		: IServiceRegistry
 	{
+		ServiceSrv coreService;
+
+		public ServiceRegistry()
+		{
+			this.coreService = SrvFactory.GetServiceSrv();
+		}
+		
 		public Service[] GetAll()
 		{
-			return ServiceRegistrySrv.GetAll();
+			return coreService.GetAll();
 		}
 
 		public RequestService[] GetAllRequest()
 		{
-			return ServiceRegistrySrv.GetAllRequest();
+			return coreService.GetAllRequest();
 		}
 
 		public EventService[] GetAllEvent()
 		{
-			return ServiceRegistrySrv.GetAllEvent();
+			return coreService.GetAllEvent();
 		}
 
 		public Service[] Search(string term)
 		{
-			return ServiceRegistrySrv.Search(term);
+			return coreService.Search(term);
 		}
 
 		public Service GetById(string id)
 		{
-			return ServiceRegistrySrv.GetById(id);
+			return coreService.GetById(id);
 		}
 
 		public Service Create(Service service)
 		{
-			return ServiceRegistrySrv.Create(service);
+			return coreService.Create(service);
 		}
 
 		public void Update(Service service)
 		{
-			ServiceRegistrySrv.Update(service);
+			coreService.Update(service);
 		}
 
 		public void Remove(string id)
 		{
-			ServiceRegistrySrv.Remove(id);
+			coreService.Remove(id);
 		}
 	}
 }

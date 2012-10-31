@@ -9,11 +9,11 @@ using MongoDB.Bson.Serialization;
 
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {
-	internal class MongoDbServiceDAO
+	public class MongoDbServiceDAO
 		: MongoDbBaseDAO<Service>, IServiceDAO
 	{
-		internal MongoDbServiceDAO(MongoServer server, string database, string collection)
-			: base(server, database, collection)
+		public MongoDbServiceDAO(MongoServer server, string database)
+			: base(server, database, "services")
 		{
 			if (!BsonClassMap.IsClassMapRegistered(typeof(Service)))
 			{
@@ -41,14 +41,11 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 		public RequestService[] GetAllRequest()
 		{
 			return collection.FindAs<RequestService>(Query.EQ("_t", "RequestService")).ToArray();
-			
-			return collection.FindAllAs<RequestService>().ToArray();
 		}
 
 		public EventService[] GetAllEvent()
 		{
 			return collection.FindAs<EventService>(Query.EQ("_t", "EventService")).ToArray();
-			return collection.FindAllAs<EventService>().ToArray();
 		}
 	}
 }

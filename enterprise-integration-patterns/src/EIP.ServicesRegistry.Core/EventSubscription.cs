@@ -4,40 +4,33 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Runtime.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace EIP.ServicesRegistry.Core
 {
 	[DataContract]
 	public class EventSubscription
-		: IMongoDbEntity
+		: IEntity
 	{
-		public MongoDB.Bson.ObjectId Id { get; set; }
 		[DataMember]
-		public MongoDB.Bson.ObjectId EventServiceId { get; set; }
+		[BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
+		public string Id { get; set; }
 		[DataMember]
-		public string SubscriberQueuePath { get; private set; }
-		
-		private EventService eventService;
-
+		public string EventServiceId { get; set; }
+		[DataMember]
+		public string Name { get; set; }
+		[DataMember]
+		public string SubscriberAddress { get; internal set; }
 		[DataMember]
 		[BsonIgnore]
-		public EventService EventService 
-		{ 
-			get 
-			{
-				if (eventService == null)
-					eventService = ServiceRegistrySrv.GetById(EventServiceId.ToString()) as EventService;
-
-				return eventService;
-			}
-			private set { eventService = value; }
-		}
+		public EventService EventService { get; set; }
 		
-		internal EventSubscription(EventService service, string subscriberQueuePath)
+		internal EventSubscription(EventService service, string name, string subscriberAddress)
 		{
 			this.EventService = service;
-			this.SubscriberQueuePath = subscriberQueuePath;
+			this.SubscriberAddress = subscriberAddress;
 			this.EventServiceId = service.Id;
+			this.Name = name;
 		}
 	}
 }
