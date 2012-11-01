@@ -21,11 +21,6 @@ namespace EIP.ServicesRegistry.Core
 			this.dao = dao;
 		}
 
-		public Service[] GetAll()
-		{
-			return dao.GetAll();
-		}
-
 		public EventService[] GetAllEventServices()
 		{
 			return dao.GetAllEvent();

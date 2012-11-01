@@ -18,8 +18,6 @@ namespace EIP.ServicesRegistry.Host.Services
 		[OperationContract]
 		string CreateRequestService(string name, string description, string address, string definitionUrl);
 		[OperationContract]
-		Service[] GetAll();
-		[OperationContract]
 		EventService[] GetAllEventServices();
 		[OperationContract]
 		RequestService[] GetAllRequestServices();

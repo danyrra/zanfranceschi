@@ -17,11 +17,6 @@ namespace EIP.ServicesRegistry.Host.Services
 			this.coreService = SrvFactory.GetServiceSrv();
 		}
 
-		public Service[] GetAll()
-		{
-			return coreService.GetAll();
-		}
-
 		public RequestService[] GetAllRequestServices()
 		{
 			return coreService.GetAllRequestServices();
