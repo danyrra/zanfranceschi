@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using EIP.CanonicalModels;
 using System.Web.Caching;
 using System.Runtime.Caching;
 using MassTransit;
@@ -18,17 +17,14 @@ namespace EIP.AppC.Models
 	/// <summary>
 	/// AppC specific representation of the Employee model
 	/// </summary>
-	public class AppCSpecificEmployeeModel
+	public class TestModel
 	{
-		public AppCSpecificEmployeeModel()
+		public TestModel()
 		{
 			Id = IdGenerator.Instance.GetNextId();
 		}
 		public int Id { get; set; }
-		public string Area { get; set; }
-		public string SubArea { get; set; }
 		public string Name { get; set; }
-		public string Email { get; set; }
 	}
 
 	/// <summary>
@@ -105,9 +101,9 @@ namespace EIP.AppC.Models
 
 			try
 			{
-				string dataType = typeof(EmployeeHired).FullName;
+				string dataType = typeof(TestOccurred).FullName;
 
-				eventService = service.FindOneByDataType(typeof(EmployeeHired).FullName);
+				eventService = service.FindOneByDataType(typeof(TestOccurred).FullName);
 
 				if (eventService == null)
 					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
