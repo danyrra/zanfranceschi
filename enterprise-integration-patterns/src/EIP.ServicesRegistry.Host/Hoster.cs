@@ -2,6 +2,7 @@
 using EIP.ServicesRegistry.Host.Services;
 using Topshelf;
 using EIP.ServicesRegistry.Core;
+using System;
 
 namespace EIP.ServicesRegistry.Host
 {
@@ -9,6 +10,9 @@ namespace EIP.ServicesRegistry.Host
 	{
 		static void Main(string[] args)
 		{
+			Console.Title = "Services Registry Host";
+
+			
 			string baseWebAddress = ConfigurationManager.AppSettings["baseWebAddress"];
 			string baseTcpAddress = ConfigurationManager.AppSettings["baseTcpAddress"];
 

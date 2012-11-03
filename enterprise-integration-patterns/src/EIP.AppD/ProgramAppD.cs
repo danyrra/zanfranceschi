@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EIP.CanonicalDomain.Events;
-using System.Threading;
 using MassTransit;
-using EIP.AppB.ServicesRegistry;
-using System.ServiceModel;
-using System.IO;
-using Newtonsoft.Json;
 using System.Configuration;
+using EIP.AppD.ServicesRegistry;
+using EIP.CanonicalDomain.Events;
+using System.IO;
+using System.ServiceModel;
 using EIP.CanonicalDomain.Requests;
+using Newtonsoft.Json;
 
-namespace EIP.AppB
+namespace EIP.AppD
 {
-	class ProgramAppB
+	class ProgramAppD
 	{
 		static void Main(string[] args)
 		{
-			Console.Title = "Subscriber (B)";
+			Console.Title = "Responder (D)";
 
-			Console.WriteLine("Starting to listen for events...");
+			Console.WriteLine("Getting ready to respond.");
 
 			try
 			{
@@ -31,8 +30,8 @@ namespace EIP.AppB
 				Console.WriteLine(ex.Message);
 			}
 
-			Console.WriteLine("listening at {0}", address);
-			Console.WriteLine("Ready. Press <Enter> to quit.");
+			Console.WriteLine("Ready to respond at {0}", address);
+			Console.WriteLine("Press <Enter> to quit.");
 
 			Console.Read();
 		}
@@ -47,12 +46,14 @@ namespace EIP.AppB
 			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
 
 			IServiceRegistry service = new ServiceRegistryClient();
+			
+			//service.CreateEventService("Test Requst", "", "zanfranceschi-n", typeof(TestRequest).FullName);
 
 			try
 			{
-				string dataType = typeof(TestOccurred).FullName;
+				string dataType = typeof(TestRequest).FullName;
 
-				eventService = service.FindOneByDataType(typeof(TestOccurred).FullName);
+				eventService = service.FindOneByDataType(typeof(TestRequest).FullName);
 
 				if (eventService == null)
 					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
@@ -88,17 +89,16 @@ namespace EIP.AppB
 				}
 				address = string.Format("{0}://{1}/{2}", queueProtocol, eventService.Address, queueUniqueName);
 				sbc.ReceiveFrom(address);
-				sbc.Subscribe(subs => subs.Consumer<MessageHandler>().Permanent());
+				sbc.Subscribe(subs => subs.Handler<TestRequest>(HandleRequest));
 			});
 		}
-	}
 
-	class MessageHandler
-		: Consumes<TestOccurred>.All
-	{
-		public void Consume(TestOccurred message)
+		static void HandleRequest(IConsumeContext<TestRequest> ctx, TestRequest request)
 		{
-			Console.WriteLine("received: {0}", message.Text);
+			Console.WriteLine("Responding to '{0}'...", request.Request);
+			TestResponse response = new TestResponse();
+			response.Response = request.Request.ToUpper();
+			ctx.Respond(response);
 		}
 	}
 }

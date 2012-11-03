@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using EIP.AppC.Models;
 using EIP.CanonicalDomain.Events;
-using EIP.CanonicalModels;
 
 namespace EIP.AppC.Controllers
 {
@@ -17,20 +16,15 @@ namespace EIP.AppC.Controllers
         }
 
 		[HttpPost]
-		public ActionResult Index(AppCSpecificEmployeeModel employee)
+		public ActionResult Index(TestModel test)
 		{
-			// Business logic with internal model of Employee
-			// employeeService.Create(employee);
+			// Business logic with internal model of Test
+			// testService.Create(test);
 
-			EmployeeHired employeeHiredEvent = new EmployeeHired();
-			employeeHiredEvent.Employee = new Employee // adaptation between models...
-			{
-				Department = employee.Area,
-				Id = employee.Id.ToString(),
-				Name = employee.Name
-			};
+			TestOccurred testEvent = new TestOccurred();
+			testEvent.Text = test.Name;
 
-			ServiceBusProvider.Bus.Publish(employeeHiredEvent);
+			ServiceBusProvider.Bus.Publish(testEvent);
 			
 			return View();
 		}

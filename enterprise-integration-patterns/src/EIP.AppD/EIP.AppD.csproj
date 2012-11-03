@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{03A943A2-01F5-421A-9CA8-4F87BBFDCE4B}</ProjectGuid>
+    <ProjectGuid>{F61095A5-6E91-48B3-AEA6-BBEA4B70DF46}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EIP.Sandbox2</RootNamespace>
-    <AssemblyName>EIP.Sandbox2</AssemblyName>
+    <RootNamespace>EIP.AppD</RootNamespace>
+    <AssemblyName>EIP.AppD</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -47,6 +47,9 @@
     <Reference Include="MassTransit.Transports.RabbitMq">
       <HintPath>..\packages\MassTransit.RabbitMQ.2.6.5\lib\net40\MassTransit.Transports.RabbitMq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RabbitMQ.Client, Version=2.8.7.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RabbitMQ.Client.2.8.7\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -54,7 +57,8 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,13 +66,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ProgramAppD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Receiver.cs" />
+    <Compile Include="Service References\ServicesRegistry\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Service References\ServicesRegistry\EIP.AppD.ServicesRegistry.EventService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServicesRegistry\EIP.AppD.ServicesRegistry.RequestService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServicesRegistry\EIP.AppD.ServicesRegistry.Service.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServicesRegistry\service-registry.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicesRegistry\service-registry1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicesRegistry\service-registry2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicesRegistry\ServiceRegistry.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalDomain.csproj">
@@ -78,6 +105,24 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServicesRegistry\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServicesRegistry\service-registry.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServicesRegistry\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServicesRegistry\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServicesRegistry\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
