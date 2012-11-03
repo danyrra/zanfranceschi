@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Configuration;
 using System.Threading.Tasks;
 using EIP.CanonicalDomain.Requests;
+using MassTransit.Exceptions;
 
 namespace EIP.AppA
 {
@@ -33,7 +34,7 @@ namespace EIP.AppA
 			}
 
 			Console.WriteLine("publishing at {0}", address);
-			
+
 			Thread.Sleep(1000);
 
 			IList<string> words = new List<string>{
@@ -62,20 +63,26 @@ namespace EIP.AppA
 				int num = rnd.Next(0, words.Count - 1);
 				string word = i.ToString() + " - " + words[num];
 
-				bus.Publish(new TestOccurred { Text = word });
-
-				if (num % 2 == 0)
+				try
 				{
-					bus.PublishRequest(new TestRequest { Request = word }, x =>
+					bus.Publish(new TestOccurred { Text = word });
+					if (num % 2 == 0)
 					{
-						x.Handle<TestResponse>(HandleResponse);
-						x.HandleFault(HandleFaultRequest);
-						x.HandleTimeout(TimeSpan.FromSeconds(4), c => Console.WriteLine("request timeout"));
-					});
+						bus.PublishRequest(new TestRequest { Request = word }, x =>
+						{
+							x.Handle<TestResponse>(HandleResponse);
+							x.HandleFault(HandleFaultRequest);
+							x.HandleTimeout(TimeSpan.FromSeconds(4), c => Console.WriteLine("request timeout"));
+						});
+					}
+				}
+				catch (PublishException pex)
+				{
+					Console.WriteLine(pex.Message);
 				}
 
 				Console.WriteLine(word);
-				Thread.Sleep(10);
+				Thread.Sleep(1000);
 			}
 		}
 
