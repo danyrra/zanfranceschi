@@ -152,9 +152,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalDomain.csproj">
+    <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalModel.csproj">
       <Project>{5078C2E0-CD36-4175-B81C-3401011AE454}</Project>
-      <Name>EIP.CanonicalDomain</Name>
+      <Name>EIP.CanonicalModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

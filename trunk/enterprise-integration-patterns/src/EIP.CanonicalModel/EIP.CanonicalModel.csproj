@@ -8,8 +8,8 @@
     <ProjectGuid>{5078C2E0-CD36-4175-B81C-3401011AE454}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EIP.CanonicalDomain</RootNamespace>
-    <AssemblyName>EIP.CanonicalDomain</AssemblyName>
+    <RootNamespace>EIP.CanonicalModel</RootNamespace>
+    <AssemblyName>EIP.CanonicalModel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

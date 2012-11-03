@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{28675253-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commun", "Commun", "{32F5AE39-2B88-475E-8659-2B24009A43F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIP.CanonicalDomain", "EIP.CanonicalDomain\EIP.CanonicalDomain.csproj", "{5078C2E0-CD36-4175-B81C-3401011AE454}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIP.CanonicalModel", "EIP.CanonicalDomain\EIP.CanonicalModel.csproj", "{5078C2E0-CD36-4175-B81C-3401011AE454}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service Registry", "Service Registry", "{B7361CDA-DC3E-43AF-B9D1-FF63BDFD098E}"
 EndProject
