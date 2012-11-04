@@ -51,17 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\IEventSubscriptionDAO.cs" />
     <Compile Include="DAL\IServiceDAO.cs" />
-    <Compile Include="DAL\MongoDB\MongoDbEventSubscritpionDAO.cs" />
     <Compile Include="DAL\MongoDB\MongoDbBaseDAO.cs" />
     <Compile Include="DAL\MongoDB\MongoDdServiceDAO.cs" />
-    <Compile Include="Entities\EventSubscription.cs" />
-    <Compile Include="Entities\EventService.cs" />
-    <Compile Include="EventSubscriptionSrv.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\RequestService.cs" />
-    <Compile Include="Entities\Service.cs" />
+    <Compile Include="Entities\EventRegistry.cs" />
+    <Compile Include="Entities\WebServiceRegistry.cs" />
+    <Compile Include="Entities\ServiceRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceSrv.cs" />
     <Compile Include="SrvFactory.cs" />

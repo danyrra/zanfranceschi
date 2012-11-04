@@ -11,118 +11,39 @@ namespace EIP.ServicesRegistry.Core
 	{
 		private IServiceDAO dao;
 
-		public EventService FindOneByDataType(string dataTypeFullName)
-		{
-			return dao.FindOneByProperty("DataType", dataTypeFullName);
-		}
-
 		public ServiceSrv(IServiceDAO dao)
 		{
 			this.dao = dao;
 		}
 
-		public EventService[] GetAllEventServices()
+		public EventRegistry CreateEventRegistry(EventRegistry obj)
 		{
-			return dao.GetAllEvent();
+			return dao.Insert<EventRegistry>(obj);
 		}
 
-		public RequestService[] GetAllRequestServices()
+		public void UpdateEventRegistry(EventRegistry obj)
 		{
-			return dao.GetAllRequest();
+			dao.Update(obj);
 		}
 
-		public Service[] Search(string term)
-		{
-			return dao.Search(term);
-		}
-
-		public Service GetById(string id)
-		{
-			return dao.GetById(id);
-		}
-
-		public string Create(Service service)
-		{
-			return dao.Insert(service).Id;
-		}
-
-		public void Update(Service service)
-		{
-			dao.Update(service);
-		}
-
-		public void Remove(string id)
+		public void RemoveEventRegistry(string id)
 		{
 			dao.Remove(id);
 		}
 
-		public string CreateRequest(
-			string name,
-			string description,
-			string address, 
-			string definitionUrl)
+		public EventRegistry FindEventByDataType(string dataTypeFullName)
 		{
-			RequestService request = new RequestService 
-			{
-				Address = address,
-				DefinitionUrl = definitionUrl,
-				Description = description,
-				Name = name
-			};
-			return dao.Insert(request).Id;
+			return dao.FindOneByProperty<EventRegistry>("CanonicalDataType", dataTypeFullName);
 		}
 
-		public string CreateEventService(
-			string name,
-			string description,
-			string address,
-			string dataType)
+		public EventRegistry[] SearchEvents(string term)
 		{
-			EventService @event = new EventService
-			{
-				Address = address,
-				DataType = dataType,
-				Description = description,
-				Name = name,
-			};
-
-			return dao.Insert(@event).Id;
+			return dao.SearchEvents(term);
 		}
 
-		public void UpdateRequestService(
-			string id,
-			string name,
-			string description,
-			string address,
-			string definitionUrl)
+		public WebServiceRegistry[] SearchWebServices(string term)
 		{
-			RequestService request = new RequestService
-			{
-				Address = address,
-				DefinitionUrl = definitionUrl,
-				Description = description,
-				Name = name
-			};
-
-			dao.Update(request);
-		}
-
-		public void UpdateEventService(
-			string id,
-			string name,
-			string description,
-			string address,
-			string dataType)
-		{
-			EventService @event = new EventService
-			{
-				Address = address,
-				DataType = dataType,
-				Description = description,
-				Name = name,
-			};
-
-			dao.Update(@event);
+			return dao.SearchWebServices(term);
 		}
 	}
 }

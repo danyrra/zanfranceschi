@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using MassTransit;
 
-namespace EIP.CanonicalDomain.Requests
+namespace EIP.CanonicalModel.Requests
 {
 	public class TestRequest
 		: CorrelatedBy<Guid>

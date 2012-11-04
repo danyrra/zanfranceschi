@@ -113,13 +113,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.EventService.datasource">
+    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.EventRegistry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.RequestService.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.Service.datasource">
+    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.WebServiceRegistry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServicesRegistry\service-registry.xsd">
@@ -152,12 +149,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalModel.csproj">
-      <Project>{5078C2E0-CD36-4175-B81C-3401011AE454}</Project>
-      <Name>EIP.CanonicalModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -178,6 +169,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EIP.CanonicalModel\EIP.CanonicalModel.csproj">
+      <Project>{5078C2E0-CD36-4175-B81C-3401011AE454}</Project>
+      <Name>EIP.CanonicalModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

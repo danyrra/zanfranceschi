@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EIP.AppC.Models;
-using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModel.Events;
 
 namespace EIP.AppC.Controllers
 {

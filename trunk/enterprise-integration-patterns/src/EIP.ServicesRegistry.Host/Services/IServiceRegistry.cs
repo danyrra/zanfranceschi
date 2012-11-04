@@ -12,28 +12,10 @@ namespace EIP.ServicesRegistry.Host.Services
 	public interface IServiceRegistry
 	{
 		[OperationContract]
-		string Create(Service service);
+		EventRegistry FindEventByDataType(string dataTypeFullName);
 		[OperationContract]
-		string CreateEventService(string name, string description, string address, string dataType);
+		EventRegistry[] SearchEvents(string term);
 		[OperationContract]
-		string CreateRequestService(string name, string description, string address, string definitionUrl);
-		[OperationContract]
-		EventService[] GetAllEventServices();
-		[OperationContract]
-		RequestService[] GetAllRequestServices();
-		[OperationContract]
-		Service GetById(string id);
-		[OperationContract]
-		EventService FindOneByDataType(string dataTypeFullName);
-		[OperationContract]
-		void Remove(string id);
-		[OperationContract]
-		Service[] Search(string term);
-		[OperationContract]
-		void Update(Service service);
-		[OperationContract]
-		void UpdateEventService(string id, string name, string description, string address, string dataType);
-		[OperationContract]
-		void UpdateRequestService(string id, string name, string description, string address, string definitionUrl);
+		WebServiceRegistry[] SearchWebService(string term);
 	}
 }
