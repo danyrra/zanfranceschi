@@ -18,11 +18,6 @@ namespace EIP.ServicesRegistry.Core
 			return kernel.Get<ServiceSrv>();
 		}
 
-		public static EventSubscriptionSrv GetEventSubscriptionSrv()
-		{
-			return kernel.Get<EventSubscriptionSrv>();
-		}
-
 		static IKernel kernel = new StandardKernel(new ServicesRegistryModule());
 
 		private class ServicesRegistryModule
@@ -33,11 +28,6 @@ namespace EIP.ServicesRegistry.Core
 				string connectionString = ConfigurationManager.AppSettings["mongodb-connection_string"];
 				string database = ConfigurationManager.AppSettings["mongodb-database"];
 				MongoServer server = MongoServer.Create(connectionString);
-
-				Bind<IEventSubscriptionDAO>()
-						  .To<MongoDbEventSubscritpionDAO>()
-						  .WithConstructorArgument("server", server)
-						  .WithConstructorArgument("database", database);
 
 				Bind<IServiceDAO>()
 						  .To<MongoDbServiceDAO>()

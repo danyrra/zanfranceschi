@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Configuration;
 using EIP.AppC.ServicesRegistry;
-using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModel.Events;
 using System.IO;
 using Newtonsoft.Json;
 using System.ServiceModel;

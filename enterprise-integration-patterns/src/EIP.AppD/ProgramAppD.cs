@@ -5,10 +5,10 @@ using System.Text;
 using MassTransit;
 using System.Configuration;
 using EIP.AppD.ServicesRegistry;
-using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModel.Events;
 using System.IO;
 using System.ServiceModel;
-using EIP.CanonicalDomain.Requests;
+using EIP.CanonicalModel.Requests;
 using Newtonsoft.Json;
 
 namespace EIP.AppD
@@ -41,26 +41,24 @@ namespace EIP.AppD
 
 		static void ConfigureEndpoint()
 		{
-			EventService eventService = null;
+			EventRegistry eventRegistry = null;
 
 			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
 
 			IServiceRegistry service = new ServiceRegistryClient();
 			
-			//service.CreateEventService("Test Requst", "", "zanfranceschi-n", typeof(TestRequest).FullName);
-
 			try
 			{
 				string dataType = typeof(TestRequest).FullName;
 
-				eventService = service.FindOneByDataType(typeof(TestRequest).FullName);
+				eventRegistry = service.FindEventByDataType(dataType);
 
-				if (eventService == null)
+				if (eventRegistry == null)
 					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
 
 				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
 				{
-					string serializedEvent = JsonConvert.SerializeObject(eventService);
+					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
 					file.Write(serializedEvent);
 				}
 			}
@@ -68,7 +66,7 @@ namespace EIP.AppD
 			{
 				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
 				{
-					eventService = JsonConvert.DeserializeObject<EventService>(file.ReadToEnd());
+					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
 				}
 			}
 
@@ -87,7 +85,7 @@ namespace EIP.AppD
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://{1}/{2}", queueProtocol, eventService.Address, queueUniqueName);
+				address = string.Format("{0}://{1}/{2}", queueProtocol, eventRegistry.Address, queueUniqueName);
 				sbc.ReceiveFrom(address);
 				sbc.Subscribe(subs => subs.Handler<TestRequest>(HandleRequest));
 			});

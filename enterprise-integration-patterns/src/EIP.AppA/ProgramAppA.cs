@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MassTransit;
-using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModel.Events;
 using System.Threading;
 using EIP.AppA.ServiceRegistry;
 using System.ServiceModel;
@@ -11,7 +11,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.Threading.Tasks;
-using EIP.CanonicalDomain.Requests;
+using EIP.CanonicalModel.Requests;
 using MassTransit.Exceptions;
 
 namespace EIP.AppA
@@ -68,7 +68,10 @@ namespace EIP.AppA
 					bus.Publish(new TestOccurred { Text = word });
 					if (num % 2 == 0)
 					{
-						bus.PublishRequest(new TestRequest { Request = word }, x =>
+
+						Guid transactionId = Guid.NewGuid();
+						
+						bus.PublishRequest(new TestRequest { CorrelationId = transactionId, Request = word }, x =>
 						{
 							x.Handle<TestResponse>(HandleResponse);
 							x.HandleFault(HandleFaultRequest);
@@ -101,33 +104,24 @@ namespace EIP.AppA
 
 		static void ConfigureEndpoint()
 		{
-			EventService eventService = null;
+			EventRegistry eventRegistry = null;
 
 			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
 
 			IServiceRegistry service = new ServiceRegistryClient();
 
-			bool autoCreateServiceRegistry = Convert.ToBoolean(ConfigurationManager.AppSettings["autoCreateServiceRegistry"]);
-
 			try
 			{
 				string dataType = typeof(TestOccurred).FullName;
 
-				eventService = service.FindOneByDataType(typeof(TestOccurred).FullName);
+				eventRegistry = service.FindEventByDataType(typeof(TestOccurred).FullName);
 
-				if (eventService == null && !autoCreateServiceRegistry)
-				{
+				if (eventRegistry == null)
 					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
-				}
-				else if (autoCreateServiceRegistry)
-				{
-					string serviceRegistryAddress = ConfigurationManager.AppSettings["ServiceRegistryAddress"];
-					service.CreateEventService("Test", "", serviceRegistryAddress, typeof(TestOccurred).FullName);
-				}
 
 				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
 				{
-					string serializedEvent = JsonConvert.SerializeObject(eventService);
+					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
 					file.Write(serializedEvent);
 				}
 			}
@@ -135,7 +129,7 @@ namespace EIP.AppA
 			{
 				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
 				{
-					eventService = JsonConvert.DeserializeObject<EventService>(file.ReadToEnd());
+					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
 				}
 			}
 
@@ -155,7 +149,7 @@ namespace EIP.AppA
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://{1}/{2}", queueProtocol, eventService.Address, queueUniqueName);
+				address = string.Format("{0}://{1}/{2}", queueProtocol, eventRegistry.Address, queueUniqueName);
 				sbc.ReceiveFrom(address);
 			});
 		}

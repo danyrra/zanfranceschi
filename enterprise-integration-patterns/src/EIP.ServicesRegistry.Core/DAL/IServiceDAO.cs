@@ -8,14 +8,12 @@ namespace EIP.ServicesRegistry.Core.DAL
 {
 	public interface IServiceDAO
 	{
-		Service Insert(Service service);
-		void Update(Service service);
+		T Insert<T>(ServiceRegistry service) where T : ServiceRegistry;
+		T GetById<T>(string id) where T : ServiceRegistry;
+		T FindOneByProperty<T>(string propertyName, object propertyValue) where T : ServiceRegistry;
+		EventRegistry[] SearchEvents(string term);
+		WebServiceRegistry[] SearchWebServices(string term);
+		void Update(ServiceRegistry service);
 		void Remove(string id);
-		Service[] GetAll();
-		RequestService[] GetAllRequest();
-		EventService[] GetAllEvent();
-		Service[] Search(string term);
-		Service GetById(string id);
-		EventService FindOneByProperty(string propertyName, object propertyValue);
 	}
 }

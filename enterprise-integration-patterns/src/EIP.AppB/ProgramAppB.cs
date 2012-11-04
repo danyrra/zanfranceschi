@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModel.Events;
 using System.Threading;
 using MassTransit;
 using EIP.AppB.ServicesRegistry;
@@ -10,7 +10,7 @@ using System.ServiceModel;
 using System.IO;
 using Newtonsoft.Json;
 using System.Configuration;
-using EIP.CanonicalDomain.Requests;
+using EIP.CanonicalModel.Requests;
 
 namespace EIP.AppB
 {
@@ -42,7 +42,7 @@ namespace EIP.AppB
 
 		static void ConfigureEndpoint()
 		{
-			EventService eventService = null;
+			EventRegistry eventRegistry = null;
 
 			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
 
@@ -52,14 +52,14 @@ namespace EIP.AppB
 			{
 				string dataType = typeof(TestOccurred).FullName;
 
-				eventService = service.FindOneByDataType(typeof(TestOccurred).FullName);
+				eventRegistry = service.FindEventByDataType(typeof(TestOccurred).FullName);
 
-				if (eventService == null)
+				if (eventRegistry == null)
 					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
 
 				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
 				{
-					string serializedEvent = JsonConvert.SerializeObject(eventService);
+					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
 					file.Write(serializedEvent);
 				}
 			}
@@ -67,7 +67,7 @@ namespace EIP.AppB
 			{
 				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
 				{
-					eventService = JsonConvert.DeserializeObject<EventService>(file.ReadToEnd());
+					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
 				}
 			}
 
@@ -86,7 +86,7 @@ namespace EIP.AppB
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://{1}/{2}", queueProtocol, eventService.Address, queueUniqueName);
+				address = string.Format("{0}://{1}/{2}", queueProtocol, eventRegistry.Address, queueUniqueName);
 				sbc.ReceiveFrom(address);
 				sbc.Subscribe(subs => subs.Consumer<MessageHandler>().Permanent());
 			});

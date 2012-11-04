@@ -79,13 +79,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.EventService.datasource">
+    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.EventRegistry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.RequestService.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.Service.datasource">
+    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.WebServiceRegistry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceRegistry\service-registry.xsd">
@@ -98,12 +95,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceRegistry\ServiceRegistry.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EIP.CanonicalDomain\EIP.CanonicalModel.csproj">
-      <Project>{5078C2E0-CD36-4175-B81C-3401011AE454}</Project>
-      <Name>EIP.CanonicalModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -125,6 +116,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EIP.CanonicalModel\EIP.CanonicalModel.csproj">
+      <Project>{5078C2E0-CD36-4175-B81C-3401011AE454}</Project>
+      <Name>EIP.CanonicalModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

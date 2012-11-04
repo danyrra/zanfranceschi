@@ -7,7 +7,7 @@ using System.Runtime.Caching;
 using MassTransit;
 using EIP.AppC.ServicesRegistry;
 using System.Configuration;
-using EIP.CanonicalDomain.Events;
+using EIP.CanonicalModel.Events;
 using System.IO;
 using System.ServiceModel;
 using Newtonsoft.Json;
@@ -93,7 +93,7 @@ namespace EIP.AppC.Models
 		/// </summary>
 		internal static IServiceBus ConfigureEndpoint()
 		{
-			EventService eventService = null;
+			EventRegistry eventRegistry = null;
 
 			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
 
@@ -103,14 +103,14 @@ namespace EIP.AppC.Models
 			{
 				string dataType = typeof(TestOccurred).FullName;
 
-				eventService = service.FindOneByDataType(typeof(TestOccurred).FullName);
+				eventRegistry = service.FindEventByDataType(typeof(TestOccurred).FullName);
 
-				if (eventService == null)
+				if (eventRegistry == null)
 					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
 
 				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
 				{
-					string serializedEvent = JsonConvert.SerializeObject(eventService);
+					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
 					file.Write(serializedEvent);
 				}
 			}
@@ -118,7 +118,7 @@ namespace EIP.AppC.Models
 			{
 				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
 				{
-					eventService = JsonConvert.DeserializeObject<EventService>(file.ReadToEnd());
+					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
 				}
 			}
 
@@ -137,7 +137,7 @@ namespace EIP.AppC.Models
 				{
 					sbc.UseRabbitMq();
 				}
-				sbc.ReceiveFrom(string.Format("{0}://{1}/{2}", queueProtocol, eventService.Address, queueUniqueName));
+				sbc.ReceiveFrom(string.Format("{0}://{1}/{2}", queueProtocol, eventRegistry.Address, queueUniqueName));
 			});
 
 			MemoryCache.Default["IServiceBus"] = bus;

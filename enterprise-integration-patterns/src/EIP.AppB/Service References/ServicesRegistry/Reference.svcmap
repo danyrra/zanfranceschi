@@ -21,11 +21,11 @@
     <MetadataSource Address="http://localhost:8088/service-registry" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service-registry.xsd" MetadataType="Schema" ID="75d769e6-619b-4150-96a8-4add77fa33a3" SourceId="1" SourceUrl="http://localhost:8088/service-registry?xsd=xsd2" />
+    <MetadataFile FileName="service-registry2.xsd" MetadataType="Schema" ID="793c51ff-5d0f-45db-950c-3d546b9dc0b8" SourceId="1" SourceUrl="http://localhost:8088/service-registry?xsd=xsd1" />
     <MetadataFile FileName="service-registry.disco" MetadataType="Disco" ID="13c1b7fc-38d6-4974-889b-6714c86c7f7d" SourceId="1" SourceUrl="http://localhost:8088/service-registry?disco" />
     <MetadataFile FileName="service-registry1.xsd" MetadataType="Schema" ID="da8409ca-e4ba-4831-b951-2766acb657bf" SourceId="1" SourceUrl="http://localhost:8088/service-registry?xsd=xsd0" />
     <MetadataFile FileName="ServiceRegistry.wsdl" MetadataType="Wsdl" ID="25c7a867-1cbb-4d9d-9f25-882939257ca5" SourceId="1" SourceUrl="http://localhost:8088/service-registry?wsdl" />
-    <MetadataFile FileName="service-registry2.xsd" MetadataType="Schema" ID="793c51ff-5d0f-45db-950c-3d546b9dc0b8" SourceId="1" SourceUrl="http://localhost:8088/service-registry?xsd=xsd1" />
+    <MetadataFile FileName="service-registry.xsd" MetadataType="Schema" ID="75d769e6-619b-4150-96a8-4add77fa33a3" SourceId="1" SourceUrl="http://localhost:8088/service-registry?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -13,7 +13,7 @@ using EIP.ServicesRegistry.Core.Entities;
 namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 {
 	public abstract class MongoDbBaseDAO<TCollectionType> 
-		where TCollectionType : IEntity
+		where TCollectionType : ServiceRegistry
 	{
 		protected MongoServer server;
 		protected MongoCollection<TCollectionType> collection;
@@ -45,11 +45,6 @@ namespace EIP.ServicesRegistry.Core.DAL._MongoDB
 		{
 			var query = Query.EQ("_id", id);
 			collection.Remove(query, RemoveFlags.Single);
-		}
-
-		public TCollectionType[] GetAll()
-		{
-			return collection.FindAll().ToArray();
 		}
 
 		public TCollectionType GetById(string id)

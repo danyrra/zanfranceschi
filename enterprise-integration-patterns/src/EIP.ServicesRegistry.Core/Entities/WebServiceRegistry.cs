@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 
 namespace EIP.ServicesRegistry.Core.Entities
 {
+	/// <summary>
+	/// Representation of a WebService
+	/// </summary>
 	[DataContract]
-	public class EventService
-		: Service
+	public class WebServiceRegistry
+		: ServiceRegistry
 	{
+		/// <summary>
+		/// Definition Url
+		/// </summary>
 		[DataMember]
-		public string DataType { get; set; }
-		[DataMember]
-		public override string ServiceType
-		{
-			get { return "event"; }
-			set { }
-		}
+		public string WsdlUrl { get; set; }
 	}
 }
