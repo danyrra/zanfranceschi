@@ -51,6 +51,7 @@ namespace EIP.ServicesRegistry.Admin
 				service.UpdateEventRegistry(registry);
 			}
 			ClearForm();
+			button1_Click(null, null);
 		}
 
 		private void button1_Click(object sender, EventArgs e)

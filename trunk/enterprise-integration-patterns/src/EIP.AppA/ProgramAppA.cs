@@ -149,7 +149,7 @@ namespace EIP.AppA
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://{1}/{2}", queueProtocol, eventRegistry.Address, queueUniqueName);
+				address = string.Format("{0}://{1}/{2}__{3}", queueProtocol, eventRegistry.Address, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 			});
 		}

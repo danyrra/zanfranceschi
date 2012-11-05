@@ -137,7 +137,8 @@ namespace EIP.AppC.Models
 				{
 					sbc.UseRabbitMq();
 				}
-				sbc.ReceiveFrom(string.Format("{0}://{1}/{2}", queueProtocol, eventRegistry.Address, queueUniqueName));
+				var address = string.Format("{0}://{1}/{2}__{3}", queueProtocol, eventRegistry.Address, Environment.MachineName, queueUniqueName);
+				sbc.ReceiveFrom(address);
 			});
 
 			MemoryCache.Default["IServiceBus"] = bus;
