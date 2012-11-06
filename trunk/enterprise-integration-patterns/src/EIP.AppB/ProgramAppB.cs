@@ -76,6 +76,10 @@ namespace EIP.AppB
 
 			bus = ServiceBusFactory.New(sbc =>
 			{
+				sbc.SetNetwork("eip");
+
+				sbc.UseControlBus();
+
 				if (queueProtocol == "msmq")
 				{
 					sbc.UseMsmq();
