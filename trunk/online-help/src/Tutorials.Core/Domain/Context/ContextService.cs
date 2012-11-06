@@ -44,7 +44,7 @@ namespace Tutorials.Core.Domain.Context
 		}
 		internal Context GetFirstContext()
 		{
-			return GetAllContexts().First();
+			return GetAllContexts().FirstOrDefault();
 		}
 		internal void OrderContexts(string[] ids)
 		{
