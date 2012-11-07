@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Messaging;
+using System.Threading;
 
 namespace EIP.Sandbox
 {
@@ -20,23 +21,27 @@ namespace EIP.Sandbox
 			}
 		}
 
+		static string MULTICAST_QUEUE_ADDRESS = "236.1.1.2:8001";
+		static string MULTICAST_QUEUE_FORMATTED = string.Format("FormatName:MULTICAST={0}", MULTICAST_QUEUE_ADDRESS);
+
 		static void Publisher()
 		{
-			MessageQueue queue = new MessageQueue("FormatName:MULTICAST=235.109.116.117:7784");
-			//MessageQueue queue = new MessageQueue(@".\private$\test_pub");
-			//queue.MulticastAddress = "235.109.116.117:7784";
-			//BinaryMessageFormatter f = new BinaryMessageFormatter();
-			//Message msg = new Message("oi");
-			//f.Write(msg, "i");
-			queue.Send("xxx");
-		}
+			decimal i = 0;
+			while (true)
+			{
+				MessageQueue queue = new MessageQueue(MULTICAST_QUEUE_FORMATTED);
+				queue.Send("test" + i.ToString());
+				Console.WriteLine("test" + i.ToString());
+				i++;
+				Thread.Sleep(1000);
+			}
+}
 
 		static void Subscriber()
 		{
-			MessageQueue queue = new MessageQueue(@".\private$\test_sub");
+			MessageQueue queue = new MessageQueue(@".\private$\multicast_queue_test");
 			BinaryMessageFormatter f = new BinaryMessageFormatter();
-			//queue.MulticastAddress = "235.109.116.117:7784";
-			queue.MulticastAddress = @"FormatName:MULTICAST=235.109.116.117:7784\private$\test_pub";
+			queue.MulticastAddress = MULTICAST_QUEUE_ADDRESS;
 			
 			while (true)
 			{

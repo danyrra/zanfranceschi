@@ -35,8 +35,6 @@ namespace EIP.AppA
 
 			Console.WriteLine("publishing at {0}", address);
 
-			//Thread.Sleep(1000);
-
 			IList<string> words = new List<string>{
 							 "bomb",
 							 "plumb",
