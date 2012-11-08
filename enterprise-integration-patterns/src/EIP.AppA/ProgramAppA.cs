@@ -109,13 +109,14 @@ namespace EIP.AppA
 			{
 				sbc.SetNetwork("eip");
 
-				sbc.UseControlBus();
+				//sbc.UseControlBus();
 
 				if (queueProtocol == "msmq")
 				{
 					sbc.UseMsmq();
 					sbc.UseMulticastSubscriptionClient();
 					sbc.VerifyMsmqConfiguration();
+					
 				}
 				else
 				{
