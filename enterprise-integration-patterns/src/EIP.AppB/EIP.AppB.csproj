@@ -103,11 +103,6 @@
   <ItemGroup>
     <Compile Include="ProgramAppB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServicesRegistry\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -117,40 +112,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.EventRegistry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServicesRegistry\EIP.AppB.ServicesRegistry.WebServiceRegistry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServicesRegistry\service-registry.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServicesRegistry\service-registry1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServicesRegistry\service-registry2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServicesRegistry\ServiceRegistry.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServicesRegistry\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServicesRegistry\service-registry.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServicesRegistry\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServicesRegistry\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServicesRegistry\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

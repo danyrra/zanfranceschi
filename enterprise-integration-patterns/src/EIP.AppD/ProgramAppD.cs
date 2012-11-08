@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using MassTransit;
 using System.Configuration;
-using EIP.AppD.ServicesRegistry;
 using EIP.CanonicalModel.Events;
 using System.IO;
 using System.ServiceModel;
@@ -41,36 +40,8 @@ namespace EIP.AppD
 
 		static void ConfigureEndpoint()
 		{
-			EventRegistry eventRegistry = null;
-
-			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
-
-			IServiceRegistry service = new ServiceRegistryClient();
+			string queueUniqueName = ConfigurationManager.AppSettings["queue-unique_name"];
 			
-			try
-			{
-				string dataType = typeof(TestRequest).FullName;
-
-				eventRegistry = service.FindEventByDataType(dataType);
-
-				if (eventRegistry == null)
-					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
-
-				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
-				{
-					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
-					file.Write(serializedEvent);
-				}
-			}
-			catch (EndpointNotFoundException) // Service Registry unreachable...
-			{
-				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
-				{
-					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
-				}
-			}
-
-			string queueUniqueName = ConfigurationManager.AppSettings["QueueUniqueName"];
 			string queueProtocol = ConfigurationManager.AppSettings["queue-protocol"];
 
 			bus = ServiceBusFactory.New(sbc =>
@@ -90,7 +61,7 @@ namespace EIP.AppD
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://{1}/{2}__{3}", queueProtocol, eventRegistry.Address, Environment.MachineName, queueUniqueName);
+				address = string.Format("{0}://localhost/{1}__{2}", queueProtocol, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 				sbc.Subscribe(subs => subs.Handler<TestRequest>(HandleRequest));
 			});
@@ -100,7 +71,7 @@ namespace EIP.AppD
 		{
 			Console.WriteLine("Responding to '{0}'...", request.Request);
 			TestResponse response = new TestResponse();
-			response.Response = request.Request.ToUpper();
+			response.Response = string.Format("{0} - {1}", Environment.MachineName, request.Request.ToUpper());
 			ctx.Respond(response);
 		}
 	}

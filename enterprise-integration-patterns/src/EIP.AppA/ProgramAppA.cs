@@ -5,7 +5,6 @@ using System.Text;
 using MassTransit;
 using EIP.CanonicalModel.Events;
 using System.Threading;
-using EIP.AppA.ServiceRegistry;
 using System.ServiceModel;
 using System.IO;
 using Newtonsoft.Json;
@@ -83,7 +82,7 @@ namespace EIP.AppA
 				}
 
 				Console.WriteLine(word);
-				//Thread.Sleep(1000);
+				Thread.Sleep(1000);
 			}
 		}
 
@@ -102,36 +101,7 @@ namespace EIP.AppA
 
 		static void ConfigureEndpoint()
 		{
-			EventRegistry eventRegistry = null;
-
-			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
-
-			IServiceRegistry service = new ServiceRegistryClient();
-
-			try
-			{
-				string dataType = typeof(TestOccurred).FullName;
-
-				eventRegistry = service.FindEventByDataType(typeof(TestOccurred).FullName);
-
-				if (eventRegistry == null)
-					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
-
-				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
-				{
-					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
-					file.Write(serializedEvent);
-				}
-			}
-			catch (EndpointNotFoundException) // Service Registry unreachable...
-			{
-				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
-				{
-					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
-				}
-			}
-
-			string queueUniqueName = ConfigurationManager.AppSettings["QueueUniqueName"];
+			string queueUniqueName = ConfigurationManager.AppSettings["queue-unique_name"];
 
 			string queueProtocol = ConfigurationManager.AppSettings["queue-protocol"];
 
@@ -151,7 +121,7 @@ namespace EIP.AppA
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://{1}/{2}__{3}", queueProtocol, eventRegistry.Address, Environment.MachineName, queueUniqueName);
+				address = string.Format("{0}://localhost/{1}__{2}", queueProtocol, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 			});
 		}
