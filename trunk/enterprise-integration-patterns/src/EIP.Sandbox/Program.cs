@@ -27,27 +27,41 @@ namespace EIP.Sandbox
 		static void Publisher()
 		{
 			decimal i = 0;
+
+			string body;
+
 			while (true)
 			{
+				body = string.Format("message {0}", i);
+
 				MessageQueue queue = new MessageQueue(MULTICAST_QUEUE_FORMATTED);
-				queue.Send("test" + i.ToString());
-				Console.WriteLine("test" + i.ToString());
+				Message message = new Message(body, new XmlMessageFormatter(new String[] { "System.String,mscorlib" }));
+				message.Body = body;
+				queue.Send(message);
+				Console.WriteLine("published: {0}", message.Body);
 				i++;
 				Thread.Sleep(1000);
 			}
-}
+		}
 
 		static void Subscriber()
 		{
 			MessageQueue queue = new MessageQueue(@".\private$\multicast_queue_test");
-			BinaryMessageFormatter f = new BinaryMessageFormatter();
 			queue.MulticastAddress = MULTICAST_QUEUE_ADDRESS;
-			
+
 			while (true)
 			{
-				Message message = queue.Receive();
-				//var msg = f.Read(message);
-				Console.WriteLine(message);
+				try
+				{
+					Message message = queue.Receive();
+					message.Formatter = new XmlMessageFormatter(new String[] { "System.String,mscorlib" });
+					Console.WriteLine("received: {0}", message.Body);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+					
+				}
 			}
 		}
 	}

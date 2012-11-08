@@ -90,28 +90,10 @@
     </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServicesRegistry\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Service References\ServicesRegistry\EIP.AppC.ServicesRegistry.EventRegistry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServicesRegistry\EIP.AppC.ServicesRegistry.WebServiceRegistry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServicesRegistry\service-registry.disco" />
-    <None Include="Service References\ServicesRegistry\configuration91.svcinfo" />
-    <None Include="Service References\ServicesRegistry\configuration.svcinfo" />
-    <None Include="Service References\ServicesRegistry\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -123,13 +105,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Service References\ServicesRegistry\service-registry1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServicesRegistry\service-registry2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServicesRegistry\ServiceRegistry.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
@@ -139,14 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServicesRegistry\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServicesRegistry\service-registry.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIP.CanonicalModel\EIP.CanonicalModel.csproj">

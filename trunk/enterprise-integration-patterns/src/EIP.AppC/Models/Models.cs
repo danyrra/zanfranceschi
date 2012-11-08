@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Caching;
 using System.Runtime.Caching;
 using MassTransit;
-using EIP.AppC.ServicesRegistry;
 using System.Configuration;
 using EIP.CanonicalModel.Events;
 using System.IO;
@@ -93,36 +92,8 @@ namespace EIP.AppC.Models
 		/// </summary>
 		internal static IServiceBus ConfigureEndpoint()
 		{
-			EventRegistry eventRegistry = null;
-
-			string LatestEventServiceFilePath = ConfigurationManager.AppSettings["LatestEventServiceFilePath"];
-
-			IServiceRegistry service = new ServiceRegistryClient();
-
-			try
-			{
-				string dataType = typeof(TestOccurred).FullName;
-
-				eventRegistry = service.FindEventByDataType(typeof(TestOccurred).FullName);
-
-				if (eventRegistry == null)
-					throw new Exception(string.Format("Could not find the service registry for type '{0}'.", dataType));
-
-				using (StreamWriter file = new StreamWriter(LatestEventServiceFilePath, false))
-				{
-					string serializedEvent = JsonConvert.SerializeObject(eventRegistry);
-					file.Write(serializedEvent);
-				}
-			}
-			catch (EndpointNotFoundException) // Service Registry unreachable...
-			{
-				using (StreamReader file = new StreamReader(LatestEventServiceFilePath))
-				{
-					eventRegistry = JsonConvert.DeserializeObject<EventRegistry>(file.ReadToEnd());
-				}
-			}
-
-			string queueUniqueName = ConfigurationManager.AppSettings["QueueUniqueName"];
+			string queueUniqueName = ConfigurationManager.AppSettings["queue-unique_name"];
+			
 			string queueProtocol = ConfigurationManager.AppSettings["queue-protocol"];
 
 			IServiceBus bus = ServiceBusFactory.New(sbc =>
@@ -137,7 +108,7 @@ namespace EIP.AppC.Models
 				{
 					sbc.UseRabbitMq();
 				}
-				var address = string.Format("{0}://{1}/{2}__{3}", queueProtocol, eventRegistry.Address, Environment.MachineName, queueUniqueName);
+				string address = string.Format("{0}://localhost/{1}__{2}", queueProtocol, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 			});
 

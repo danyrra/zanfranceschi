@@ -84,54 +84,15 @@
   <ItemGroup>
     <Compile Include="ProgramAppA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServiceRegistry\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.EventRegistry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceRegistry\EIP.AppA.ServiceRegistry.WebServiceRegistry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceRegistry\service-registry.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceRegistry\service-registry1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceRegistry\service-registry2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceRegistry\ServiceRegistry.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceRegistry\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceRegistry\service-registry.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceRegistry\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceRegistry\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceRegistry\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIP.CanonicalModel\EIP.CanonicalModel.csproj">
