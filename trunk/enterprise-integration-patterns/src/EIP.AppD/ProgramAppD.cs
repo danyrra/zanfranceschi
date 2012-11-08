@@ -48,7 +48,7 @@ namespace EIP.AppD
 			{
 				sbc.SetNetwork("eip");
 
-				sbc.UseControlBus();
+				//sbc.UseControlBus();
 				
 				if (queueProtocol == "msmq")
 				{
