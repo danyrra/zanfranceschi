@@ -104,7 +104,7 @@ namespace EIP.AppC.Models
 					sbc.UseMulticastSubscriptionClient();
 					sbc.VerifyMsmqConfiguration();
 				}
-				else
+				else if (queueProtocol == "rabbitmq")
 				{
 					sbc.UseRabbitMq();
 				}
