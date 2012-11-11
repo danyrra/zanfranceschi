@@ -57,7 +57,7 @@ namespace EIP.AppB
 					sbc.UseMulticastSubscriptionClient();
 					sbc.VerifyMsmqConfiguration();
 				}
-				else
+				else if (queueProtocol == "rabbitmq")
 				{
 					sbc.UseRabbitMq();
 				}

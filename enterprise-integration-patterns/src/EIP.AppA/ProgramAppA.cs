@@ -118,7 +118,7 @@ namespace EIP.AppA
 					sbc.VerifyMsmqConfiguration();
 					
 				}
-				else
+				else if (queueProtocol == "rabbitmq")
 				{
 					sbc.UseRabbitMq();
 				}
