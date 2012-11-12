@@ -12,11 +12,16 @@ using System.Configuration;
 using System.Threading.Tasks;
 using EIP.CanonicalModel.Requests;
 using MassTransit.Exceptions;
+using RabbitMQ.Client.Exceptions;
 
 namespace EIP.AppA
 {
 	class ProgramAppA
 	{
+		static IServiceBus bus;
+		static string address = string.Empty;
+		static IList<TestOccurred> unpublishedMessages = new List<TestOccurred>();
+		
 		static void Main(string[] args)
 		{
 			Console.WindowWidth = 60;
@@ -63,15 +68,66 @@ namespace EIP.AppA
 				int num = rnd.Next(0, words.Count - 1);
 				string word = string.Format("({0}) | {1} - {2}", DateTime.Now.ToString("HH:mm:ss"), i.ToString(), words[num]);
 
+				var message = new TestOccurred { Text = word };
+
 				try
 				{
-					bus.Publish(new TestOccurred { Text = word });
-					
+
+					int configure_count = 1;
+					while (bus == null)
+					{
+						try
+						{
+							Console.WriteLine("Trying to bring the Bus up. (attempt nº {0})", configure_count++);
+							ConfigureEndpoint();
+							Thread.Sleep(1000);
+						}
+						catch (MassTransit.Exceptions.ConfigurationException cex)
+						{
+							if (
+								cex.InnerException != null &&
+								cex.InnerException.InnerException != null &&
+								cex.InnerException.InnerException.GetType() == typeof(BrokerUnreachableException))
+							{
+								Exception brokerException = cex.InnerException.InnerException;
+								Console.WriteLine();
+								Console.WriteLine("-------------------------");
+								Console.WriteLine(brokerException.Message);
+								Console.WriteLine("Check if RabbitMQ service is running.");
+								Console.WriteLine("-------------------------");
+								Console.WriteLine();
+							}
+							throw cex;
+						}
+						catch (Exception ex)
+						{
+							Console.WriteLine("could not be published: {0}", message.Text);
+							Console.WriteLine(ex.Message);
+							unpublishedMessages.Add(message);
+						}
+					}
+
+					if (unpublishedMessages.Count > 0)
+					{
+						foreach (var msg in unpublishedMessages)
+						{
+							bus.Publish(msg);
+							Console.WriteLine("published: {0}", msg.Text);
+						}
+
+						unpublishedMessages.Clear();
+					}
+
+					bus.Publish(message);
+
+					Console.WriteLine("published: {0}", message.Text);
+
+					#region Request/Reply
 					if (num % 2 == 0 && false)
 					{
 
 						Guid transactionId = Guid.NewGuid();
-						
+
 						bus.PublishRequest(new TestRequest { CorrelationId = transactionId, Request = word }, x =>
 						{
 							x.Handle<TestResponse>(HandleResponse);
@@ -79,30 +135,20 @@ namespace EIP.AppA
 							x.HandleTimeout(TimeSpan.FromSeconds(4), c => Console.WriteLine("request timeout"));
 						});
 					}
+					#endregion
+				
 				}
-				catch (PublishException pex)
+				catch (Exception ex)
 				{
-					Console.WriteLine(pex.Message);
+					Console.WriteLine("could not be published: {0}", message.Text);
+					Console.WriteLine(ex.Message);
+					unpublishedMessages.Add(message);
 				}
 
-				Console.WriteLine(word);
 				Thread.Sleep(1000);
 			}
 		}
-
-		static void HandleResponse(TestResponse response)
-		{
-			Console.WriteLine("response: {0}", response.Response);
-		}
-
-		static void HandleFaultRequest(Fault<TestRequest> fault)
-		{
-			Console.WriteLine("fault request");
-		}
-
-		static IServiceBus bus;
-		static string address = string.Empty;
-
+		
 		static void ConfigureEndpoint()
 		{
 			string queueUniqueName = ConfigurationManager.AppSettings["queue-unique_name"];
@@ -113,14 +159,12 @@ namespace EIP.AppA
 			{
 				sbc.SetNetwork("eip");
 
-				//sbc.UseControlBus();
-
 				if (queueProtocol == "msmq")
 				{
 					sbc.UseMsmq();
 					sbc.UseMulticastSubscriptionClient();
 					sbc.VerifyMsmqConfiguration();
-					
+
 				}
 				else if (queueProtocol == "rabbitmq")
 				{
@@ -130,5 +174,16 @@ namespace EIP.AppA
 				sbc.ReceiveFrom(address);
 			});
 		}
+		
+		static void HandleResponse(TestResponse response)
+		{
+			Console.WriteLine("response: {0}", response.Response);
+		}
+
+		static void HandleFaultRequest(Fault<TestRequest> fault)
+		{
+			Console.WriteLine("fault request");
+		}
+		
 	}
 }
