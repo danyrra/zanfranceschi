@@ -4,12 +4,60 @@ using System.Linq;
 using System.Text;
 using System.Messaging;
 using System.Threading;
+using EasyNetQ;
 
 namespace EIP.Sandbox
 {
-	class Program
+	class MyMessage
+	{
+		public string Text { get; set; }
+	}
+	
+	class EasyNetQTest
 	{
 		static void Main(string[] args)
+		{
+			if (args.Contains("pub"))
+			{
+				Publish();
+			}
+			else if (args.Contains("sub"))
+			{
+				Subscribe();
+			}
+			Console.Read();
+		}
+
+		static void Subscribe()
+		{
+			var bus = RabbitHutch.CreateBus("host=localhost");
+			bus.Subscribe<MyMessage>("my_subscription_id", msg => Console.WriteLine(msg.Text));
+		}
+
+		static void Publish()
+		{ 
+			var bus = RabbitHutch.CreateBus("host=localhost");
+
+			using (var publishChannel = bus.OpenPublishChannel())
+			{
+				int i = 0;
+				
+				while (true)
+				{
+					publishChannel.Publish(new MyMessage { Text = i.ToString() });
+					i++;
+				}
+			}
+        
+		}
+	}
+	
+	/// <summary>
+	/// Testes com multicast
+	/// </summary>
+	class Program
+	{
+		static void _Main(string[] args)
 		{
 			if (args.Contains("pub"))
 			{
