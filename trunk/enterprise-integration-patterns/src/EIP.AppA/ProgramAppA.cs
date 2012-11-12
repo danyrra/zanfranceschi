@@ -19,6 +19,9 @@ namespace EIP.AppA
 	{
 		static void Main(string[] args)
 		{
+			Console.WindowWidth = 60;
+			Console.WindowHeight = 10;
+			
 			Console.Title = "Publisher/Requester (A)";
 
 			Console.WriteLine("Starting to publish test messages...");
@@ -58,12 +61,13 @@ namespace EIP.AppA
 				i++;
 				Random rnd = new Random();
 				int num = rnd.Next(0, words.Count - 1);
-				string word = i.ToString() + " - " + words[num];
+				string word = string.Format("({0}) | {1} - {2}", DateTime.Now.ToString("HH:mm:ss"), i.ToString(), words[num]);
 
 				try
 				{
 					bus.Publish(new TestOccurred { Text = word });
-					if (num % 2 == 0)
+					
+					if (num % 2 == 0 && false)
 					{
 
 						Guid transactionId = Guid.NewGuid();
@@ -122,7 +126,7 @@ namespace EIP.AppA
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://localhost/{1}__{2}", queueProtocol, Environment.MachineName, queueUniqueName);
+				address = string.Format("{0}://localhost/{1}__{2}?ha=true", queueProtocol, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 			});
 		}

@@ -16,6 +16,9 @@ namespace EIP.AppD
 	{
 		static void Main(string[] args)
 		{
+			Console.WindowWidth = 60;
+			Console.WindowHeight = 10;
+
 			Console.Title = "Responder (D)";
 
 			Console.WriteLine("Getting ready to respond.");
@@ -61,7 +64,7 @@ namespace EIP.AppD
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://localhost/{1}__{2}", queueProtocol, Environment.MachineName, queueUniqueName);
+				address = string.Format("{0}://localhost/{1}__{2}?ha=true", queueProtocol, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 				sbc.Subscribe(subs => subs.Handler<TestRequest>(HandleRequest));
 			});

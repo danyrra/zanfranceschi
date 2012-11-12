@@ -17,6 +17,9 @@ namespace EIP.AppB
 	{
 		static void Main(string[] args)
 		{
+			Console.WindowWidth = 60;
+			Console.WindowHeight = 10;
+
 			Console.Title = "Subscriber (B)";
 
 			Console.WriteLine("Starting to listen for events...");
@@ -61,7 +64,7 @@ namespace EIP.AppB
 				{
 					sbc.UseRabbitMq();
 				}
-				address = string.Format("{0}://localhost/{1}__{2}", queueProtocol, Environment.MachineName, queueUniqueName);
+				address = string.Format("{0}://localhost/{1}__{2}?ha=true", queueProtocol, Environment.MachineName, queueUniqueName);
 				sbc.ReceiveFrom(address);
 				sbc.Subscribe(subs => subs.Consumer<MessageHandler>().Permanent());
 			});
