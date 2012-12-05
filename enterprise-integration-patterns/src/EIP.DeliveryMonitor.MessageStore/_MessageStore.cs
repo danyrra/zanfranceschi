@@ -15,7 +15,11 @@ namespace EIP.DeliveryMonitor.MessageStore
 		static void Main(string[] args)
 		{
 			Console.Title = "Message Store";
-			
+			Consume();
+		}
+
+		static void Consume()
+		{
 			string queueName = @".\private$\message_store";
 
 			MessageQueue queue = null;

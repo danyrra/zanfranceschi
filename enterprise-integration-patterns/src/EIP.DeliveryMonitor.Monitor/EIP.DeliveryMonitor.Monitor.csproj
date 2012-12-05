@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1C46BF75-40D6-4663-9360-B06BDBFF6A5D}</ProjectGuid>
+    <ProjectGuid>{224A8D89-A0C8-47EB-99FF-20910FD467A1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EIP.Sandbox</RootNamespace>
-    <AssemblyName>EIP.Sandbox</AssemblyName>
+    <RootNamespace>EIP.DeliveryMonitor.Monitor</RootNamespace>
+    <AssemblyName>EIP.DeliveryMonitor.Monitor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\SandboxDebug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,22 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\packages\EasyNetQ.0.8.3.40\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="Magnum">
-      <HintPath>..\packages\Magnum.2.1.0\lib\NET40\Magnum.dll</HintPath>
-    </Reference>
-    <Reference Include="MassTransit.Transports.MSMQ">
-      <HintPath>..\packages\MassTransit.2.7.0\lib\net40\MassTransit.Transports.MSMQ.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client, Version=2.8.6.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RabbitMQ.Client.2.8.6\lib\net30\RabbitMQ.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
@@ -60,11 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="_Monitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

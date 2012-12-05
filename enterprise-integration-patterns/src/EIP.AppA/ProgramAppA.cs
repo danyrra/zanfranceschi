@@ -73,6 +73,14 @@ namespace EIP.AppA
 				try
 				{
 
+					var probe = bus.Probe();
+					bus.Inspect(probe);
+
+					foreach (var entry in probe.Entries)
+					{
+						Console.WriteLine("{0}: {1}", entry.Key, entry.Value);
+					}
+					
 					int configure_count = 1;
 					while (bus == null)
 					{
