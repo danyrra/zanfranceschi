@@ -45,7 +45,11 @@ namespace EIP.Sandbox
 				while (true)
 				{
 					publishChannel.Publish(new MyMessage { Text = i.ToString() });
+					Console.WriteLine("---------------------");
+					Console.WriteLine(i);
+					Console.WriteLine("---------------------");
 					i++;
+					Thread.Sleep(1000);
 				}
 			}
         
