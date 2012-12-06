@@ -15,6 +15,9 @@ namespace EIP.DeliveryMonitor.MessageStore
 		static void Main(string[] args)
 		{
 			Console.Title = "Message Store";
+			Console.WindowWidth = 50;
+			Console.WindowHeight = 10;
+
 			Consume();
 		}
 
@@ -43,7 +46,7 @@ namespace EIP.DeliveryMonitor.MessageStore
 					message.Formatter = new XmlMessageFormatter(new String[] { "EIP.DeliveryMonitor.Messages.TrackingMessage, EIP.DeliveryMonitor.Messages" });
 					TrackingMessage tracking = message.Body as TrackingMessage;
 					messages.Add(tracking);
-					Console.WriteLine("message stored: {0}/{1}", tracking.Id, tracking.TrackingMessageType);
+					Console.WriteLine("message stored: {0}", tracking.SenderId);
 				}
 				catch (Exception ex)
 				{

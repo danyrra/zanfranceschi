@@ -12,6 +12,9 @@ namespace EIP.DeliveryMonitor.Subscriber
 		static void Main(string[] args)
 		{
 			Console.Title = "Subscriber";
+			Console.WindowWidth = 70;
+			Console.WindowHeight = 10;
+
 			var subcriber = new _Subscriber();
 			subcriber.Configure();
 			subcriber.Start();
@@ -65,7 +68,7 @@ namespace EIP.DeliveryMonitor.Subscriber
 					Console.WriteLine("received: '{0}' - {1}", message.Body, message.Id);
 
 					MessageQueue trackingQueue = new MessageQueue(@".\private$\message_store");
-					Message trackingMessage = new Message(new TrackingMessage { Id = message.Id, TrackingMessageType = TrackingMessageType.Received }, new XmlMessageFormatter(new String[] { "EIP.DeliveryMonitor.Messages.TrackingMessage, EIP.DeliveryMonitor.Messages" }));
+					Message trackingMessage = new Message(new TrackingMessage { SenderId = queueId, MessageId = message.Id, TrackingMessageType = TrackingMessageType.Received }, new XmlMessageFormatter(new String[] { "EIP.DeliveryMonitor.Messages.TrackingMessage, EIP.DeliveryMonitor.Messages" }));
 					trackingQueue.Send(trackingMessage);
 				}
 				catch (Exception ex)
