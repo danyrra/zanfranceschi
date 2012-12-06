@@ -13,6 +13,8 @@ namespace EIP.DeliveryMonitor.Publisher
 		static void Main(string[] args)
 		{
 			Console.Title = "Publisher";
+			Console.WindowWidth = 30;
+			Console.WindowHeight = 5;
 			
 			decimal i = 0;
 
@@ -30,7 +32,7 @@ namespace EIP.DeliveryMonitor.Publisher
 
 
 				MessageQueue trackingQueue = new MessageQueue(@".\private$\message_store");
-				Message trackingMessage = new Message(new TrackingMessage { Id = message.Id, TrackingMessageType = TrackingMessageType.Published }, new XmlMessageFormatter(new String[] { "EIP.DeliveryMonitor.Messages.TrackingMessage, EIP.DeliveryMonitor.Messages" }));
+				Message trackingMessage = new Message(new TrackingMessage { SenderId = "publisher", MessageId = message.Id, TrackingMessageType = TrackingMessageType.Published }, new XmlMessageFormatter(new String[] { "EIP.DeliveryMonitor.Messages.TrackingMessage, EIP.DeliveryMonitor.Messages" }));
 				trackingQueue.Send(trackingMessage);
 
 				i++;

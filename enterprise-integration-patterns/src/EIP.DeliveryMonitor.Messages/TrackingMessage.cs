@@ -8,7 +8,8 @@ namespace EIP.DeliveryMonitor.Messages
 	[Serializable]
 	public class TrackingMessage
 	{
-		public string Id { get; set; }
+		public string SenderId { get; set; }
+		public string MessageId { get; set; }
 		public TrackingMessageType TrackingMessageType { get; set; }
 
 	}

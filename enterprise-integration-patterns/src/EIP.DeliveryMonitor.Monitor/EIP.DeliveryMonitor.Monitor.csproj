@@ -47,6 +47,12 @@
     <Compile Include="_Monitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EIP.DeliveryMonitor.Messages\EIP.DeliveryMonitor.Messages.csproj">
+      <Project>{9164BAB1-21AE-4F54-A51B-D5914771DC07}</Project>
+      <Name>EIP.DeliveryMonitor.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
