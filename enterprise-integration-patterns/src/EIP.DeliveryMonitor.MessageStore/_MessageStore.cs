@@ -43,7 +43,7 @@ namespace EIP.DeliveryMonitor.MessageStore
 				try
 				{
 					Message message = queue.Receive();
-					message.Formatter = new XmlMessageFormatter(new String[] { "EIP.DeliveryMonitor.Messages.TrackingMessage, EIP.DeliveryMonitor.Messages" });
+					message.Formatter = new XmlMessageFormatter(new Type[] { typeof(TrackingMessage) });
 					TrackingMessage tracking = message.Body as TrackingMessage;
 					messages.Add(tracking);
 					Console.WriteLine("message stored: {0}", tracking.SenderId);
