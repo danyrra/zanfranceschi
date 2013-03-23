@@ -35,4 +35,51 @@ namespace EIP.DeliveryMonitor.Sandbox
 			}
 		}
 	}
+
+
+	public class IBus
+	{
+		private MessageQueue requestQueue;
+		private MessageQueue responseQueue;
+		
+		public IBus(MessageQueue requestQueue, MessageQueue responseQueue)
+		{
+			this.requestQueue = requestQueue;
+			this.responseQueue = responseQueue;
+
+			MessagePropertyFilter filter = new MessagePropertyFilter();
+			filter.SetAll();
+			
+			this.requestQueue.Formatter = new BinaryMessageFormatter();
+			this.responseQueue.Formatter = new BinaryMessageFormatter();
+			this.requestQueue.MessageReadPropertyFilter = filter;
+			this.responseQueue.MessageReadPropertyFilter = filter;
+		}
+		
+		public void Request<TRequest, TResponse>(TRequest request, Action<TResponse> callback)
+		{
+			Message requestMessage = new Message(request);
+			requestMessage.ResponseQueue = responseQueue;
+			requestQueue.Send(requestMessage);
+
+			Message responseMessage = responseQueue.ReceiveByCorrelationId(requestMessage.Id, new TimeSpan(0, 5, 0));
+			TResponse response = (TResponse)responseMessage.Body;
+			callback(response);
+		}
+
+		public void Respond<TRequest, TResponse>(Func<TRequest, TResponse> func)
+		{
+			Message requestMessage = requestQueue.Receive();
+
+			TRequest request = (TRequest)requestMessage.Body;
+
+			TResponse response = func(request);
+
+			Message responseMessage = new Message(response);
+			responseMessage.CorrelationId = requestMessage.Id;
+
+			MessageQueue responseQueue = requestMessage.ResponseQueue;
+			responseQueue.Send(response);
+		}
+	}
 }
