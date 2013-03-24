@@ -28,7 +28,6 @@
 
 			connection = factory.CreateConnection();
 			channel = connection.CreateModel();
-
 			channel.QueueDeclare(queueName, true, false, false, null);
 		}
 
@@ -140,7 +139,6 @@
 		{
 			const int timeoutMilseconds = 400;
 			object result;
-
 			consumer.Queue.Dequeue(timeoutMilseconds, out result);
 			return result as BasicDeliverEventArgs;
 		}
