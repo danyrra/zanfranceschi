@@ -32,7 +32,6 @@
 
 			connection = factory.CreateConnection();
 			channel = connection.CreateModel();
-
 			channel.QueueDeclare(queueName, true, false, false, null);
 			MakeReplyConsumer();
 		}
