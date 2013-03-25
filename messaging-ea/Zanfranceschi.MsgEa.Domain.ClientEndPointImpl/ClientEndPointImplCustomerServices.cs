@@ -7,6 +7,8 @@
 	using Zanfranceschi.MsgEa.Messages.Responses;
 	using Zanfranceschi.MsgEa.Model;
 	using Zanfranceschi.MsgEa.Domain.Services;
+	using System.Collections;
+	using System.Collections.Generic;
 
 	public class ClientEndPointImplCustomerServices
 		: ICustomerServices
@@ -27,7 +29,11 @@
 
 			connection = factory.CreateConnection();
 			channel = connection.CreateModel();
-			channel.QueueDeclare(queueName, true, false, false, null);
+
+			IDictionary args = new Dictionary<string, string>();
+			args.Add("x-ha-policy", "all");
+
+			channel.QueueDeclare(queueName, true, false, false, args);
 
 			replyQueueName = this.channel.QueueDeclare();
 			responseConsumer = new QueueingBasicConsumer(this.channel);

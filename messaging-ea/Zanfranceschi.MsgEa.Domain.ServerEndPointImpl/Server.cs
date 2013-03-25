@@ -1,6 +1,8 @@
 ﻿namespace Zanfranceschi.MsgEa.Domain.ServerEndPointImpl
 {
 	using System;
+	using System.Collections;
+	using System.Collections.Generic;
 	using RabbitMQ.Client;
 	using RabbitMQ.Client.Events;
 	using Zanfranceschi.MsgEa.Domain.Impls.Services;
@@ -28,7 +30,11 @@
 
 			connection = factory.CreateConnection();
 			channel = connection.CreateModel();
-			channel.QueueDeclare(queueName, true, false, false, null);
+
+			IDictionary args = new Dictionary<string, string>();
+			args.Add("x-ha-policy", "all");
+
+			channel.QueueDeclare(queueName, true, false, false, args);
 		}
 
 		public void Start()
