@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Zanfranceschi.MsgEa.Services")]
+[assembly: AssemblyTitle("Zanfranceschi.MsgEa.Domain.ServerEndPointImpl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Zanfranceschi.MsgEa.Services")]
+[assembly: AssemblyProduct("Zanfranceschi.MsgEa.Domain.ServerEndPointImpl")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f9384f35-5b9b-4920-a492-745379e46980")]
+[assembly: Guid("ead1530c-d2dc-4dfe-96bd-b9f498ca73fb")]
 
 // Version information for an assembly consists of the following four values:
 //
