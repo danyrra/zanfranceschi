@@ -40,9 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerServices.cs" />
-    <Compile Include="DAL\ICustomerDAO.cs" />
-    <Compile Include="DAL\Impls\Memory\MemoryCustomerDAO.cs" />
+    <Compile Include="Services\ICustomerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

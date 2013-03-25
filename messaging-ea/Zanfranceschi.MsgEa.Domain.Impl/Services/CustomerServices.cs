@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Zanfranceschi.MsgEa.Model;
-using Zanfranceschi.MsgEa.Domain.DAL;
-
-namespace Zanfranceschi.MsgEa.Domain
+﻿namespace Zanfranceschi.MsgEa.Domain.Impls.Services
 {
+	
+	using System.Linq;
+	using Zanfranceschi.MsgEa.Domain.Impl.DAL;
+	using Zanfranceschi.MsgEa.Domain.Services;
+	using Zanfranceschi.MsgEa.Model;
+	
 	public class CustomerServices
+		: ICustomerServices
 	{
 		private ICustomerDAO dao;
 
@@ -48,6 +48,11 @@ namespace Zanfranceschi.MsgEa.Domain
 			message = new Message(string.Format("{0} custumers found.", result.Count()));
 
 			return result;
+		}
+
+		public void Dispose()
+		{
+			
 		}
 	}
 }

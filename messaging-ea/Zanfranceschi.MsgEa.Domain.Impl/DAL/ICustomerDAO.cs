@@ -1,7 +1,7 @@
-﻿namespace Zanfranceschi.MsgEa.Domain.DAL
+﻿namespace Zanfranceschi.MsgEa.Domain.Impl.DAL
 {
 	using Zanfranceschi.MsgEa.Model;
-	
+
 	public interface ICustomerDAO
 	{
 		void Add(Customer customer);

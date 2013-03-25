@@ -1,7 +1,8 @@
-﻿namespace Zanfranceschi.MsgEa.Domain.DAL.Impls.Memory
+﻿namespace Zanfranceschi.MsgEa.Domain.Impls.DAL.Impls.Memory
 {
 	using System.Collections.Generic;
 	using System.Linq;
+	using Zanfranceschi.MsgEa.Domain.Impl.DAL;
 	using Zanfranceschi.MsgEa.Model;
 	
 	public class MemoryCustomerDAO

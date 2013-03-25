@@ -1,9 +1,9 @@
-﻿namespace Zanfranceschi.MsgEa.Services
+﻿namespace Zanfranceschi.MsgEa.Domain.ServerEndPointImpl
 {
 	using System;
 	using RabbitMQ.Client;
 	using RabbitMQ.Client.Events;
-	using Zanfranceschi.MsgEa.Domain;
+	using Zanfranceschi.MsgEa.Domain.Impls.Services;
 	using Zanfranceschi.MsgEa.Messages.Requests;
 	using Zanfranceschi.MsgEa.Messages.Responses;
 	using Zanfranceschi.MsgEa.Model;
@@ -112,13 +112,13 @@
 		private Response GetResponse(CustomerServiceRequest request)
 		{
 			Message message;
-			
+
 			switch (request.OperationType)
 			{
 				case CustomerOperationTypeRequest.Register:
 					var customer = services.RegisterCustomer(request.Requestor, request.CustomerName, out message);
 					return new CustomerRegisterServiceResponse(customer, message);
-					
+
 				case CustomerOperationTypeRequest.Update:
 					services.UpdateCustomer(request.Requestor, request.CustomerId, request.CustomerName, out message);
 					return new CustomerUpdateOrDeleteServiceResponse(message);
@@ -126,7 +126,7 @@
 				case CustomerOperationTypeRequest.Delete:
 					services.ExcludeCustomer(request.Requestor, request.CustomerId, out message);
 					return new CustomerUpdateOrDeleteServiceResponse(message);
-				
+
 				case CustomerOperationTypeRequest.Search:
 					var customers = services.SearchCustomers(request.Requestor, request.NameLike, out message);
 					return new CustomerSearchServiceResponse(customers, message);

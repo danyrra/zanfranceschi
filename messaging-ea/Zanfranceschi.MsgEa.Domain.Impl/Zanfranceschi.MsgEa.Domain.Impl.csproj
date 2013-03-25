@@ -2,20 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{38F1177D-344A-4636-BDD3-EEF642804E25}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{04201D09-2A2C-463A-B3C0-5E4E06F5F87F}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zanfranceschi.MsgEa.UIs._Console</RootNamespace>
-    <AssemblyName>Zanfranceschi.MsgEa.UIs._Console</AssemblyName>
+    <RootNamespace>Zanfranceschi.MsgEa.Domain.Impl</RootNamespace>
+    <AssemblyName>Zanfranceschi.MsgEa.Domain.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,8 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,17 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DAL\ICustomerDAO.cs" />
+    <Compile Include="DAL\Impls\Memory\MemoryCustomerDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CustomerServices.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zanfranceschi.MsgEa.Domain.ClientEndPointImpl\Zanfranceschi.MsgEa.Domain.ClientEndPointImpl.csproj">
-      <Project>{B01D495E-3E2C-4CB0-800F-6CF8E50785D3}</Project>
-      <Name>Zanfranceschi.MsgEa.Domain.ClientEndPointImpl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zanfranceschi.MsgEa.Domain\Zanfranceschi.MsgEa.Domain.csproj">
       <Project>{3996A672-9C61-42A0-9766-C15D67067395}</Project>
       <Name>Zanfranceschi.MsgEa.Domain</Name>

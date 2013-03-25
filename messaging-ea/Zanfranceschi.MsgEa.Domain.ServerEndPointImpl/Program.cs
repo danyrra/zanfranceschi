@@ -1,10 +1,10 @@
-﻿namespace Zanfranceschi.MsgEa.Services
+﻿namespace Zanfranceschi.MsgEa.Domain.ServerEndPointImpl
 {
 	using System;
 	using Ninject;
-	using Zanfranceschi.MsgEa.Domain;
-	using Zanfranceschi.MsgEa.Domain.DAL;
-	using Zanfranceschi.MsgEa.Domain.DAL.Impls.Memory;
+	using Zanfranceschi.MsgEa.Domain.Impl.DAL;
+	using Zanfranceschi.MsgEa.Domain.Impls.DAL.Impls.Memory;
+	using Zanfranceschi.MsgEa.Domain.Impls.Services;
 
 	class Program
 	{
@@ -13,7 +13,7 @@
 			Console.Title = "Server";
 			Console.WindowHeight = 10;
 			Console.WindowWidth = 80;
-			
+
 			using (IKernel kernel = new StandardKernel())
 			{
 				kernel.Bind<ICustomerDAO>().To<MemoryCustomerDAO>();
