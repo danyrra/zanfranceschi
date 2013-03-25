@@ -28,6 +28,7 @@ namespace Band.EventsMonitor
 			if (btnToggle.Text.Equals("start"))
 			{
 				bus = RabbitHutch.CreateBus(string.Format("host={0}", txtHost.Text));
+				txtTopic.Enabled = false;
 				bus.Subscribe<string>(subscriptionId, txtTopic.Text, HandleMessage);
 				btnToggle.Text = "stop";
 				imgStatus.Image = Band.EventsMonitor.Properties.Resources.connected;
@@ -35,6 +36,7 @@ namespace Band.EventsMonitor
 			else
 			{
 				btnToggle.Text = "start";
+				txtTopic.Enabled = true;
 				imgStatus.Image = Band.EventsMonitor.Properties.Resources.disconnected;
 				if (bus != null)
 				{
@@ -45,7 +47,6 @@ namespace Band.EventsMonitor
 
 		private void HandleMessage(string message)
 		{
-			
 			if (txtMessages.InvokeRequired)
 			{
 				txtMessages.Invoke(new MethodInvoker(delegate
