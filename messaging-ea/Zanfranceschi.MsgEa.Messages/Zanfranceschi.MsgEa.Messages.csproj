@@ -51,10 +51,6 @@
     <Compile Include="Requests\SerializationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zanfranceschi.MsgEa.Domain\Zanfranceschi.MsgEa.Domain.csproj">
-      <Project>{3996A672-9C61-42A0-9766-C15D67067395}</Project>
-      <Name>Zanfranceschi.MsgEa.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zanfranceschi.MsgEa.Model\Zanfranceschi.MsgEa.Model.csproj">
       <Project>{2A3083CE-5AFE-44DB-AF68-8B4786C9D6B7}</Project>
       <Name>Zanfranceschi.MsgEa.Model</Name>
