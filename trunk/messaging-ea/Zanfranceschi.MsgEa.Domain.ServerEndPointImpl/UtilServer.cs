@@ -11,7 +11,7 @@
 	using Zanfranceschi.MsgEa.Model;
 	using Zanfranceschi.MsgEa.Domain.Services;
 
-	internal class UtilServer
+	public class UtilServer
 	{
 		private IConnection connection;
 		private IModel channel;
@@ -20,7 +20,7 @@
 
 		private IUtilServices services;
 
-		internal UtilServer(IUtilServices services)
+		public UtilServer(IUtilServices services)
 		{
 			this.services = services;
 
