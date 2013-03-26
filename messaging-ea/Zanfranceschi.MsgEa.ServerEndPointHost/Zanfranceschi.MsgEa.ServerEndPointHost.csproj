@@ -2,18 +2,20 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{95B737FC-2C6B-494A-8CCE-7D943297632E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{39D91E9B-CAF0-4565-A835-B43C8FA682A9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zanfranceschi.MsgEa.Domain.ServerEndPointImpl</RootNamespace>
-    <AssemblyName>Zanfranceschi.MsgEa.Domain.ServerEndPointImpl</AssemblyName>
+    <RootNamespace>Zanfranceschi.MsgEa.ServerEndPointHost</RootNamespace>
+    <AssemblyName>Zanfranceschi.MsgEa.ServerEndPointHost</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,17 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client, Version=3.0.4.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RabbitMQ.Client.3.0.4\lib\net30\RabbitMQ.Client.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,30 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UtilServer.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zanfranceschi.MsgEa.Domain.Impl\Zanfranceschi.MsgEa.Domain.Impl.csproj">
       <Project>{04201D09-2A2C-463A-B3C0-5E4E06F5F87F}</Project>
       <Name>Zanfranceschi.MsgEa.Domain.Impl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zanfranceschi.MsgEa.Domain.ServerEndPointImpl\Zanfranceschi.MsgEa.Domain.ServerEndPointImpl.csproj">
+      <Project>{95B737FC-2C6B-494A-8CCE-7D943297632E}</Project>
+      <Name>Zanfranceschi.MsgEa.Domain.ServerEndPointImpl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zanfranceschi.MsgEa.Domain\Zanfranceschi.MsgEa.Domain.csproj">
       <Project>{3996A672-9C61-42A0-9766-C15D67067395}</Project>
       <Name>Zanfranceschi.MsgEa.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zanfranceschi.MsgEa.Messages\Zanfranceschi.MsgEa.Messages.csproj">
-      <Project>{B43EB6ED-78AF-40FA-AB2E-ABEAB1BCC8C3}</Project>
-      <Name>Zanfranceschi.MsgEa.Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zanfranceschi.MsgEa.Model\Zanfranceschi.MsgEa.Model.csproj">
-      <Project>{2A3083CE-5AFE-44DB-AF68-8B4786C9D6B7}</Project>
-      <Name>Zanfranceschi.MsgEa.Model</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
