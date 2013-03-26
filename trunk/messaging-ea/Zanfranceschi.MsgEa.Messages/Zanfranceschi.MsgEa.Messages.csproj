@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Requests\GetAddressServiceRequest.cs" />
     <Compile Include="Requests\Request.cs" />
+    <Compile Include="Responses\GetAddressServiceResponse.cs" />
     <Compile Include="Responses\CustomerUpdateOrDeleteServiceResponse.cs" />
     <Compile Include="Responses\CustomerRegisterServiceResponse.cs" />
     <Compile Include="Responses\CustomerSearchServiceResponse.cs" />

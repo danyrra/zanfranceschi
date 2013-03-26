@@ -50,6 +50,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RPCServer.cs" />
+    <Compile Include="WebCEP.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

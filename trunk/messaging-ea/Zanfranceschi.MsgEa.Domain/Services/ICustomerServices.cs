@@ -4,7 +4,7 @@
 	using System;
 
 	public interface ICustomerServices 
-		: IDisposable
+		: IServices
 	{
 		void ExcludeCustomer(User user, string customerId, out Message message);
 		Customer RegisterCustomer(User user, string customerName, out Message message);

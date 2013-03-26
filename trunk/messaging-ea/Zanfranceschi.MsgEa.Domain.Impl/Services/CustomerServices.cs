@@ -1,10 +1,14 @@
 ﻿namespace Zanfranceschi.MsgEa.Domain.Impls.Services
 {
-	
+
+	using System;
 	using System.Linq;
 	using Zanfranceschi.MsgEa.Domain.Impl.DAL;
 	using Zanfranceschi.MsgEa.Domain.Services;
 	using Zanfranceschi.MsgEa.Model;
+	using System.Net;
+	using System.IO;
+	using System.Data;
 	
 	public class CustomerServices
 		: ICustomerServices

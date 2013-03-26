@@ -11,16 +11,16 @@
 	using Zanfranceschi.MsgEa.Model;
 	using Zanfranceschi.MsgEa.Domain.Services;
 
-	internal class Server
+	internal class UtilServer
 	{
 		private IConnection connection;
 		private IModel channel;
 
-		private const string queueName = "zanfranceschi.msgea.customer";
+		private const string queueName = "zanfranceschi.msgea.utils";
 
-		private ICustomerServices services;
+		private IUtilServices services;
 
-		internal Server(ICustomerServices services)
+		internal UtilServer(IUtilServices services)
 		{
 			this.services = services;
 
@@ -88,13 +88,13 @@
 			try
 			{
 				object messageObject = SerializationHelper.FromByteArray(messageInEnvelope.Body);
-				CustomerServiceRequest request = messageObject as CustomerServiceRequest;
+				GetAddressServiceRequest request = messageObject as GetAddressServiceRequest;
 
 				if (request != null)
 				{
-					Console.WriteLine("Received message: {0}", request.OperationType);
+					Console.WriteLine("Received request for address: {0}", request.CEP);
 
-					Response responseMessage = GetResponse(request);
+					GetAddressServiceResponse responseMessage = GetResponse(request);
 
 					IBasicProperties requestProperties = messageInEnvelope.BasicProperties;
 					IBasicProperties responseProperties = consumer.Model.CreateBasicProperties();
@@ -102,7 +102,7 @@
 					SendResponse(requestProperties.ReplyTo, responseProperties, responseMessage);
 					channel.BasicAck(messageInEnvelope.DeliveryTag, false);
 
-					Console.WriteLine("sent reply to: {0}", request.OperationType);
+					Console.WriteLine("reply sent");
 				}
 			}
 			catch (Exception ex)
@@ -111,35 +111,20 @@
 			}
 		}
 
+
 		private void SendResponse(string replyQueueName, IBasicProperties responseProperties, Response responseMessage)
 		{
 			channel.BasicPublish(string.Empty, replyQueueName, responseProperties, responseMessage.ToByteArray());
 		}
 
-		private Response GetResponse(CustomerServiceRequest request)
+		private GetAddressServiceResponse GetResponse(GetAddressServiceRequest request)
 		{
 			Message message;
+			User user = null;
 
-			switch (request.OperationType)
-			{
-				case CustomerOperationTypeRequest.Register:
-					var customer = services.RegisterCustomer(request.Requestor, request.CustomerName, out message);
-					return new CustomerRegisterServiceResponse(customer, message);
+			Address address = services.GetAddressByCEP(user, request.CEP, out message);
 
-				case CustomerOperationTypeRequest.Update:
-					services.UpdateCustomer(request.Requestor, request.CustomerId, request.CustomerName, out message);
-					return new CustomerUpdateOrDeleteServiceResponse(message);
-
-				case CustomerOperationTypeRequest.Delete:
-					services.ExcludeCustomer(request.Requestor, request.CustomerId, out message);
-					return new CustomerUpdateOrDeleteServiceResponse(message);
-
-				case CustomerOperationTypeRequest.Search:
-					var customers = services.SearchCustomers(request.Requestor, request.NameLike, out message);
-					return new CustomerSearchServiceResponse(customers, message);
-			}
-
-			return new ErrorResponse(new Message("Ooops"));
+			return new GetAddressServiceResponse(address, message);
 		}
 
 		private static BasicDeliverEventArgs DequeueMessage(QueueingBasicConsumer consumer)
