@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Services\ICustomerServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServices.cs" />
+    <Compile Include="Services\IUtilServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zanfranceschi.MsgEa.Model\Zanfranceschi.MsgEa.Model.csproj">

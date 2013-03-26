@@ -12,6 +12,10 @@ namespace Zanfranceschi.MsgEa.Sandbox.AppB
 			Console.Title = "RPC Server";
 			Console.WindowHeight = 10;
 			Console.WindowWidth = 40;
+
+
+			WebCEP cep = new WebCEP("06710590");
+
 			
 			RPCServer server = new RPCServer();
 			server.Start();
