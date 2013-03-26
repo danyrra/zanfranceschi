@@ -22,22 +22,30 @@
 
 		public ClientEndPointImplCustomerServices()
 		{
-			ConnectionFactory factory = new ConnectionFactory
+			try
 			{
-				HostName = "localhost"
-			};
+				ConnectionFactory factory = new ConnectionFactory
+					{
+						HostName = "localhost"
+					};
 
-			connection = factory.CreateConnection();
-			channel = connection.CreateModel();
+				connection = factory.CreateConnection();
+				channel = connection.CreateModel();
 
-			IDictionary args = new Dictionary<string, string>();
-			args.Add("x-ha-policy", "all");
+				IDictionary args = new Dictionary<string, string>();
+				args.Add("x-ha-policy", "all");
 
-			channel.QueueDeclare(queueName, true, false, false, args);
+				channel.QueueDeclare(queueName, true, false, false, args);
 
-			replyQueueName = this.channel.QueueDeclare();
-			responseConsumer = new QueueingBasicConsumer(this.channel);
-			channel.BasicConsume(replyQueueName, true, responseConsumer);
+				replyQueueName = this.channel.QueueDeclare();
+				responseConsumer = new QueueingBasicConsumer(this.channel);
+				channel.BasicConsume(replyQueueName, true, responseConsumer);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Error: {0}", ex.Message);
+				Console.WriteLine(ex.StackTrace);
+			}
 		}
 
 		public void ExcludeCustomer(User user, string customerId, out Message message)
