@@ -18,12 +18,6 @@
 
 			using (ICustomerServices services = new ClientEndPointImplCustomerServices())
 			{
-
-				for (int i = 0; i < 100000; i++)
-				{
-					Customer customer = services.RegisterCustomer(user, Guid.NewGuid().ToString(), out message);
-				}
-				
 				string input = string.Empty;
 
 				while (true)
