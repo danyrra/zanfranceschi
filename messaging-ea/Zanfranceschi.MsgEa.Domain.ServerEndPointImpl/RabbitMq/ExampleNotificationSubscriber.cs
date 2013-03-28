@@ -27,7 +27,7 @@
 			channel.ExchangeDeclare(ExchangeName, "fanout");
 
 			// queue name is generated
-			queueName = channel.QueueDeclare();
+			queueName = channel.QueueDeclare("q", true, false, false, null);
 			channel.QueueBind(queueName, ExchangeName, string.Empty);
 		}
 
