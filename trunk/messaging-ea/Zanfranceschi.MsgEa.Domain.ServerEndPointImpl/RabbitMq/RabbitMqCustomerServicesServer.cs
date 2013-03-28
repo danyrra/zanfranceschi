@@ -1,40 +1,34 @@
-﻿namespace Zanfranceschi.MsgEa.Domain.ServerEndPointImpl
+﻿namespace Zanfranceschi.MsgEa.Domain.ServerEndPointImpl.RabbitMq
 {
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using RabbitMQ.Client;
 	using RabbitMQ.Client.Events;
-	using Zanfranceschi.MsgEa.Domain.Impls.Services;
+	using Zanfranceschi.MsgEa.Domain.Services;
 	using Zanfranceschi.MsgEa.Messages.Requests;
 	using Zanfranceschi.MsgEa.Messages.Responses;
 	using Zanfranceschi.MsgEa.Model;
-	using Zanfranceschi.MsgEa.Domain.Services;
 
-	public class UtilServer
+	public class CustomerServicesServer
+		: RabbitMqServicesServer
 	{
-		private IConnection connection;
-		private IModel channel;
+		private const string queueName = "zanfranceschi.msgea.customer";
+		private ICustomerServices services;
+		private ExampleNotificationPublisher notificationPublisher;
 
-		private const string queueName = "zanfranceschi.msgea.utils";
-
-		private IUtilServices services;
-
-		public UtilServer(IUtilServices services)
+		public CustomerServicesServer(ICustomerServices services, IServicesServerLogger logger)
+			: base("localhost", logger)
 		{
 			this.services = services;
+			notificationPublisher = new ExampleNotificationPublisher();
+			notificationPublisher.Connect();
+		}
 
-			ConnectionFactory factory = new ConnectionFactory
-			{
-				HostName = "localhost"
-			};
-
-			connection = factory.CreateConnection();
-			channel = connection.CreateModel();
-
+		protected override void OnChannelCreated(IModel channel)
+		{
 			IDictionary args = new Dictionary<string, string>();
 			args.Add("x-ha-policy", "all");
-
 			channel.QueueDeclare(queueName, true, false, false, args);
 		}
 
@@ -88,43 +82,58 @@
 			try
 			{
 				object messageObject = SerializationHelper.FromByteArray(messageInEnvelope.Body);
-				GetAddressServiceRequest request = messageObject as GetAddressServiceRequest;
+				CustomerServiceRequest request = messageObject as CustomerServiceRequest;
 
 				if (request != null)
 				{
-					Console.WriteLine("Received request for address: {0}", request.CEP);
+					logger.Log(string.Format("Received message: {0}", request.OperationType));
 
-					GetAddressServiceResponse responseMessage = GetResponse(request);
+					Response responseMessage = GetResponse(request);
 
 					IBasicProperties requestProperties = messageInEnvelope.BasicProperties;
 					IBasicProperties responseProperties = consumer.Model.CreateBasicProperties();
 					responseProperties.CorrelationId = requestProperties.CorrelationId;
 					SendResponse(requestProperties.ReplyTo, responseProperties, responseMessage);
 					channel.BasicAck(messageInEnvelope.DeliveryTag, false);
-
-					Console.WriteLine("reply sent");
+					notificationPublisher.SendMessage(string.Format("Request replied @ {0}", DateTime.Now));
+					logger.Log(string.Format("sent reply to: {0}", request.OperationType));
 				}
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine("Failed message: {0}", ex);
+				logger.Log(string.Format("Failed message: {0}", ex));
 			}
 		}
-
 
 		private void SendResponse(string replyQueueName, IBasicProperties responseProperties, Response responseMessage)
 		{
 			channel.BasicPublish(string.Empty, replyQueueName, responseProperties, responseMessage.ToByteArray());
 		}
 
-		private GetAddressServiceResponse GetResponse(GetAddressServiceRequest request)
+		private Response GetResponse(CustomerServiceRequest request)
 		{
 			Message message;
-			User user = null;
 
-			Address address = services.GetAddressByCEP(user, request.CEP, out message);
+			switch (request.OperationType)
+			{
+				case CustomerOperationTypeRequest.Register:
+					var customer = services.RegisterCustomer(request.Requestor, request.CustomerName, out message);
+					return new CustomerRegisterServiceResponse(customer, message);
 
-			return new GetAddressServiceResponse(address, message);
+				case CustomerOperationTypeRequest.Update:
+					services.UpdateCustomer(request.Requestor, request.CustomerId, request.CustomerName, out message);
+					return new CustomerUpdateOrDeleteServiceResponse(message);
+
+				case CustomerOperationTypeRequest.Delete:
+					services.ExcludeCustomer(request.Requestor, request.CustomerId, out message);
+					return new CustomerUpdateOrDeleteServiceResponse(message);
+
+				case CustomerOperationTypeRequest.Search:
+					var customers = services.SearchCustomers(request.Requestor, request.NameLike, out message);
+					return new CustomerSearchServiceResponse(customers, message);
+			}
+
+			return new ErrorResponse(new Message("Ooops"));
 		}
 
 		private static BasicDeliverEventArgs DequeueMessage(QueueingBasicConsumer consumer)
@@ -134,5 +143,7 @@
 			consumer.Queue.Dequeue(timeoutMilseconds, out result);
 			return result as BasicDeliverEventArgs;
 		}
+
+		
 	}
 }

@@ -9,8 +9,8 @@
 		public User Requestor { get; private set; }
 		
 		protected Request(User requestor)
-		{ 
-		
+		{
+			Requestor = requestor;
 		}
 	}
 }

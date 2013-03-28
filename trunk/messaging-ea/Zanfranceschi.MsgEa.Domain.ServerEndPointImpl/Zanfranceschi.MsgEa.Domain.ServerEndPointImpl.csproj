@@ -51,8 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UtilServer.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="IServicesServerLogger.cs" />
+    <Compile Include="RabbitMq\ExampleNotificationPublisher.cs" />
+    <Compile Include="RabbitMq\ExampleNotificationSubscriber.cs" />
+    <Compile Include="RabbitMq\RabbitMqServicesServer.cs" />
+    <Compile Include="RabbitMq\RabbitMqUtilServicesServer.cs" />
+    <Compile Include="RabbitMq\RabbitMqCustomerServicesServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

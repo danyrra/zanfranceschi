@@ -20,13 +20,6 @@
 			{
 				string input = string.Empty;
 
-
-				for (int i = 0; i < 10000; i++)
-				{
-					Customer customer = services.RegisterCustomer(user, input, out message);
-					Console.WriteLine(message.Text);
-				}
-
 				while (true)
 				{
 					Console.WriteLine("Type the new customer name:");
