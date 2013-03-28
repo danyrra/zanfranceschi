@@ -37,10 +37,9 @@
 					end = DateTime.Now;
 					span = end - start;
 
-					Console.WriteLine("{0}ms", span.TotalMilliseconds);
-					Console.WriteLine(message.Text);
+					Console.WriteLine("{0} (em {1}ms)", message.Text, span.TotalMilliseconds);
 				}
-
+				Customer[] customers;
 				while (true)
 				{
 					Console.WriteLine("Type the customer search term:");
@@ -49,13 +48,17 @@
 					if (input == "exit")
 						break;
 
-					Customer[] customers = services.SearchCustomers(user, input, out message);
-					Console.WriteLine(message.Text);
+					start = DateTime.Now;
+					customers = services.SearchCustomers(user, input, out message);
+					end = DateTime.Now;
+					span = end - start;
 
 					foreach (var cust in customers)
 					{
 						Console.WriteLine("{0} - {1}", cust.Id, cust.Name);
 					}
+
+					Console.WriteLine("{0} (em {1}ms)", message.Text, span.TotalMilliseconds);
 				}
 				Console.WriteLine("terminated...");
 			}
