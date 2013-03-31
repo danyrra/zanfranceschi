@@ -10,6 +10,8 @@
 	using Zanfranceschi.MsgEa.Domain.ServerEndPointImpl;
 	using Zanfranceschi.MsgEa.Domain.ServerEndPointImpl.RabbitMq;
 	using Zanfranceschi.MsgEa.Domain.Services;
+	using System.IO;
+	using System.Reflection;
 
 	class Program
 	{
@@ -18,7 +20,6 @@
 			Console.Title = "Server";
 			Console.WindowHeight = 10;
 			Console.WindowWidth = 80;
-
 
 			Console.WriteLine("Select the service to start.");
 			Console.WriteLine("Type 1 for Customer and Utility Services.");
@@ -40,6 +41,40 @@
 				Thread subsT = new Thread(StartSubscriber);
 				subsT.Start();
 				Console.WriteLine("Subscriber started.");
+			}
+
+			Thread fileWatcherThread = new Thread(StartFileWatcher);
+			fileWatcherThread.Start();
+		}
+
+		static void StartFileWatcher()
+		{
+			FileSystemWatcher watcher = new FileSystemWatcher(AppDomain.CurrentDomain.BaseDirectory);
+			watcher.NotifyFilter =
+				  NotifyFilters.Attributes
+				| NotifyFilters.CreationTime
+				| NotifyFilters.DirectoryName
+				| NotifyFilters.FileName
+				| NotifyFilters.LastAccess
+				| NotifyFilters.LastWrite
+				| NotifyFilters.Security
+				| NotifyFilters.Size;
+
+			watcher.Changed += new FileSystemEventHandler(watcher_Changed);
+			watcher.Deleted += new FileSystemEventHandler(watcher_Changed);
+			watcher.Created += new FileSystemEventHandler(watcher_Changed);
+			watcher.Filter = "*.dll";
+			watcher.EnableRaisingEvents = true;
+			
+			Console.WriteLine("file watcher.");
+		}
+
+		static void watcher_Changed(object sender, FileSystemEventArgs e)
+		{
+			DirectoryInfo info = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+			foreach (var item in info.GetFiles("*.dll"))
+			{
+				Console.WriteLine(item.Name);
 			}
 		}
 
@@ -69,7 +104,7 @@
 		}
 	}
 
-	class Logger 
+	class Logger
 		: IServicesServerLogger
 	{
 		public void Log(string log)
