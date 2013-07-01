@@ -13,6 +13,9 @@ namespace Zanfranceschi.MsgEa.Sandbox.AppA
 			Console.Title = "RPC Client";
 			Console.WindowHeight = 10;
 			Console.WindowWidth = 45;
+
+			ENQTest x = new ENQTest();
+
 			
 			RPCClient client = new RPCClient();
 

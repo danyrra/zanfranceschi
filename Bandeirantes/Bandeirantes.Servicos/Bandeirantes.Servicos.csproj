@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B43EB6ED-78AF-40FA-AB2E-ABEAB1BCC8C3}</ProjectGuid>
+    <ProjectGuid>{B0471ED7-E63F-4AF5-B8AA-166BAFBCB0C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zanfranceschi.MsgEa.Messages</RootNamespace>
-    <AssemblyName>Zanfranceschi.MsgEa.Messages</AssemblyName>
+    <RootNamespace>Bandeirantes.Servicos</RootNamespace>
+    <AssemblyName>Bandeirantes.Servicos</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,25 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IReq.cs" />
-    <Compile Include="Notifications\ExampleNotification.cs" />
-    <Compile Include="Requests\GetAddressServiceRequest.cs" />
-    <Compile Include="Requests\Request.cs" />
-    <Compile Include="Responses\GetAddressServiceResponse.cs" />
-    <Compile Include="Responses\CustomerUpdateOrDeleteServiceResponse.cs" />
-    <Compile Include="Responses\CustomerRegisterServiceResponse.cs" />
-    <Compile Include="Responses\CustomerSearchServiceResponse.cs" />
-    <Compile Include="Responses\ErrorResponse.cs" />
-    <Compile Include="Responses\Response.cs" />
-    <Compile Include="Requests\CustomerServiceRequest.cs" />
+    <Compile Include="Comum\MensagemBarramento.cs" />
+    <Compile Include="Comum\Notificacao.cs" />
+    <Compile Include="Comum\Requisicao.cs" />
+    <Compile Include="Comum\Resposta.cs" />
+    <Compile Include="Corporativo\Comercial\NegociacaoBloqueadaNotificacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\SerializationHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zanfranceschi.MsgEa.Model\Zanfranceschi.MsgEa.Model.csproj">
-      <Project>{2A3083CE-5AFE-44DB-AF68-8B4786C9D6B7}</Project>
-      <Name>Zanfranceschi.MsgEa.Model</Name>
-    </ProjectReference>
+    <Compile Include="Radio\Locutores\CriarLocutorRequisicao.cs" />
+    <Compile Include="Tv\Programacao\CriarProgramaRequisicao.cs" />
+    <Compile Include="Tv\Programacao\ListarProgramasRequisicao.cs" />
+    <Compile Include="Tv\Programacao\ListarProgramasResposta.cs" />
+    <Compile Include="Tv\Programacao\RoteiroExportadoNotificacao.cs" />
+    <Compile Include="Utilidades\EnviarEmailRequisicao.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
