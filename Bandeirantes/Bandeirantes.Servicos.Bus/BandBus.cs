@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,11 @@ namespace Bandeirantes.Servicos.Bus
 			where TipoResposta : MensagemBarramento
 		{
 			string requestQueue = typeof(TipoRequisicao).FullName;
-			channel.QueueDeclare(requestQueue, false, false, false, null);
+
+			IDictionary args = new Dictionary<string, string>();
+			args.Add("ha", "true");
+
+			channel.QueueDeclare(requestQueue, false, false, false, args);
 			string replyQueue = channel.QueueDeclare();
 			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
 			channel.BasicConsume(replyQueue, true, consumer);
@@ -69,7 +74,11 @@ namespace Bandeirantes.Servicos.Bus
 			where TipoResposta : MensagemBarramento
 		{
 			string requestQueue = typeof(TipoRequisicao).FullName;
-			channel.QueueDeclare(requestQueue, false, false, false, null);
+
+			IDictionary args = new Dictionary<string, string>();
+			args.Add("ha", "true");
+
+			channel.QueueDeclare(requestQueue, false, false, false, args);
 			string replyQueue = channel.QueueDeclare();
 			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
 			channel.BasicConsume(replyQueue, true, consumer);
@@ -120,7 +129,11 @@ namespace Bandeirantes.Servicos.Bus
 			where TipoResposta : MensagemBarramento
 		{
 			string requestQueue = typeof(TipoRequisicao).FullName;
-			channel.QueueDeclare(requestQueue, false, false, false, null);
+
+			IDictionary args = new Dictionary<string, string>();
+			args.Add("ha", "true");
+
+			channel.QueueDeclare(requestQueue, false, false, false, args);
 			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
 			channel.BasicConsume(requestQueue, false, consumer);
 
