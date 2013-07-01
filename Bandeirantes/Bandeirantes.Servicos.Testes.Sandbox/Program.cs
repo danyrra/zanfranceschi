@@ -62,14 +62,20 @@ namespace Bandeirantes.Servicos.Testes.Sandbox
 					requestProperties.CorrelationId = correlationId;
 					requestProperties.ReplyTo = replyQueue;
 
-					channel.BasicPublish(
-						string.Empty,
-						rpcQueueName,
-						requestProperties,
-						Encoding.UTF8.GetBytes("Request"));
+					while (true)
+					{
+						Console.WriteLine("Your request:");
+						string msg = Console.ReadLine();
 
-					BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
-					Log("response received: {0}", Encoding.UTF8.GetString(ea.Body));
+						channel.BasicPublish(
+							string.Empty,
+							rpcQueueName,
+							requestProperties,
+							Encoding.UTF8.GetBytes(msg));
+
+						BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+						Log("response received: {0}", Encoding.UTF8.GetString(ea.Body)); 
+					}
 				}
 			}
 		}
@@ -81,7 +87,7 @@ namespace Bandeirantes.Servicos.Testes.Sandbox
 				using (IModel channel = connection.CreateModel())
 				{
 					channel.QueueDeclare(rpcQueueName, false, false, false, null);
-					channel.BasicQos(1, 1, true);
+					//channel.BasicQos(1, 1, true);
 					QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
 					channel.BasicConsume(rpcQueueName, false, consumer);
 
@@ -91,7 +97,7 @@ namespace Bandeirantes.Servicos.Testes.Sandbox
 					{
 						BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
 						IBasicProperties replyProperties = channel.CreateBasicProperties();
-						replyProperties.CorrelationId = ea.BasicProperties.CorrelationId;
+						//replyProperties.CorrelationId = ea.BasicProperties.CorrelationId;
 						byte[] replyMessage = Encoding.UTF8.GetBytes(string.Format("Resposta para {0}", Encoding.UTF8.GetString(ea.Body)));
 						channel.BasicPublish(string.Empty, ea.BasicProperties.ReplyTo, replyProperties, replyMessage);
 						channel.BasicAck(ea.DeliveryTag, false);
