@@ -35,44 +35,59 @@ namespace Bandeirantes.Servicos.Bus
 			Publish<T>(message);
 		}
 
-		public void Request<TipoRequisicao, TipoResposta>(TipoRequisicao requisicao, Action<TipoResposta> handler, string responseId)
+		public void BatchRequest<TipoRequisicao, TipoResposta>(IEnumerable<TipoRequisicao> requisicoes, Action<TipoResposta> handler)
 			where TipoRequisicao : MensagemBarramento
 			where TipoResposta : MensagemBarramento
 		{
-			string requestExchange = typeof(TipoRequisicao).FullName;
-
-			string responseExchange = typeof(TipoResposta).FullName;
-			string responseQueue = channel.QueueDeclare(responseId, true, false, false, null);
-			
-			channel.ExchangeDeclare(requestExchange, ExchangeType.Topic, true, false, null);
-			channel.ExchangeDeclare(responseExchange, ExchangeType.Topic, true, false, null);
-
-			channel.QueueBind(responseQueue, responseExchange, "*");
-
+			string requestQueue = typeof(TipoRequisicao).FullName;
+			channel.QueueDeclare(requestQueue, false, false, false, null);
+			string replyQueue = channel.QueueDeclare();
+			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
+			channel.BasicConsume(replyQueue, true, consumer);
+			string correlationId = Guid.NewGuid().ToString();
 			IBasicProperties requestProperties = channel.CreateBasicProperties();
+			requestProperties.ReplyTo = replyQueue;
 
-			// set correlation Id
-			requestProperties.CorrelationId = ((MensagemBarramento)requisicao).Id.ToString();
-			// publish request
-			string obj = JsonConvert.SerializeObject(requisicao);
-			channel.BasicPublish(requestExchange, "*", requestProperties, Encoding.UTF8.GetBytes(obj));
-
-			// listen response
-			QueueingBasicConsumer consumer = new QueueingBasicConsumer();
-
-			channel.BasicConsume(responseQueue, true, consumer);
-
-			BasicDeliverEventArgs e = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
-			if (e.BasicProperties.CorrelationId.Equals(requestProperties.CorrelationId) || true)
+			foreach (var requisicao in requisicoes)
 			{
-				IBasicProperties replyProperties = e.BasicProperties;
-				byte[] body = e.Body;
+				byte[] message = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(requisicao));
 
-				string serializedObject = Encoding.Default.GetString(body);
-				TipoResposta @object = JsonConvert.DeserializeObject<TipoResposta>(serializedObject);
-				handler(@object);
-				channel.BasicAck(e.DeliveryTag, false);
+				channel.BasicPublish(
+					string.Empty,
+					requestQueue,
+					requestProperties,
+					message);
+
+				BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+				TipoResposta resposta = JsonConvert.DeserializeObject<TipoResposta>(Encoding.UTF8.GetString(ea.Body));
+				handler(resposta);
 			}
+		}
+
+		public void Request<TipoRequisicao, TipoResposta>(TipoRequisicao requisicao, Action<TipoResposta> handler)
+			where TipoRequisicao : MensagemBarramento
+			where TipoResposta : MensagemBarramento
+		{
+			string requestQueue = typeof(TipoRequisicao).FullName;
+			channel.QueueDeclare(requestQueue, false, false, false, null);
+			string replyQueue = channel.QueueDeclare();
+			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
+			channel.BasicConsume(replyQueue, true, consumer);
+			string correlationId = Guid.NewGuid().ToString();
+			IBasicProperties requestProperties = channel.CreateBasicProperties();
+			requestProperties.ReplyTo = replyQueue;
+
+			byte[] message = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(requisicao));
+
+			channel.BasicPublish(
+				string.Empty,
+				requestQueue,
+				requestProperties,
+				message);
+
+			BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+			TipoResposta resposta = JsonConvert.DeserializeObject<TipoResposta>(Encoding.UTF8.GetString(ea.Body));
+			handler(resposta);
 		}
 
 		public void Dispose()
@@ -104,35 +119,19 @@ namespace Bandeirantes.Servicos.Bus
 			where TipoRequisicao : IRequisicaoComResposta
 			where TipoResposta : MensagemBarramento
 		{
-			string exchange = typeof(TipoRequisicao).FullName;
-			string queue = string.Format("{0}-{1}", exchange, "response");
-
-			channel.ExchangeDeclare(exchange, ExchangeType.Topic, true, false, null);
-			channel.QueueDeclare(queue, true, false, false, null);
-			channel.QueueBind(queue, exchange, "*");
-
+			string requestQueue = typeof(TipoRequisicao).FullName;
+			channel.QueueDeclare(requestQueue, false, false, false, null);
 			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
-			string consumerTag = channel.BasicConsume(queue, false, consumer);
+			channel.BasicConsume(requestQueue, false, consumer);
+
 			while (true)
 			{
-				BasicDeliverEventArgs e = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
-				IBasicProperties props = e.BasicProperties;
-				byte[] body = e.Body;
-				string serializedObject = Encoding.Default.GetString(body);
-				TipoRequisicao @object = JsonConvert.DeserializeObject<TipoRequisicao>(serializedObject);
-				TipoResposta resp = func(@object);
-
-				#region respond
-				string responseExchange = typeof(TipoResposta).FullName;
-				channel.ExchangeDeclare(responseExchange, ExchangeType.Topic, true, false, null);
-				string responseObject = JsonConvert.SerializeObject(resp);
-				IBasicProperties basicProperties = channel.CreateBasicProperties();
-				basicProperties.CorrelationId = props.CorrelationId;
-				channel.BasicPublish(responseExchange, "*", basicProperties, Encoding.UTF8.GetBytes(responseObject));
-				#endregion
-
-				channel.BasicAck(e.DeliveryTag, false);
-			}
+				BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+				IBasicProperties replyProperties = channel.CreateBasicProperties();
+				byte[] replyMessage = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(func(requisicao)));
+				channel.BasicPublish(string.Empty, ea.BasicProperties.ReplyTo, replyProperties, replyMessage);
+				channel.BasicAck(ea.DeliveryTag, false);
+			}		
 		}
 
 		public void Dispose()
