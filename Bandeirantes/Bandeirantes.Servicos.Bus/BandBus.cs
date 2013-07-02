@@ -43,7 +43,7 @@ namespace Bandeirantes.Servicos.Bus
 			string requestQueue = typeof(TipoRequisicao).FullName;
 
 			IDictionary args = new Dictionary<string, string>();
-			args.Add("ha", "true");
+			args.Add("x-ha-policy", "all");
 
 			channel.QueueDeclare(requestQueue, false, false, false, args);
 			string replyQueue = channel.QueueDeclare();
@@ -73,10 +73,23 @@ namespace Bandeirantes.Servicos.Bus
 			where TipoRequisicao : MensagemBarramento
 			where TipoResposta : MensagemBarramento
 		{
+			
+			//string responseQueueName = string.Format("bandeirantes.resposta.{0}", Guid.NewGuid());
+			//string responseQueue = channel.QueueDeclare(responseQueueName, false, true, false, null);
+
+			string requestExchange = "bandeirantes.rpc";
+			channel.ExchangeDeclare(requestExchange, ExchangeType.Direct);
+			string requestRoutingKey = typeof(TipoRequisicao).FullName;
+			string requestCorrelationId = Guid.NewGuid().ToString();
+			IBasicProperties requestProperties = channel.CreateBasicProperties();
+			requestProperties.CorrelationId = requestCorrelationId;
+			channel.BasicPublish(requestExchange, requestRoutingKey, requestProperties, null);
+			
+			/*
 			string requestQueue = typeof(TipoRequisicao).FullName;
 
 			IDictionary args = new Dictionary<string, string>();
-			args.Add("ha", "true");
+			args.Add("x-ha-policy", "all");
 
 			channel.QueueDeclare(requestQueue, false, false, false, args);
 			string replyQueue = channel.QueueDeclare();
@@ -97,6 +110,7 @@ namespace Bandeirantes.Servicos.Bus
 			BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
 			TipoResposta resposta = JsonConvert.DeserializeObject<TipoResposta>(Encoding.UTF8.GetString(ea.Body));
 			handler(resposta);
+			*/ 
 		}
 
 		public void Dispose()
@@ -128,23 +142,26 @@ namespace Bandeirantes.Servicos.Bus
 			where TipoRequisicao : IRequisicaoComResposta
 			where TipoResposta : MensagemBarramento
 		{
-			string requestQueue = typeof(TipoRequisicao).FullName;
+			string requestExchange = "bandeirantes.rpc";
+			channel.ExchangeDeclare(requestExchange, ExchangeType.Direct, true);
 
-			IDictionary args = new Dictionary<string, string>();
-			args.Add("ha", "true");
+			string requestQueueName = typeof(TipoRequisicao).FullName;
+			channel.QueueDeclare(requestQueueName, true, false, false, null);
+			channel.QueueBind(requestQueueName, requestExchange, requestQueueName);
 
-			channel.QueueDeclare(requestQueue, false, false, false, args);
-			QueueingBasicConsumer consumer = new QueueingBasicConsumer(channel);
-			channel.BasicConsume(requestQueue, false, consumer);
+			QueueingBasicConsumer requestConsumer = new QueueingBasicConsumer(channel);
+			channel.BasicConsume(requestQueueName, false, requestConsumer);
 
 			while (true)
 			{
-				BasicDeliverEventArgs ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
-				IBasicProperties replyProperties = channel.CreateBasicProperties();
-				byte[] replyMessage = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(func(requisicao)));
-				channel.BasicPublish(string.Empty, ea.BasicProperties.ReplyTo, replyProperties, replyMessage);
-				channel.BasicAck(ea.DeliveryTag, false);
-			}		
+				BasicDeliverEventArgs delivery = (BasicDeliverEventArgs)requestConsumer.Queue.Dequeue();
+				IBasicProperties responseProperties = channel.CreateBasicProperties();
+				responseProperties.CorrelationId = delivery.BasicProperties.CorrelationId;
+				byte[] response = Encoding.UTF8.GetBytes(string.Format("Responded '{0}' @ {1}", Encoding.UTF8.GetString(delivery.Body), DateTime.Now));
+				channel.BasicPublish(string.Empty, delivery.BasicProperties.ReplyTo, responseProperties, response);
+				channel.BasicAck(delivery.DeliveryTag, false);
+				Console.WriteLine(Encoding.UTF8.GetString(response));
+			}
 		}
 
 		public void Dispose()
