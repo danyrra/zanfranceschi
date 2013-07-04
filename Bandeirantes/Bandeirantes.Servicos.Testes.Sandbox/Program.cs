@@ -15,6 +15,10 @@ namespace Bandeirantes.Servicos.Testes.Sandbox
 		{
 			Console.WindowHeight = 10;
 			Console.WindowWidth = 50;
+
+			ConnectionTests();
+
+
 			Console.WriteLine("'Client (c)' or 'Server (s)':");
 			string type = Console.ReadLine();
 			string title = null;
@@ -39,6 +43,27 @@ namespace Bandeirantes.Servicos.Testes.Sandbox
 
 			Console.Title = title;
 			method();
+		}
+
+		static void ConnectionTests()
+		{
+			IConnection connection = new ConnectionFactory { HostName = "localhost" }.CreateConnection();
+			IModel channel = connection.CreateModel();
+
+			//connection.ConnectionShutdown += connection_ConnectionShutdown;
+			//channel.ModelShutdown += channel_ModelShutdown;
+
+			Console.Read();
+		}
+
+		static void channel_ModelShutdown(IModel model, ShutdownEventArgs reason)
+		{
+			
+		}
+
+		static void connection_ConnectionShutdown(IConnection connection, ShutdownEventArgs reason)
+		{
+			
 		}
 
 		static void RawClient()

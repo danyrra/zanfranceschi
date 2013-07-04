@@ -15,7 +15,7 @@ namespace Bandeirantes.Servicos.Demo.Subscriber
 			Console.WriteLine("Nome exclusivo da fila:");
 			string subscriptionId = Console.ReadLine();
 			
-			using (BandBus bus = new BandBus("localhost"))
+			using (IServicesBus bus = ServiceBusFactory.CreateServiceBus("localhost"))
 			{
 				bus.Subscribe<NegociacaoBloqueadaNotificacao>(subscriptionId, (notificacao) => {
 					Console.WriteLine(notificacao.NegociacaoId);
