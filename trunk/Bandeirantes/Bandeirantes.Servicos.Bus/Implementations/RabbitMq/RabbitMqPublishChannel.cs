@@ -92,7 +92,7 @@ namespace Bandeirantes.Servicos.Bus.Implementations.RabbitMq
 			string requestCorrelationId = Guid.NewGuid().ToString();
 			requestProperties.CorrelationId = requestCorrelationId;
 			requestProperties.ReplyTo = responseQueueName;
-			//requestProperties.Expiration = "1";
+			requestProperties.Expiration = "1";
 
 			// set all for response
 			channel.BasicConsume(responseQueueName, false, responseConsumer);

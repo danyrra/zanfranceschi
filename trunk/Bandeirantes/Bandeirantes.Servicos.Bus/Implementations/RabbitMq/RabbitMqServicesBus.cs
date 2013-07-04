@@ -38,7 +38,7 @@ namespace Bandeirantes.Servicos.Bus.Implementations.RabbitMq
 			IDictionary args = new Dictionary<object, object> 
 			{ 
 				{ "x-dead-letter-exchange", "dead-letter-exchange" }, 
-				{ "x-dead-letter-routing-key", "*" }
+				{ "x-dead-letter-routing-key", "#" }
 			};
 
 			channel.QueueDeclare(requestQueueName, true, false, false, args);
