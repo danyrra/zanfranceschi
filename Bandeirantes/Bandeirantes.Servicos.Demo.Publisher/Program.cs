@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using Bandeirantes.Servicos.Bus;
-using Bandeirantes.Servicos.Comum;
 using Bandeirantes.Servicos.Corporativo.Comercial;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 
 namespace Bandeirantes.Servicos.Demo.Publisher
 {
@@ -16,6 +8,10 @@ namespace Bandeirantes.Servicos.Demo.Publisher
 	{
 		static void Main(string[] args)
 		{
+			Console.WindowHeight = 10;
+			Console.WindowWidth = 50;
+			Console.Title = "Publisher";
+			
 			while (true)
 			{
 				try
