@@ -52,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bandeirantes.Servicos.Bus\Bandeirantes.Servicos.Bus.csproj">
+      <Project>{4f27be11-7af8-47aa-b61e-f8086518aabf}</Project>
+      <Name>Bandeirantes.Servicos.Bus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bandeirantes.Servicos\Bandeirantes.Servicos.csproj">
       <Project>{b0471ed7-e63f-4af5-b8aa-166bafbcb0c5}</Project>
       <Name>Bandeirantes.Servicos</Name>
