@@ -18,9 +18,9 @@ namespace Bandeirantes.Servicos.Demo.Publisher
 				{
 					Console.WriteLine("Entre com o número de mensagens para publicar ou digite sair para sair.");
 					int number = Convert.ToInt32(Console.ReadLine());
-					using (BandBus bus = new BandBus("localhost"))
+					using (IServicesBus bus = ServiceBusFactory.CreateServiceBus("localhost"))
 					{
-						using (PublishChannel pc = bus.OpenPublishChannel())
+						using (IPublishChannel pc = bus.OpenPublishChannel())
 						{
 							Console.WriteLine("Publicando {0} mensagens...", number);
 							DateTime start = DateTime.Now;

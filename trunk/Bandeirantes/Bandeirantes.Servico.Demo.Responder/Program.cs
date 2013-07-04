@@ -18,17 +18,18 @@ namespace Bandeirantes.Servico.Demo.Responder
 			Console.Title = "Responder";
 
 			Console.WriteLine("Aceitando requisições...");
-
-			BandBus bus = new BandBus("localhost");
-			var requisicao = new ListarProgramasRequisicao();
-			bus.Respond<ListarProgramasRequisicao, ListarProgramasResposta>(requisicao, req =>
+			using (IServicesBus bus = ServiceBusFactory.CreateServiceBus("localhost"))
 			{
-				Console.WriteLine("Requisição recebida.");
-				ListarProgramasRespostaEntidade lista = new ListarProgramasRespostaEntidade();
-				ListarProgramasResposta resposta = new ListarProgramasResposta(lista);
-				resposta.EnviadaEm = DateTime.Now;
-				return resposta;
-			});
+				var requisicao = new ListarProgramasRequisicao();
+				bus.Respond<ListarProgramasRequisicao, ListarProgramasResposta>(req =>
+				{
+					Console.WriteLine("Requisição recebida.");
+					ListarProgramasRespostaEntidade lista = new ListarProgramasRespostaEntidade();
+					ListarProgramasResposta resposta = new ListarProgramasResposta(lista);
+					resposta.EnviadaEm = DateTime.Now;
+					return resposta;
+				});
+			}
 		}
 	}
 }

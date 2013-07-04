@@ -25,9 +25,9 @@ namespace Bandeirantes.Servico.Demo.Requestor
 				{
 					Console.WriteLine("Entre com o número de requisições ou digite 'sair' para sair.");
 					int number = Convert.ToInt32(Console.ReadLine());
-					using (BandBus bus = new BandBus("localhost"))
+					using (IServicesBus bus = ServiceBusFactory.CreateServiceBus("localhost"))
 					{
-						using (PublishChannel pc = bus.OpenPublishChannel())
+						using (IPublishChannel pc = bus.OpenPublishChannel())
 						{
 							Console.WriteLine("Publicando {0} mensagens...", number);
 
